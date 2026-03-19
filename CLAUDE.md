@@ -130,6 +130,14 @@ npx openspec instructions <artifact> --change <name> --json
 - AI 撰寫的文章 tags 第一個固定為「AI生成」
 - description 100-160 字，圖片路徑 /images/blog/
 
+### 升版作業經驗
+
+- **Major 升版一律打包處理**：Dependabot 個別開的 PR 不適合 major upgrade，應關閉後統一在一個 OpenSpec change 中處理所有相關套件
+- **升版前先查 migration guide**：用 WebFetch 讀官方遷移文件，列出所有 breaking changes 再動手
+- **有官方升版工具就用**：如 `npx @tailwindcss/upgrade`（Tailwind 4）、`npx @astrojs/upgrade`（Astro）
+- **分階段驗證**：每完成一個框架升版就跑 build/test，不要全改完才驗證，否則難以定位問題來源
+- **archive 後必須 format**：`npx openspec archive` 產出的 spec 檔不一定符合 Prettier 格式，commit 前必須跑 `pnpm format`
+
 ### 開發規範
 
 以 `openspec/config.yaml` 為準，涵蓋：coding、uiux、testing、quality、tech_stack、deployment、review_process、tasks。config.yaml 更新時以最新版為準。
