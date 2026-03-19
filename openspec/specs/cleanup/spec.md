@@ -1,8 +1,11 @@
 # cleanup Specification
 
 ## Purpose
+
 TBD - created by archiving change cleanup-legacy-hexo-files. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: REQ-CLEANUP-001: Remove Hexo build output directories
 
 All Hexo-generated directories at the repo root must be removed from git tracking: `2018/`, `2019/`, `archives/`, `categories/`, `tags/`, `about/`, `schedule/`, `css/`, `js/`, `lib/`, `images/`, `gitment/`, `page/`.
@@ -64,4 +67,3 @@ All source files must pass Prettier formatting checks.
 - GIVEN all files have been formatted
 - WHEN `pnpm format:check` is executed
 - THEN the command exits with code 0
-
