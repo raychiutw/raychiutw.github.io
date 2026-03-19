@@ -1,8 +1,11 @@
 # tailwind4-css-config Specification
 
 ## Purpose
+
 TBD - created by archiving change upgrade-astro5-tw4-react19. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: CSS-based Tailwind 設定
 
 專案 MUST 使用 Tailwind CSS 4 的 CSS-based 設定方式。主題自訂 SHALL 在 `global.css` 中以 `@theme` 區塊定義，取代原本的 `tailwind.config.mjs`。
@@ -67,4 +70,3 @@ TBD - created by archiving change upgrade-astro5-tw4-react19. Update Purpose aft
 - **WHEN** 檢查 `src/styles/global.css`
 - **THEN** SHALL 不包含任何 `@tailwind` 指令
 - **AND** SHALL 以 `@import "tailwindcss"` 作為 Tailwind 的引入方式
-

@@ -9,7 +9,7 @@ context: |
   極簡文字風格，專注閱讀體驗。
 
   ## 技術架構
-  - 靜態網站產生器: Astro 5.x (static output)
+  - 靜態網站產生器: Astro 6.x (static output)
   - 樣式框架: Tailwind CSS 4.x
   - 語言: TypeScript (strict mode)
   - 互動元件: React 19.x (Island 模式)
@@ -112,7 +112,7 @@ rules:
     - "跨瀏覽器：Chrome/Firefox/Safari/Edge ≥ 90，Playwright 三引擎通過"
 
   tech_stack:
-    - "核心框架：Astro 5.x（static output mode）"
+    - "核心框架：Astro 6.x（static output mode）"
     - "樣式：Tailwind CSS 4.x"
     - "語言：TypeScript strict mode"
     - "互動元件：React 19.x，僅限 Island 模式"
@@ -126,7 +126,7 @@ rules:
   deployment:
     - "CI pipeline：install → lint → format:check → tsc → build → test，任一失敗阻擋合併"
     - 僅 master 分支觸發自動部署，feature/* 分支僅跑 CI 檢查
-    - "使用 GitHub Actions + actions/deploy-pages@v4，Node.js 20 LTS"
+    - "使用 GitHub Actions + actions/deploy-pages@v4，Node.js 22 LTS"
     - "部署前五項必要條件：CI 通過、Reviewer Approve、QC PASS、PM 驗收、Key User Approve"
     - "部署後 5 分鐘內驗證：首頁、文章頁、RSS、sitemap、搜尋功能"
     - 回滾策略：使用上一個正常 commit SHA 重新部署，修復後仍需完整走 PR 流程

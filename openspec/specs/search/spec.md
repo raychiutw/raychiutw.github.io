@@ -3,7 +3,9 @@
 ## Purpose
 
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 編譯時建立搜尋索引
 
 系統 MUST 於編譯時自動建立 Pagefind 搜尋索引。
@@ -74,4 +76,3 @@ THEN 搜尋 modal 對話框 SHALL 彈出顯示
 
 WHEN 使用者輸入的關鍵字查無任何符合的文章
 THEN 搜尋 modal SHALL 顯示友善提示訊息（例如「找不到相關文章，請嘗試其他關鍵字」）
-

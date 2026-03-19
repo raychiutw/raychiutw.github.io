@@ -1,8 +1,11 @@
 # astro5-content-layer Specification
 
 ## Purpose
+
 TBD - created by archiving change upgrade-astro5-tw4-react19. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Content Layer API 設定檔
 
 系統 MUST 使用 Astro 5 Content Layer API，設定檔 SHALL 位於 `src/content.config.ts`（專案 src 目錄下），並使用 `glob` loader 定義 blog collection。
@@ -60,4 +63,3 @@ Content Layer API 中，文章識別欄位 MUST 使用 `id` 取代原本的 `slu
   - `tags`: z.array(z.string())
   - `postSlug`: z.string().optional()
   - `draft`: z.boolean().default(false)
-

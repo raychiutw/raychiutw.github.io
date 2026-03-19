@@ -1,5 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
+interface PagefindSearchResult {
+  data(): Promise<PagefindResultData>;
+}
+
+interface PagefindResultData {
+  url: string;
+  meta?: { title?: string };
+  excerpt: string;
+}
+
+interface PagefindModule {
+  init(): Promise<void>;
+  search(query: string): Promise<{ results: PagefindSearchResult[] }>;
+}
+
 interface SearchResult {
   url: string;
   meta: { title: string };
@@ -14,7 +29,7 @@ export default function SearchDialog() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDev, setIsDev] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const pagefindRef = useRef<any>(null);
+  const pagefindRef = useRef<PagefindModule | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   // Load pagefind on first open
@@ -84,9 +99,11 @@ export default function SearchDialog() {
       setIsLoading(true);
       try {
         const search = await pagefindRef.current.search(query);
-        const data = await Promise.all(search.results.slice(0, 10).map((r: any) => r.data()));
+        const data = await Promise.all(
+          search.results.slice(0, 10).map((r: PagefindSearchResult) => r.data()),
+        );
         setResults(
-          data.map((d: any) => ({
+          data.map((d: PagefindResultData) => ({
             url: d.url,
             meta: { title: d.meta?.title || d.url },
             excerpt: d.excerpt,

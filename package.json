@@ -10,7 +10,7 @@
     "postbuild": "pagefind --site dist --force-language zh-TW",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint . --ext .js,.ts,.astro",
+    "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,ts,tsx,astro,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{js,ts,tsx,astro,json,md,css}\"",
     "test": "vitest run",
@@ -18,20 +18,21 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/react": "^5.0.0",
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/react": "^5.0.1",
     "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.3.0",
-    "@sentry/browser": "^10.44.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "astro": "^5.5.5",
+    "@astrojs/sitemap": "^3.7.1",
+    "@sentry/browser": "^10.45.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.0.6",
     "medium-zoom": "^1.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@google-analytics/data": "^5.2.1",
     "@playwright/test": "^1.58.2",
     "@testing-library/jest-dom": "^6.9.1",
@@ -40,12 +41,13 @@
     "@types/react-dom": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.57.1",
-    "eslint": "^8.57.1",
+    "eslint": "^10.0.3",
     "eslint-plugin-astro": "^1.6.0",
+    "globals": "^17.4.0",
     "jsdom": "^29.0.0",
     "pagefind": "^1.4.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "vitest": "^2.1.9"
+    "vitest": "^4.1.0"
   }
 }

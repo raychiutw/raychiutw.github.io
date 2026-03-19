@@ -1,8 +1,11 @@
 # react19-upgrade Specification
 
 ## Purpose
+
 TBD - created by archiving change upgrade-astro5-tw4-react19. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: React 19 相容性
 
 所有 React Island 元件（SearchDialog、ThemeToggle）MUST 與 React 19 相容，功能行為 SHALL 與升級前一致。
@@ -54,4 +57,3 @@ React 整合 MUST 使用 `@astrojs/react` 5.x 版本以支援 React 19。
 
 - **WHEN** 執行 `pnpm test`
 - **THEN** 所有既有單元測試 SHALL 通過
-

@@ -3,7 +3,9 @@
 ## Purpose
 
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Astro 框架與輸出模式
 
 系統 SHALL 使用 Astro 5.x 作為網站框架，且 SHALL 將輸出模式設定為 `output: 'static'`，以產生純靜態 HTML 網站。
@@ -111,4 +113,3 @@ TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after 
 - AND `src/content/` SHALL 包含 Markdown 內容集合
 - AND `src/utils/` SHALL 包含工具函式
 - AND `src/styles/` SHALL 包含全域樣式檔案
-

@@ -3,7 +3,9 @@
 ## Purpose
 
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 系統偏好跟隨
 
 深色模式 SHALL 預設跟隨使用者作業系統的 `prefers-color-scheme` 設定。當使用者未曾手動切換時，MUST 以系統偏好作為預設主題。
@@ -108,4 +110,3 @@ ThemeToggle 切換按鈕 MUST 使用 React Island 模式，並以 `client:idle` 
 
 WHEN 頁面載入完成且瀏覽器處於閒置狀態
 THEN ThemeToggle 元件 SHALL 完成 hydration 並可互動
-
