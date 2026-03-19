@@ -162,6 +162,7 @@ async function checkBrokenLinks() {
 
 async function fetchLighthouseScores() {
   try {
+    const apiKey = process.env.PAGESPEED_API_KEY;
     const categories = [
       "performance",
       "accessibility",
@@ -169,8 +170,9 @@ async function fetchLighthouseScores() {
       "seo",
     ];
     const params = categories.map((c) => `category=${c}`).join("&");
+    const keyParam = apiKey ? `&key=${apiKey}` : "";
     const res = await fetch(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${SITE_URL}&${params}`,
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${SITE_URL}&${params}${keyParam}`,
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
