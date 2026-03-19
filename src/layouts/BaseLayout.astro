@@ -42,7 +42,9 @@ const { title, description, image, article, publishDate, tags } = Astro.props;
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NX1JY1LY0F"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'G-NX1JY1LY0F');
     </script>
@@ -51,7 +53,10 @@ const { title, description, image, article, publishDate, tags } = Astro.props;
     <script is:inline>
       (function () {
         const theme = localStorage.getItem('theme');
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (
+          theme === 'dark' ||
+          (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
           document.documentElement.classList.add('dark');
         }
       })();

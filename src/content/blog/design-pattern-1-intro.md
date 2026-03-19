@@ -1,10 +1,10 @@
 ---
-title: "隨手 Design Pattern (1) - 序篇"
-description: "這個系列簡單紀錄我程式開發中用到的 Design Pattern，並附上範例說明應用情境，盡量用簡單的說明讓大家明瞭 Design Pattern"
+title: '隨手 Design Pattern (1) - 序篇'
+description: '這個系列簡單紀錄我程式開發中用到的 Design Pattern，並附上範例說明應用情境，盡量用簡單的說明讓大家明瞭 Design Pattern'
 date: 2019-08-08
-category: "程式開發"
-tags: ["Design Pattern"]
-postSlug: "design-pattern-1-intro"
+category: '程式開發'
+tags: ['Design Pattern']
+postSlug: 'design-pattern-1-intro'
 ---
 
 > 這個系列簡單紀錄我程式開發中用到的 Design Pattern，並附上範例說明應用情境，盡量用簡單的說明讓大家明瞭 Desin Pattern

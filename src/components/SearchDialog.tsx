@@ -84,9 +84,7 @@ export default function SearchDialog() {
       setIsLoading(true);
       try {
         const search = await pagefindRef.current.search(query);
-        const data = await Promise.all(
-          search.results.slice(0, 10).map((r: any) => r.data()),
-        );
+        const data = await Promise.all(search.results.slice(0, 10).map((r: any) => r.data()));
         setResults(
           data.map((d: any) => ({
             url: d.url,
@@ -193,29 +191,20 @@ export default function SearchDialog() {
         {/* Results */}
         <div className="overflow-y-auto px-2 py-2" style={{ minHeight: '80px' }}>
           {isDev && (
-            <p
-              className="px-3 py-4 text-center text-sm"
-              style={{ color: 'var(--text-muted)' }}
-            >
+            <p className="px-3 py-4 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
               搜尋功能僅在建置後可用。請先執行 <code>pnpm build</code> 再使用{' '}
               <code>pnpm preview</code>。
             </p>
           )}
 
           {!isDev && isLoading && (
-            <p
-              className="px-3 py-4 text-center text-sm"
-              style={{ color: 'var(--text-muted)' }}
-            >
+            <p className="px-3 py-4 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
               搜尋中...
             </p>
           )}
 
           {!isDev && !isLoading && hasSearched && results.length === 0 && (
-            <p
-              className="px-3 py-4 text-center text-sm"
-              style={{ color: 'var(--text-muted)' }}
-            >
+            <p className="px-3 py-4 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
               找不到相關文章，請嘗試其他關鍵字
             </p>
           )}
@@ -229,8 +218,7 @@ export default function SearchDialog() {
                     className="block rounded-lg px-3 py-2 no-underline transition-colors duration-150"
                     style={{ color: 'var(--text)' }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor =
-                        'var(--border)';
+                      e.currentTarget.style.backgroundColor = 'var(--border)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent';
@@ -259,10 +247,7 @@ export default function SearchDialog() {
           )}
 
           {!isDev && !isLoading && !hasSearched && (
-            <p
-              className="px-3 py-4 text-center text-sm"
-              style={{ color: 'var(--text-muted)' }}
-            >
+            <p className="px-3 py-4 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
               輸入關鍵字搜尋文章
             </p>
           )}

@@ -18,9 +18,7 @@ export const getStaticPaths = (async () => {
   return [...tagMap.entries()].map(([tag, posts]) => ({
     params: { tag },
     props: {
-      posts: posts.sort(
-        (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-      ),
+      posts: posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
     },
   }));
 }) satisfies GetStaticPaths;
@@ -43,13 +41,15 @@ function getPostUrl(post: (typeof posts)[number]) {
   <p class="mt-2 text-text/50">{posts.length} 篇文章</p>
 
   <div class="mt-8 divide-y divide-text/10">
-    {posts.map((post) => (
-      <PostCard
-        title={post.data.title}
-        date={post.data.date}
-        description={post.data.description}
-        url={getPostUrl(post)}
-      />
-    ))}
+    {
+      posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          date={post.data.date}
+          description={post.data.description}
+          url={getPostUrl(post)}
+        />
+      ))
+    }
   </div>
 </BaseLayout>

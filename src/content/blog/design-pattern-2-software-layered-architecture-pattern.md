@@ -1,10 +1,10 @@
 ---
-title: "隨手 Design Pattern (2) - 軟體分層設計模式 (Software Layered Architecture Pattern)"
-description: "軟體分層設計模式是我這幾年專案必會使用的架構，它的效益在多人團隊分工上有極大的效益，且能有效專注修改區域，提高共用性"
+title: '隨手 Design Pattern (2) - 軟體分層設計模式 (Software Layered Architecture Pattern)'
+description: '軟體分層設計模式是我這幾年專案必會使用的架構，它的效益在多人團隊分工上有極大的效益，且能有效專注修改區域，提高共用性'
 date: 2019-08-08
-category: "程式開發"
-tags: ["Design Pattern", "Software Layered Architecture Pattern", "CSharp"]
-postSlug: "design-pattern-2-software-layered-architecture-pattern"
+category: '程式開發'
+tags: ['Design Pattern', 'Software Layered Architecture Pattern', 'CSharp']
+postSlug: 'design-pattern-2-software-layered-architecture-pattern'
 ---
 
 > 軟體分層設計模式是我這幾年專案必會使用的架構，它的效益在多人團隊分工上有極大的效益，且能有效專注修改區域，提高共用性，讓我們來看看這是怎樣的架構。
@@ -28,7 +28,7 @@ postSlug: "design-pattern-2-software-layered-architecture-pattern"
 - 資料層 : Repoitory
 - 共用層 : Common
 
-![軟體分層設計圖](/images/blog/sla.png "軟體分層設計圖")。
+![軟體分層設計圖](/images/blog/sla.png '軟體分層設計圖')。
 
 ### 我的實作
 

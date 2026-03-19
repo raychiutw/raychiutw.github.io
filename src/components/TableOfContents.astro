@@ -19,40 +19,31 @@ const { headings } = Astro.props;
 const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 
-{filteredHeadings.length > 0 && (
-  <nav class="toc" aria-label="目錄">
-    <details class="toc-details md:open">
-      <summary class="toc-summary">目錄</summary>
-      <ul class="toc-list">
-        {filteredHeadings.map((heading) => (
-          <li
-            class:list={[
-              'toc-item',
-              { 'toc-item-h3': heading.depth === 3 },
-            ]}
-          >
-            <a
-              href={`#${heading.slug}`}
-              class="toc-link"
-              data-heading-slug={heading.slug}
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </details>
-  </nav>
-)}
+{
+  filteredHeadings.length > 0 && (
+    <nav class="toc" aria-label="目錄">
+      <details class="toc-details md:open">
+        <summary class="toc-summary">目錄</summary>
+        <ul class="toc-list">
+          {filteredHeadings.map((heading) => (
+            <li class:list={['toc-item', { 'toc-item-h3': heading.depth === 3 }]}>
+              <a href={`#${heading.slug}`} class="toc-link" data-heading-slug={heading.slug}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </nav>
+  )
+}
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const tocLinks = document.querySelectorAll('.toc-link');
     if (tocLinks.length === 0) return;
 
-    const headingSlugs = Array.from(tocLinks).map((link) =>
-      link.getAttribute('data-heading-slug')
-    );
+    const headingSlugs = Array.from(tocLinks).map((link) => link.getAttribute('data-heading-slug'));
 
     const headingElements = headingSlugs
       .map((slug) => document.getElementById(slug))
@@ -70,9 +61,7 @@ const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
             if (currentActive) {
               currentActive.classList.remove('toc-link-active');
             }
-            const link = document.querySelector(
-              `.toc-link[data-heading-slug="${slug}"]`
-            );
+            const link = document.querySelector(`.toc-link[data-heading-slug="${slug}"]`);
             if (link) {
               link.classList.add('toc-link-active');
               currentActive = link;
@@ -83,7 +72,7 @@ const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
       {
         rootMargin: '-80px 0px -60% 0px',
         threshold: 0,
-      }
+      },
     );
 
     headingElements.forEach((el) => observer.observe(el));

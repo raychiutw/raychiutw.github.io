@@ -1,10 +1,10 @@
 ---
-title: "Hugo 快速安裝教學"
-description: "Hugo 是用 Go 語言開發的靜態網站產生器（Static Site Generator），有著超快產生速度的優點，就讓我們來玩玩看吧"
+title: 'Hugo 快速安裝教學'
+description: 'Hugo 是用 Go 語言開發的靜態網站產生器（Static Site Generator），有著超快產生速度的優點，就讓我們來玩玩看吧'
 date: 2019-04-11
-category: "程式開發"
-tags: ["Hugo", "Static Site Generator"]
-postSlug: "hugo-quick-install-guide"
+category: '程式開發'
+tags: ['Hugo', 'Static Site Generator']
+postSlug: 'hugo-quick-install-guide'
 ---
 
 > Hugo 是用 Go 語言開發的靜態網站產生器（Static Site Generator），有著超快產生速度的優點，就讓我們來玩玩看吧。
@@ -45,7 +45,7 @@ hugo new site hugodemo
 
 Hugo 安裝好是沒有佈景主題的，所以接下來必須來設定佈景主題。
 
->相較於 Hugo，Hexo、Jekyll有預設佈景主題，這點是 Hugo 較為不便的地方。
+> 相較於 Hugo，Hexo、Jekyll有預設佈景主題，這點是 Hugo 較為不便的地方。
 
 ### 下載佈景主題
 
@@ -92,7 +92,7 @@ hugo server -D
 若展開 hugodemo 資料夾，會包含以下內容
 .
 ├── archetypes
-│   └── default.md
+│ └── default.md
 ├── config.toml
 ├── content
 ├── data
@@ -107,7 +107,7 @@ config.toml: 控制 hugo 產生網頁內容的設定檔，預設使用 toml 格�
 content: 放置 Markdown 文章與網頁內容的資料夾。
 data: 儲存一些 configuration 檔案的地方，協助建構靜態網頁。
 layouts: 儲存產生的網頁 layout 樣板（之後範例使用其他的 theme）。
-static: 放置靜態內容，如圖片，CSS 以及 *.js 等內容。
+static: 放置靜態內容，如圖片，CSS 以及 \*.js 等內容。
 themes: 從外部引入的 theme 檔案。
 
 > 目前只要知道 config.toml, content, static 與 themes 這幾個部分即可。

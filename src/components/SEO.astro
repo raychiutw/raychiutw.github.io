@@ -10,14 +10,7 @@ interface Props {
   tags?: string[];
 }
 
-const {
-  title,
-  description,
-  image,
-  article = false,
-  publishDate,
-  tags = [],
-} = Astro.props;
+const { title, description, image, article = false, publishDate, tags = [] } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, SITE_URL).toString();
 const ogImage = image ? new URL(image, SITE_URL).toString() : undefined;
@@ -46,19 +39,24 @@ const ogType = article ? 'article' : 'website';
 <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} RSS`} href="/rss.xml" />
 
 <!-- JSON-LD Structured Data (Article pages only) -->
-{article && publishDate && (
-  <script type="application/ld+json" set:html={JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    description: description,
-    datePublished: publishDate.toISOString(),
-    url: canonicalURL,
-    author: {
-      '@type': 'Person',
-      name: 'Ray Chiu',
-    },
-    ...(ogImage ? { image: ogImage } : {}),
-    ...(tags.length > 0 ? { keywords: tags.join(', ') } : {}),
-  })} />
-)}
+{
+  article && publishDate && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: title,
+        description: description,
+        datePublished: publishDate.toISOString(),
+        url: canonicalURL,
+        author: {
+          '@type': 'Person',
+          name: 'Ray Chiu',
+        },
+        ...(ogImage ? { image: ogImage } : {}),
+        ...(tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+      })}
+    />
+  )
+}

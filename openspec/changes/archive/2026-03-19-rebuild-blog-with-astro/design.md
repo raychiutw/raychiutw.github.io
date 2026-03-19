@@ -30,6 +30,7 @@ Ray's Notes 是一個自 2018 年運營的個人技術部落格，目前使用 H
 **選擇原因**：Astro 專為內容網站設計，零 JS 預設產出最小 bundle，Content Collections 提供型別安全的內容管理，Island Architecture 只在需要時載入互動元件。
 
 **替代方案**：
+
 - Next.js (Static Export)：React 生態成熟但對純部落格過重，bundle 較大
 - Eleventy (11ty)：極輕量但元件化能力弱，互動功能需手刻 JS
 
@@ -38,6 +39,7 @@ Ray's Notes 是一個自 2018 年運營的個人技術部落格，目前使用 H
 **選擇原因**：僅搜尋對話框（SearchDialog）和深色切換（ThemeToggle）需要客戶端互動。使用 React Island + `client:visible`/`client:idle` 按需載入，其餘全為零 JS 的 .astro 元件。
 
 **替代方案**：
+
 - 原生 JS：更輕量但缺乏元件化，維護成本高
 - Svelte Island：bundle 更小但團隊較不熟悉
 
@@ -46,6 +48,7 @@ Ray's Notes 是一個自 2018 年運營的個人技術部落格，目前使用 H
 **選擇原因**：編譯時產生索引，零後端依賴，索引檔通常 < 100KB，支援中文分詞（`--force-language zh-TW`），與靜態部署完美搭配。
 
 **替代方案**：
+
 - Algolia：功能強大但需外部服務、有免費額度限制
 - FlexSearch：需手動建索引，中文支援需額外設定
 
@@ -54,6 +57,7 @@ Ray's Notes 是一個自 2018 年運營的個人技術部落格，目前使用 H
 **選擇原因**：基於 GitHub Discussions，無需額外後端或資料庫，訪客用 GitHub 帳號留言，自動支援 Markdown 格式，可跟隨深色模式切換。
 
 **替代方案**：
+
 - Utterances：基於 Issues 但功能較少
 - Disqus：第三方服務、載入慢、有廣告
 
@@ -62,6 +66,7 @@ Ray's Notes 是一個自 2018 年運營的個人技術部落格，目前使用 H
 **選擇原因**：Tailwind 的 utility-first 方式適合快速開發極簡風格，`dark:` variant 原生支援深色模式。色彩定義為 CSS custom properties，方便主題切換。
 
 **替代方案**：
+
 - 手寫 CSS：完全自由但開發速度慢
 - CSS Modules：作用域隔離好但與 Astro 元件的整合不如 Tailwind 自然
 
@@ -104,18 +109,18 @@ push → install (pnpm) → lint (ESLint) → format:check (Prettier)
      → deploy (GitHub Pages)
 ```
 
-僅 master 分支觸發部署，feature/* 分支僅跑 CI 檢查。
+僅 master 分支觸發部署，feature/\* 分支僅跑 CI 檢查。
 
 ## Risks / Trade-offs
 
-| 風險 | 緩解措施 |
-|------|----------|
-| Hexo frontmatter 格式與 Astro 不完全相容 | 撰寫遷移腳本自動轉換，逐篇人工驗證 |
-| URL 結構改變導致 SEO 排名下降 | 嚴格保持 `/YYYY/MM/DD/slug/` 格式，設定 canonical URL |
-| Pagefind 中文分詞品質 | 使用 `--force-language zh-TW` 並實測搜尋結果 |
-| React Island 增加 bundle 大小 | 僅 2 個 Island，使用 client:visible 延遲載入，監控 JS ≤ 50KB |
-| Giscus 需要訪客有 GitHub 帳號 | 目標讀者為技術人員，GitHub 帳號普及率高，可接受 |
-| 舊站 Gitment 留言資料遺失 | 已確認可接受，留言量少 |
+| 風險                                     | 緩解措施                                                     |
+| ---------------------------------------- | ------------------------------------------------------------ |
+| Hexo frontmatter 格式與 Astro 不完全相容 | 撰寫遷移腳本自動轉換，逐篇人工驗證                           |
+| URL 結構改變導致 SEO 排名下降            | 嚴格保持 `/YYYY/MM/DD/slug/` 格式，設定 canonical URL        |
+| Pagefind 中文分詞品質                    | 使用 `--force-language zh-TW` 並實測搜尋結果                 |
+| React Island 增加 bundle 大小            | 僅 2 個 Island，使用 client:visible 延遲載入，監控 JS ≤ 50KB |
+| Giscus 需要訪客有 GitHub 帳號            | 目標讀者為技術人員，GitHub 帳號普及率高，可接受              |
+| 舊站 Gitment 留言資料遺失                | 已確認可接受，留言量少                                       |
 
 ## Migration Plan
 

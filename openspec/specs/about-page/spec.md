@@ -1,8 +1,11 @@
 # about-page Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 路由設定
 
 關於頁面 MUST 可透過 `/about/` 路由存取。
@@ -70,4 +73,3 @@ THEN 關於頁面的排版風格（字型、間距、配色）SHALL 與文章頁
 
 WHEN 關於頁面的 Markdown 內容包含標題、段落、列表、連結等語法
 THEN 頁面 SHALL 正確渲染這些 Markdown 語法為對應的 HTML 元素
-

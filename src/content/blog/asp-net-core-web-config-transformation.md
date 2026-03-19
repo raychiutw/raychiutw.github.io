@@ -1,10 +1,10 @@
 ---
-title: "ASP.NET Core 啟用 Web.config Transformation"
-description: ".Net Framework 4.0 提供了 Transformation 功能，讓 Web.Config 與 app.Config 可以依據組態設定建置不同的參數，這項好用的功能在 .Net Core 的專案中已無法作用，本文紀錄如何再次啟用這好用的功能"
+title: 'ASP.NET Core 啟用 Web.config Transformation'
+description: '.Net Framework 4.0 提供了 Transformation 功能，讓 Web.Config 與 app.Config 可以依據組態設定建置不同的參數，這項好用的功能在 .Net Core 的專案中已無法作用，本文紀錄如何再次啟用這好用的功能'
 date: 2018-05-02
-category: "程式開發"
-tags: ["ASP.NET Core", "Transformation"]
-postSlug: "asp-net-core-web-config-transformation"
+category: '程式開發'
+tags: ['ASP.NET Core', 'Transformation']
+postSlug: 'asp-net-core-web-config-transformation'
 ---
 
 > .Net Framework 4.0 提供了 Transformation 功能，讓 Web.Config 與 app.Config 可以依據組態設定建置不同的參數，這項好用的功能在 .Net Core 的專案中已無法作用，本文紀錄如何再次啟用這好用的功能。
@@ -62,7 +62,7 @@ ASP.Net Core 範本專案沒有 web.config, 我們先手動新增並輸入以下
   </ItemGroup>
 ```
 
->請直接編輯 csproj，請勿使用 Nuget Manager 安裝。
+> 請直接編輯 csproj，請勿使用 Nuget Manager 安裝。
 
 在 `</project>` 之前請輸入以下設定
 

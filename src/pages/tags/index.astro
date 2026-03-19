@@ -17,14 +17,16 @@ const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
 <BaseLayout title="標籤" description="所有文章標籤">
   <h1 class="font-sans text-3xl font-bold tracking-tight md:text-4xl">標籤</h1>
   <div class="mt-8 flex flex-wrap gap-3">
-    {tags.map(([tag, count]) => (
-      <a
-        href={`/tags/${tag}`}
-        class="text-text/70 no-underline transition-colors duration-200 hover:text-accent"
-      >
-        #{tag}
-        <span class="text-sm text-text/50">({count})</span>
-      </a>
-    ))}
+    {
+      tags.map(([tag, count]) => (
+        <a
+          href={`/tags/${tag}`}
+          class="text-text/70 no-underline transition-colors duration-200 hover:text-accent"
+        >
+          #{tag}
+          <span class="text-sm text-text/50">({count})</span>
+        </a>
+      ))
+    }
   </div>
 </BaseLayout>

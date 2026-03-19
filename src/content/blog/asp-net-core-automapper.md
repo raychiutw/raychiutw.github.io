@@ -1,13 +1,13 @@
 ---
-title: "在 ASP.NET Core 中使用 AutoMapper"
-description: "AutoMapper 是一個類別對應轉換的套件，在 ASP.NET Core 專案中的用法有有點差異，本篇說明適合 ASP.NET Core 的簡潔用法。安裝套件，加入 Startup.cs，建立 Profile，使用 IMapper"
+title: '在 ASP.NET Core 中使用 AutoMapper'
+description: 'AutoMapper 是一個類別對應轉換的套件，在 ASP.NET Core 專案中的用法有有點差異，本篇說明適合 ASP.NET Core 的簡潔用法。安裝套件，加入 Startup.cs，建立 Profile，使用 IMapper'
 date: 2018-05-17
-category: "程式開發"
-tags: ["ASP.NET Core", "AutoMapper", "CSharp", "Nuget Package"]
-postSlug: "asp-net-core-automapper"
+category: '程式開發'
+tags: ['ASP.NET Core', 'AutoMapper', 'CSharp', 'Nuget Package']
+postSlug: 'asp-net-core-automapper'
 ---
 
->AutoMapper 是一個類別對應轉換的套件，在ASP.NET Core專案中的用法有有點差異，本篇說明適合ASP.NET Core 的簡潔用法。
+> AutoMapper 是一個類別對應轉換的套件，在ASP.NET Core專案中的用法有有點差異，本篇說明適合ASP.NET Core 的簡潔用法。
 
 <!--more-->
 
@@ -45,7 +45,7 @@ public class UserProfie : Profile
 }
 ```
 
- Profile 的重點在繼承 `Profile` 這個類別
+Profile 的重點在繼承 `Profile` 這個類別
 
 #### 使用 IMapper
 

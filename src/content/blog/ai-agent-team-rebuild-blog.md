@@ -1,10 +1,10 @@
 ---
-title: "我當 User，Claude 當 PM — AI Agent 團隊重建部落格實戰"
-description: "用 Claude Code 的 AI Agent 團隊（PM、工程師、Code Reviewer、QC）完成部落格從 Hexo 到 Astro 的全面重建，記錄 OpenSpec 流程與平行開發的實戰經驗。"
+title: '我當 User，Claude 當 PM — AI Agent 團隊重建部落格實戰'
+description: '用 Claude Code 的 AI Agent 團隊（PM、工程師、Code Reviewer、QC）完成部落格從 Hexo 到 Astro 的全面重建，記錄 OpenSpec 流程與平行開發的實戰經驗。'
 date: 2026-03-19
-category: "程式開發"
-tags: ["AI生成", "Claude Code", "AI Agent", "Astro", "OpenSpec"]
-postSlug: "ai-agent-team-rebuild-blog"
+category: '程式開發'
+tags: ['AI生成', 'Claude Code', 'AI Agent', 'Astro', 'OpenSpec']
+postSlug: 'ai-agent-team-rebuild-blog'
 ---
 
 ## 開場：六年沒更新的部落格，該動了
@@ -17,13 +17,13 @@ postSlug: "ai-agent-team-rebuild-blog"
 
 先來看看這個 AI Agent 團隊長什麼樣子：
 
-| 角色 | 負責人 | 職責 |
-|------|--------|------|
-| Key User | 我（Ray） | 需求提出、最終 Approve |
-| PM / Product Owner | Claude | 需求分析、自主提案、任務拆分、協調 |
-| 工程師 | Teammate Agent | 開發實作 |
-| Code Reviewer | Teammate Agent | PR 審查（規範/安全/效能/漏洞） |
-| QC | Teammate Agent | 連結/版面/功能/跨瀏覽器測試 |
+| 角色               | 負責人         | 職責                               |
+| ------------------ | -------------- | ---------------------------------- |
+| Key User           | 我（Ray）      | 需求提出、最終 Approve             |
+| PM / Product Owner | Claude         | 需求分析、自主提案、任務拆分、協調 |
+| 工程師             | Teammate Agent | 開發實作                           |
+| Code Reviewer      | Teammate Agent | PR 審查（規範/安全/效能/漏洞）     |
+| QC                 | Teammate Agent | 連結/版面/功能/跨瀏覽器測試        |
 
 這個團隊有幾個特別的地方：
 
@@ -56,14 +56,14 @@ Explore（探索）→ Propose（提案）→ Apply（實作）→ Archive（歸
 
 PM 主動提出了三個靜態網站框架的比較：
 
-| 項目 | Astro | Next.js | 11ty |
-|------|-------|---------|------|
-| 學習曲線 | 中等 | 較高 | 低 |
-| 建置速度 | 極快 | 中等 | 快 |
-| JS Bundle | 預設零 JS | 較大 | 預設零 JS |
-| 生態圈 | 成長中 | 龐大 | 小眾 |
-| Island 模式 | 原生支援 | 需額外設定 | 不支援 |
-| 適合場景 | 內容為主 | 互動為主 | 純靜態 |
+| 項目        | Astro     | Next.js    | 11ty      |
+| ----------- | --------- | ---------- | --------- |
+| 學習曲線    | 中等      | 較高       | 低        |
+| 建置速度    | 極快      | 中等       | 快        |
+| JS Bundle   | 預設零 JS | 較大       | 預設零 JS |
+| 生態圈      | 成長中    | 龐大       | 小眾      |
+| Island 模式 | 原生支援  | 需額外設定 | 不支援    |
+| 適合場景    | 內容為主  | 互動為主   | 純靜態    |
 
 PM 推薦 Astro，理由很明確：部落格是內容導向的網站，Astro 的 Island Architecture 讓頁面預設零 JS，只在需要互動的地方（搜尋、深色模式切換）載入 React 元件。建置速度快，而且對 Content Collections 的支援非常成熟。我同意了。
 
@@ -95,16 +95,16 @@ PM 推薦 Astro，理由很明確：部落格是內容導向的網站，Astro �
 
 ## 成果數據
 
-| 項目 | 數據 |
-|------|------|
-| 文章遷移 | 27 篇 |
-| 總頁面數 | 69 頁 |
-| 圖片遷移 | 14 張 |
-| Build 時間 | 3.52 秒 |
-| Unit Tests | 9 passed |
-| E2E Tests | 5 passed |
-| 功能 | 搜尋/深色模式/留言/RSS/SEO/CI-CD |
-| 技術棧 | Astro 4.x + Tailwind CSS + TypeScript + React Island |
+| 項目       | 數據                                                 |
+| ---------- | ---------------------------------------------------- |
+| 文章遷移   | 27 篇                                                |
+| 總頁面數   | 69 頁                                                |
+| 圖片遷移   | 14 張                                                |
+| Build 時間 | 3.52 秒                                              |
+| Unit Tests | 9 passed                                             |
+| E2E Tests  | 5 passed                                             |
+| 功能       | 搜尋/深色模式/留言/RSS/SEO/CI-CD                     |
+| 技術棧     | Astro 4.x + Tailwind CSS + TypeScript + React Island |
 
 27 篇文章、69 頁的部落格，build 時間只要 3.52 秒。從需求討論到主體開發完成，一個早上搞定。
 

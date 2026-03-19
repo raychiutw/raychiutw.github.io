@@ -1,13 +1,13 @@
 ---
-title: "隨手 Design Pattern (3) - 簡單工廠模式 (Simple Factory Pattern)"
-description: "簡單工廠是相當易用的一種設計模式，當程式複雜度高的時候，可以利用此模式切割複雜度高的判斷式，抽離業務邏輯與建構式，讓業務邏輯單純"
+title: '隨手 Design Pattern (3) - 簡單工廠模式 (Simple Factory Pattern)'
+description: '簡單工廠是相當易用的一種設計模式，當程式複雜度高的時候，可以利用此模式切割複雜度高的判斷式，抽離業務邏輯與建構式，讓業務邏輯單純'
 date: 2019-08-21
-category: "程式開發"
-tags: ["Design Pattern", "Simple Factory Pattern", "CSharp"]
-postSlug: "design-pattern-3-simple-factory-pattern"
+category: '程式開發'
+tags: ['Design Pattern', 'Simple Factory Pattern', 'CSharp']
+postSlug: 'design-pattern-3-simple-factory-pattern'
 ---
 
->簡單工廠是相當易用的一種設計模式，當程式複雜度高的時候時候，可以利用此模式切割複雜度高的判斷式，抽離業務邏輯與建構式，讓業務邏輯單純，隔離複雜的建構式，有效提升程式碼的可讀性，藉由 C# 語法特性更可以降低程式複雜度。
+> 簡單工廠是相當易用的一種設計模式，當程式複雜度高的時候時候，可以利用此模式切割複雜度高的判斷式，抽離業務邏輯與建構式，讓業務邏輯單純，隔離複雜的建構式，有效提升程式碼的可讀性，藉由 C# 語法特性更可以降低程式複雜度。
 
 ### 定義
 
@@ -28,7 +28,7 @@ postSlug: "design-pattern-3-simple-factory-pattern"
 
 ### UML 類別圖
 
-![UML 類別圖](/images/blog/SimpleFactory.jpg "UML 類別圖")
+![UML 類別圖](/images/blog/SimpleFactory.jpg 'UML 類別圖')
 
 ### 實作說明
 
@@ -104,7 +104,7 @@ postSlug: "design-pattern-3-simple-factory-pattern"
 
 藉由 `Bird Factory` 將 `switch` 判斷式抽離，`Main` 程式複雜度下降，這也就是簡單工廠帶來的效益，專注商業邏輯，抽離複雜的判斷式。但是其實這仍不夠好，隨著實作 `IBird` 的鳥類越來越來多，`BirdFactory` 裡的 `switch` 會越來越複雜，也就越來越難維護。
 
-![BirdFactory程式複雜度](/images/blog/BirdFactory.png "BirdFactory程式複雜度")
+![BirdFactory程式複雜度](/images/blog/BirdFactory.png 'BirdFactory程式複雜度')
 
 > 這裡使用的是 CodeMaid 的 Spade 功能，有時間在另外做說明！
 
@@ -134,7 +134,7 @@ postSlug: "design-pattern-3-simple-factory-pattern"
     }
 ```
 
-![BirdFactoryWithLinq程式複雜度](/images/blog/BirdFactoryWithLinq.png "BirdFactoryWithLinq程式複雜度")
+![BirdFactoryWithLinq程式複雜度](/images/blog/BirdFactoryWithLinq.png 'BirdFactoryWithLinq程式複雜度')
 
 GetBird 的複雜度由 4 降為 1，是不是很完美。
 

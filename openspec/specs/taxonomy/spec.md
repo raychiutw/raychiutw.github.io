@@ -1,8 +1,11 @@
 # taxonomy Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 分類頁面
 
 系統 SHALL 提供 `/categories/[category]` 路由，列出該分類下的所有文章。
@@ -63,4 +66,3 @@ AND 每個年月分組 SHALL 顯示該期間的文章數量
 
 WHEN 歸檔頁面載入完成
 THEN 同一年月內的文章 SHALL 依發佈日期由新至舊排列
-

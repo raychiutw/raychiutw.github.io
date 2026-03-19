@@ -20,14 +20,14 @@
   /**
    * 根據目前 html 是否有 dark class 回傳 giscus theme 名稱
    */
-  function getGiscusTheme(): string {
+  function getGiscusTheme() {
     return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
   }
 
   /**
    * 動態建立 giscus script tag 並插入 DOM
    */
-  function loadGiscus(): void {
+  function loadGiscus() {
     const wrapper = document.getElementById('giscus-wrapper');
     if (!wrapper || wrapper.querySelector('script')) return;
 
@@ -53,13 +53,13 @@
   /**
    * 透過 postMessage 通知 giscus iframe 切換 theme
    */
-  function setGiscusTheme(theme: string): void {
-    const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
-    if (iframe?.contentWindow) {
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme } } },
-        'https://giscus.app',
-      );
+  // @ts-ignore -- TS annotations not supported by astro-eslint-parser@1.3.0
+  function setGiscusTheme(theme) {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    // @ts-ignore -- iframe is HTMLIFrameElement, contentWindow exists
+    if (iframe && iframe.contentWindow) {
+      // @ts-ignore
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
     }
   }
 

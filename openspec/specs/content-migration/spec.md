@@ -1,8 +1,11 @@
 # content-migration Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 文章遷移數量與存放位置
 
 所有現有 Hexo 部落格文章 SHALL 遷移至 Astro 內容集合，共計 30 篇文章 MUST 全數遷移至 `src/content/blog/` 目錄。
@@ -110,4 +113,3 @@ TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after 
 - THEN Markdown 內容 SHALL 正確轉換為 HTML
 - AND 程式碼區塊 SHALL 保留語法高亮標記
 - AND 標題層級 SHALL 與原始 Markdown 一致
-

@@ -5,12 +5,14 @@ Ray 使用 Claude Code 作為 PM，指揮 AI Agent 團隊（工程師、Code Rev
 ## Goals / Non-Goals
 
 **Goals:**
+
 - 撰寫一篇 1500-2500 字的技術文章
 - 記錄完整的 AI Agent 團隊協作流程
 - 分享實際數據和成果
 - 第一個標籤為「AI生成」
 
 **Non-Goals:**
+
 - 不是 Claude Code 的使用教學
 - 不是 Astro 的入門指南
 
@@ -32,10 +34,10 @@ Ray 使用 Claude Code 作為 PM，指揮 AI Agent 團隊（工程師、Code Rev
 ### Frontmatter
 
 ```yaml
-title: "我當 User，Claude 當 PM — AI Agent 團隊重建部落格實戰"
-description: "用 Claude Code 的 AI Agent 團隊（PM、工程師、Code Reviewer、QC）完成部落格從 Hexo 到 Astro 的全面重建，記錄 OpenSpec 流程與平行開發的實戰經驗。"
+title: '我當 User，Claude 當 PM — AI Agent 團隊重建部落格實戰'
+description: '用 Claude Code 的 AI Agent 團隊（PM、工程師、Code Reviewer、QC）完成部落格從 Hexo 到 Astro 的全面重建，記錄 OpenSpec 流程與平行開發的實戰經驗。'
 date: 2026-03-19
-category: "程式開發"
-tags: ["AI生成", "Claude Code", "AI Agent", "Astro", "OpenSpec"]
-postSlug: "ai-agent-team-rebuild-blog"
+category: '程式開發'
+tags: ['AI生成', 'Claude Code', 'AI Agent', 'Astro', 'OpenSpec']
+postSlug: 'ai-agent-team-rebuild-blog'
 ```

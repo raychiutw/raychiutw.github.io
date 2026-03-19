@@ -6,6 +6,7 @@ Push 到 master 後，GitHub Actions 的 `Deploy to GitHub Pages` 和 `CI` workf
 錯誤訊息為：`Error: No pnpm version is specified.`
 
 `pnpm/action-setup@v4` 要求必須透過以下方式之一指定 pnpm 版本：
+
 1. GitHub Action config 的 `version` 參數
 2. `package.json` 的 `packageManager` 欄位
 

@@ -1,10 +1,10 @@
 ---
-title: "Jeykll 快速安裝教學"
-description: "Jeykll 是 Github 的聯合創始人的作品，以 Ruby 開發的靜態網頁產生器，是目前最受歡迎的，相關資源最多的 ssg，本篇就來簡單快速教學"
+title: 'Jeykll 快速安裝教學'
+description: 'Jeykll 是 Github 的聯合創始人的作品，以 Ruby 開發的靜態網頁產生器，是目前最受歡迎的，相關資源最多的 ssg，本篇就來簡單快速教學'
 date: 2019-04-12
-category: "程式開發"
-tags: ["Jekyll", "Static Site Generator"]
-postSlug: "jekyll-quick-install-guide"
+category: '程式開發'
+tags: ['Jekyll', 'Static Site Generator']
+postSlug: 'jekyll-quick-install-guide'
 ---
 
 > Jeykll 是 Github 的聯合創始人的作品，以 Ruby 開發的靜態網頁產生器，是目前最受歡迎的，相關資源最多的 ssg，本篇就來簡單快速教學。
@@ -48,7 +48,7 @@ Github Pages 是和 Jekyll 最合拍的 Hosting 空間，同個一爸爸的優�
 
 - 和 Github Pages 深度整合（其他 Hosting 空間也是很容易部署）。
 - 相關插件資源眾多。
-- _config.yml 設定統一。
+- \_config.yml 設定統一。
 
 ### 缺點
 

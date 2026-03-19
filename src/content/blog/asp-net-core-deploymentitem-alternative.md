@@ -1,10 +1,10 @@
 ---
-title: "ASP.NET Core 無法使用 DeploymentItem 的替代方案"
-description: "在 MSTest 中，若要在執行測試時能調用實體檔案，通常會用 DeploymentItem Attribute 來指定要同時部署的檔案，但屬性在 ASP.NET Core 中不再支援，本篇說明其他替代方案"
+title: 'ASP.NET Core 無法使用 DeploymentItem 的替代方案'
+description: '在 MSTest 中，若要在執行測試時能調用實體檔案，通常會用 DeploymentItem Attribute 來指定要同時部署的檔案，但屬性在 ASP.NET Core 中不再支援，本篇說明其他替代方案'
 date: 2018-05-10
-category: "程式開發"
-tags: ["ASP.NET Core", "MSTest", "UnitTest", "CSharp"]
-postSlug: "asp-net-core-deploymentitem-alternative"
+category: '程式開發'
+tags: ['ASP.NET Core', 'MSTest', 'UnitTest', 'CSharp']
+postSlug: 'asp-net-core-deploymentitem-alternative'
 ---
 
 > 在 MSTest 中，若要在執行測試時能調用實體檔案，通常會用 DeploymentItem Attribute 來指定要同時部署的檔案，但屬性在 ASP.NET Core 中不再支援，本篇說明其他替代方案。

@@ -1,8 +1,11 @@
 # post-page Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 文章元資料顯示
 
 文章頁面 SHALL 於頂部顯示文章標題、發佈日期、所屬分類、標籤清單及預估閱讀時間。
@@ -99,4 +102,3 @@ THEN 圖片 SHALL 置中對齊且寬度為容器的 100%
 
 WHEN 使用者捲動至文章頁面底部
 THEN 頁面 SHALL 顯示 Giscus 留言元件
-

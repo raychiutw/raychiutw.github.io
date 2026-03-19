@@ -1,21 +1,21 @@
 ---
-title: "隨手 Design Pattern (5) - 雙重檢查鎖定模式 (Double-Checked Locking Pattern)"
-description: "雙重檢查鎖定 (Double-Checked Locking Pattern) 是另外一個常用的設計模式，用來減少並發系統中競爭和同步的開銷，常用來避免快取在同一時間被重複建立"
+title: '隨手 Design Pattern (5) - 雙重檢查鎖定模式 (Double-Checked Locking Pattern)'
+description: '雙重檢查鎖定 (Double-Checked Locking Pattern) 是另外一個常用的設計模式，用來減少並發系統中競爭和同步的開銷，常用來避免快取在同一時間被重複建立'
 date: 2019-08-23
-category: "程式開發"
-tags: ["Design Pattern", "Double-Checked Locking Pattern", "CSharp"]
-postSlug: "design-pattern-5-double-checked-locking-pattern"
+category: '程式開發'
+tags: ['Design Pattern', 'Double-Checked Locking Pattern', 'CSharp']
+postSlug: 'design-pattern-5-double-checked-locking-pattern'
 ---
 
->雙重檢查鎖定 (Double-Checked Locking Pattern) 是另外一個常用的設計模式，用來減少並發系統中競爭和同步的開銷。雙重檢查鎖定模式首先驗證鎖定條件(第一次檢查)，只有通過鎖定條件驗證才真正的進行加鎖邏輯並再次驗證條件(第二次檢查)。常用來避免快取在同一時間被重複建立。
+> 雙重檢查鎖定 (Double-Checked Locking Pattern) 是另外一個常用的設計模式，用來減少並發系統中競爭和同步的開銷。雙重檢查鎖定模式首先驗證鎖定條件(第一次檢查)，只有通過鎖定條件驗證才真正的進行加鎖邏輯並再次驗證條件(第二次檢查)。常用來避免快取在同一時間被重複建立。
 
 ### 定義
 
 我們先來看看來自 Wiki 的定義
 
->雙重檢查鎖定模式（也被稱為"雙重檢查加鎖優化"，"鎖暗示"（Lock hint）[1]) 是一種軟體設計模式用來減少並發系統中競爭和同步的開銷。雙重檢查鎖定模式首先驗證鎖定條件(第一次檢查)，只有通過鎖定條件驗證才真正的進行加鎖邏輯並再次驗證條件(第二次檢查)。
->該模式在某些語言在某些硬體平台的實現可能是不安全的。有的時候，這一模式被看做是反模式。
->它通常用於減少加鎖開銷，尤其是為多執行緒環境中的單例模式實現「惰性初始化」。惰性初始化的意思是直到第一次訪問時才初始化它的值。
+> 雙重檢查鎖定模式（也被稱為"雙重檢查加鎖優化"，"鎖暗示"（Lock hint）[1]) 是一種軟體設計模式用來減少並發系統中競爭和同步的開銷。雙重檢查鎖定模式首先驗證鎖定條件(第一次檢查)，只有通過鎖定條件驗證才真正的進行加鎖邏輯並再次驗證條件(第二次檢查)。
+> 該模式在某些語言在某些硬體平台的實現可能是不安全的。有的時候，這一模式被看做是反模式。
+> 它通常用於減少加鎖開銷，尤其是為多執行緒環境中的單例模式實現「惰性初始化」。惰性初始化的意思是直到第一次訪問時才初始化它的值。
 
 ### C# 實際範例
 

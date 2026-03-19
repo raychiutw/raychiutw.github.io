@@ -1,8 +1,11 @@
 # comment-system Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: GitHub Discussions 留言後端
 
 留言系統 MUST 使用 Giscus，以 GitHub Discussions 作為留言儲存後端。
@@ -67,4 +70,3 @@ THEN 頁面 MUST NOT 包含 Giscus 留言元件
 
 WHEN 使用者存取任一文章頁面
 THEN 頁面底部 SHALL 顯示 Giscus 留言區
-

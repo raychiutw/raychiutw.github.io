@@ -1,13 +1,13 @@
 ---
-title: "Hexo（3）－基本設定"
-description: "有了第一個自己的 Blog，也順利的產生第一篇文章，接下來我們來做一些設定，讓 Blog 更量身打造一些。請打開目錄下的 _config.yaml，我們一步步調整。Site 設定是 Blog 的基本資訊，請修改基本的資訊上去"
+title: 'Hexo（3）－基本設定'
+description: '有了第一個自己的 Blog，也順利的產生第一篇文章，接下來我們來做一些設定，讓 Blog 更量身打造一些。請打開目錄下的 _config.yaml，我們一步步調整。Site 設定是 Blog 的基本資訊，請修改基本的資訊上去'
 date: 2018-05-10
-category: "程式開發"
-tags: ["Hexo", "Static Site Generator"]
-postSlug: "hexo-tutorial-3-basic-settings"
+category: '程式開發'
+tags: ['Hexo', 'Static Site Generator']
+postSlug: 'hexo-tutorial-3-basic-settings'
 ---
 
->有了第一個自己的 Blog，也順利的產身第一篇文章，接下來我們來做一些設定，讓 Blog 更量身打造一些。
+> 有了第一個自己的 Blog，也順利的產身第一篇文章，接下來我們來做一些設定，讓 Blog 更量身打造一些。
 
 <!--more-->
 

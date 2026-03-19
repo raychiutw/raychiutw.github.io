@@ -1,13 +1,13 @@
 ---
-title: "靜態網站產生器大比拚"
-description: "靜態網站產生器 (Static Site Generator) 是快速架站的利器，更是輕量級部落格架站的好幫手，本篇將常見的 Jekyll、Hexo、Hugo 三套工具做了評比"
+title: '靜態網站產生器大比拚'
+description: '靜態網站產生器 (Static Site Generator) 是快速架站的利器，更是輕量級部落格架站的好幫手，本篇將常見的 Jekyll、Hexo、Hugo 三套工具做了評比'
 date: 2019-03-20
-category: "程式開發"
-tags: ["Static Site Generator", "Hexo", "Hugo", "Jekyll"]
-postSlug: "static-site-generator-comparison"
+category: '程式開發'
+tags: ['Static Site Generator', 'Hexo', 'Hugo', 'Jekyll']
+postSlug: 'static-site-generator-comparison'
 ---
 
->靜態網站產生器 (Static Site Generator) 是快速架站的利器，更是輕量級部落格架站的好幫手，本篇將常見的 Jekyll、Hexo、Hugo 三套工具做了評比‧。
+> 靜態網站產生器 (Static Site Generator) 是快速架站的利器，更是輕量級部落格架站的好幫手，本篇將常見的 Jekyll、Hexo、Hugo 三套工具做了評比‧。
 
 ### 選擇靜態網站的原因？
 

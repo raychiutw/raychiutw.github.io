@@ -4,31 +4,34 @@
 
 @layer base {
   :root {
-    --bg: #FDF6EC;
-    --text: #3E2723;
+    --bg: #fdf6ec;
+    --text: #3e2723;
     --text-muted: #795548;
-    --accent: #FF9A76;
-    --link: #E65100;
-    --border: #D7CCC8;
-    --code-bg: #FFF3E0;
-    --inline-code-bg: #FFF8E1;
+    --accent: #ff9a76;
+    --link: #e65100;
+    --border: #d7ccc8;
+    --code-bg: #fff3e0;
+    --inline-code-bg: #fff8e1;
   }
 
   .dark {
-    --bg: #1A1410;
-    --text: #E8DDD0;
-    --text-muted: #A89080;
-    --accent: #FFB088;
-    --link: #FFB088;
-    --border: #3E3028;
-    --code-bg: #231C14;
-    --inline-code-bg: #2A1F15;
+    --bg: #1a1410;
+    --text: #e8ddd0;
+    --text-muted: #a89080;
+    --accent: #ffb088;
+    --link: #ffb088;
+    --border: #3e3028;
+    --code-bg: #231c14;
+    --inline-code-bg: #2a1f15;
   }
 
   *,
   *::before,
   *::after {
-    transition: color 200ms, background-color 200ms, border-color 200ms;
+    transition:
+      color 200ms,
+      background-color 200ms,
+      border-color 200ms;
   }
 
   html {
@@ -43,7 +46,12 @@
   }
 
   /* Heading typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Noto Sans TC', system-ui, sans-serif;
     font-weight: 700;
   }
@@ -135,7 +143,8 @@
     background-color: var(--inline-code-bg);
     padding: 0.2em 0.4em;
     border-radius: 3px;
-    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
     font-size: 0.9em;
   }
 
@@ -153,7 +162,8 @@
     background-color: transparent;
     padding: 0;
     border-radius: 0;
-    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
   }
 
   .prose img {
@@ -236,7 +246,9 @@ html.dark .astro-code span {
   color: var(--text-muted);
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.2s, background-color 0.2s;
+  transition:
+    opacity 0.2s,
+    background-color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,7 +273,10 @@ html.dark .astro-code span {
 
 .copy-feedback {
   font-size: 0.75rem;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   white-space: nowrap;
 }
 
@@ -274,7 +289,10 @@ html.dark .astro-code span {
 }
 
 .toc-summary {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
@@ -321,7 +339,9 @@ html.dark .astro-code span {
   padding: 0.2em 0.5em;
   border-radius: 4px;
   border-left: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .toc-link:hover {

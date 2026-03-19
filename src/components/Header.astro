@@ -6,21 +6,30 @@ import SearchDialog from './SearchDialog';
 
 <header class="border-b" style="border-color: var(--border);">
   <div class="mx-auto flex max-w-prose items-center justify-between px-4 py-4">
-    <a href="/" class="flex items-center gap-2 font-sans text-lg font-semibold tracking-wide text-text no-underline">
-      <div style="width:24px;height:24px;background:#FF9A76;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;">R</div>
+    <a
+      href="/"
+      class="flex items-center gap-2 font-sans text-lg font-semibold tracking-wide text-text no-underline"
+    >
+      <div
+        style="width:24px;height:24px;background:#FF9A76;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;"
+      >
+        R
+      </div>
       {SITE_TITLE.toUpperCase()}
     </a>
 
     <div class="flex items-center gap-2">
       <nav class="hidden md:flex md:items-center md:gap-6" aria-label="主要導覽">
-        {NAV_ITEMS.map((item) => (
-          <a
-            href={item.href}
-            class="text-sm text-text/70 no-underline transition-colors duration-200 hover:text-accent"
-          >
-            {item.title}
-          </a>
-        ))}
+        {
+          NAV_ITEMS.map((item) => (
+            <a
+              href={item.href}
+              class="text-sm text-text/70 no-underline transition-colors duration-200 hover:text-accent"
+            >
+              {item.title}
+            </a>
+          ))
+        }
       </nav>
 
       <!-- Search button -->
@@ -30,7 +39,17 @@ import SearchDialog from './SearchDialog';
         aria-label="搜尋"
         data-search-trigger
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.3-4.3"></path>
         </svg>
@@ -50,12 +69,35 @@ import SearchDialog from './SearchDialog';
         aria-expanded="false"
         data-menu-toggle
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-menu-icon-open>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          data-menu-icon-open
+        >
           <path d="M4 12h16"></path>
           <path d="M4 6h16"></path>
           <path d="M4 18h16"></path>
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" data-menu-icon-close>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="hidden"
+          data-menu-icon-close
+        >
           <path d="M18 6 6 18"></path>
           <path d="m6 6 12 12"></path>
         </svg>
@@ -65,18 +107,21 @@ import SearchDialog from './SearchDialog';
 
   <!-- Mobile nav menu -->
   <nav
-    class="hidden border-t px-4 pb-4 md:hidden" style="border-color: var(--border);"
+    class="hidden border-t px-4 pb-4 md:hidden"
+    style="border-color: var(--border);"
     aria-label="行動版導覽"
     data-mobile-menu
   >
-    {NAV_ITEMS.map((item) => (
-      <a
-        href={item.href}
-        class="block py-2 text-sm text-text/70 no-underline transition-colors duration-200 hover:text-accent"
-      >
-        {item.title}
-      </a>
-    ))}
+    {
+      NAV_ITEMS.map((item) => (
+        <a
+          href={item.href}
+          class="block py-2 text-sm text-text/70 no-underline transition-colors duration-200 hover:text-accent"
+        >
+          {item.title}
+        </a>
+      ))
+    }
   </nav>
 </header>
 

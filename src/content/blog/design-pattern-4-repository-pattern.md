@@ -1,13 +1,13 @@
 ---
-title: "隨手 Design Pattern (4) - Repository 模式 (Repository Pattern)"
-description: "Repository 模式與 UnitOfWork 模式可說是充滿爭議，國外大神爭論不休，本篇不打算加入筆戰，只簡單提供幾個適合的應用的情境與範例"
+title: '隨手 Design Pattern (4) - Repository 模式 (Repository Pattern)'
+description: 'Repository 模式與 UnitOfWork 模式可說是充滿爭議，國外大神爭論不休，本篇不打算加入筆戰，只簡單提供幾個適合的應用的情境與範例'
 date: 2019-08-22
-category: "程式開發"
-tags: ["Design Pattern", "Repository Pattern", "CSharp"]
-postSlug: "design-pattern-4-repository-pattern"
+category: '程式開發'
+tags: ['Design Pattern', 'Repository Pattern', 'CSharp']
+postSlug: 'design-pattern-4-repository-pattern'
 ---
 
->Repository 模式與 UnitOfWork 模式可說是充滿爭議，國外大神爭論不休，本篇不打算加入筆戰，只簡單提供幾個適合的應用的情境與範例，大家就自行選擇消化囉。
+> Repository 模式與 UnitOfWork 模式可說是充滿爭議，國外大神爭論不休，本篇不打算加入筆戰，只簡單提供幾個適合的應用的情境與範例，大家就自行選擇消化囉。
 
 ### Repository 模式的好處
 
@@ -75,7 +75,7 @@ public class OrderRepository : IRepository<TEntity>
 
 ### Repository 模式 with Entity Framwprk
 
-若按照上面的定義，EF 定義了每個 Entity 就是一個資料表，所以要搭配  Repository 模式 應該就是適合泛型 IRepository 囉 ?
+若按照上面的定義，EF 定義了每個 Entity 就是一個資料表，所以要搭配 Repository 模式 應該就是適合泛型 IRepository 囉 ?
 
 答案是：不盡然，目前兩派爭論不休。
 

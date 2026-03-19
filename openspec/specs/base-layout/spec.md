@@ -1,8 +1,11 @@
 # base-layout Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: BaseLayout 基礎佈局元件
 
 `BaseLayout.astro` SHALL 作為全站的基礎佈局元件，MUST 包含完整的 HTML head 區塊、Header 元件、主要內容插槽（slot）與 Footer 元件。
@@ -120,4 +123,3 @@ TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after 
 - WHEN 使用螢幕閱讀器瀏覽網站
 - THEN 頁面結構 SHALL 能透過語義標籤正確辨識各區塊
 - AND 導覽列 SHALL 使用 `<nav>` 標籤包裹
-

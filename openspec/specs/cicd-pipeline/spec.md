@@ -1,8 +1,11 @@
 # cicd-pipeline Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: GitHub Actions Workflow 觸發條件
 
 CI/CD Pipeline MUST 使用 GitHub Actions workflow 實作。觸發條件 SHALL 包含：push to `master` 分支以及 Pull Request 事件。
@@ -113,4 +116,3 @@ GitHub Dependabot MUST 啟用，自動偵測依賴套件更新並建立 Pull Req
 
 WHEN 專案的某個依賴套件發佈新版本
 THEN Dependabot SHALL 自動建立 Pull Request 提議更新該套件
-

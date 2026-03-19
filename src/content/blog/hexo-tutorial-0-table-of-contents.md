@@ -1,10 +1,10 @@
 ---
-title: "Hexo教學（0）－目錄"
-description: "Hexo 是一個使用 Node.js 為基礎的靜態網站產生器。使用 Markdown 解析文章，透過主題產生靜態檔案。而且他是由台灣人所開發出來的。優點包含台灣人開發中文資源豐富，Node.js 生態完整插件完整，頁面產生速度快"
+title: 'Hexo教學（0）－目錄'
+description: 'Hexo 是一個使用 Node.js 為基礎的靜態網站產生器。使用 Markdown 解析文章，透過主題產生靜態檔案。而且他是由台灣人所開發出來的。優點包含台灣人開發中文資源豐富，Node.js 生態完整插件完整，頁面產生速度快'
 date: 2018-05-01
-category: "程式開發"
-tags: ["Hexo", "Static Site Generator"]
-postSlug: "hexo-tutorial-0-table-of-contents"
+category: '程式開發'
+tags: ['Hexo', 'Static Site Generator']
+postSlug: 'hexo-tutorial-0-table-of-contents'
 ---
 
 > Hexo 是一個使用 Node.js 為基礎的靜態網站產生器。使用 Markdown 解析文章，透過主題產生靜態檔案。而且他是由台灣人所開發出來的。
@@ -18,7 +18,7 @@ postSlug: "hexo-tutorial-0-table-of-contents"
 ## 缺點
 
 - Node.js 插件眾多，依賴複雜，有可能會踩坑。
-- Hexo _config.yaml 與 Hexo Theme _config.yaml 交互設定較複雜。
+- Hexo \_config.yaml 與 Hexo Theme \_config.yaml 交互設定較複雜。
 
 <!--more-->
 

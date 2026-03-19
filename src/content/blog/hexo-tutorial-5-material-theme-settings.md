@@ -1,13 +1,13 @@
 ---
-title: "Hexo教學（5）－Material 主題設定"
-description: "自建 Blog 其中一種樂趣就是可以換很多種風格迥異的主題，不過仍需要一點程式基礎才能做好設定，接下來會以 Hexo 排名第二的主題 Material 來做說明。下載主題與更名設定檔"
+title: 'Hexo教學（5）－Material 主題設定'
+description: '自建 Blog 其中一種樂趣就是可以換很多種風格迥異的主題，不過仍需要一點程式基礎才能做好設定，接下來會以 Hexo 排名第二的主題 Material 來做說明。下載主題與更名設定檔'
 date: 2018-05-20
-category: "程式開發"
-tags: ["Hexo", "Hexo Themes", "Static Site Generator"]
-postSlug: "hexo-tutorial-5-material-theme-settings"
+category: '程式開發'
+tags: ['Hexo', 'Hexo Themes', 'Static Site Generator']
+postSlug: 'hexo-tutorial-5-material-theme-settings'
 ---
 
->自建 Blog 其中一種樂趣就是可以換很多種風格迥異的主題，不過仍需要一點程式基礎才能做好設定，接下來會以 Hexo 排名第二的主題 - Material 來做說明。
+> 自建 Blog 其中一種樂趣就是可以換很多種風格迥異的主題，不過仍需要一點程式基礎才能做好設定，接下來會以 Hexo 排名第二的主題 - Material 來做說明。
 
 <!--more-->
 
@@ -23,11 +23,11 @@ Hexo 只需要將主題文件放置於站點目錄的 themes 目錄下。從 Git
 
 先理解兩個名詞
 
->站點配置文件
+> 站點配置文件
 
 站點目錄下的 `_config.yml`
 
->主題配置文件
+> 主題配置文件
 
 material 資料夾下的 `_config.yml`
 
@@ -64,7 +64,7 @@ theme: material
 
 接下來主題配置文件的設定
 
->設定樣式
+> 設定樣式
 
 - Paradox: 標準 Material Design
 - Isolation: 極簡風格
@@ -87,47 +87,47 @@ scheme: Paradox
 ```yaml
 # Sidebar Customize
 sidebar:
-    dropdown:
-        Email Me:
-            link: mail@mail.com
-            icon: email
-        Github:
-            link: "https://github.com/username"
-            icon: layers
-    homepage:
-        use: true
-        icon: home
-        divider: false
-    archives:
-        use: true
-        icon: inbox
-        divider: false
-    categories:
-        use: true
-        icon: chrome_reader_mode
-        divider: false
-    pages:
-        標籤:
-            link: "/tags"
-            icon: bookmark
-            divider: false
-        時間軸:
-            link: "/timeline"
-            icon: timeline
-            divider: false
-        #About:
-            #link: "/about"
-            #icon: person
-            #divider: false
-    article_num:
-        use: true
-        divider: false
-    footer:
-        divider: true
-        theme: true
-        support: false
-        feedback: false
-        material: false
+  dropdown:
+    Email Me:
+      link: mail@mail.com
+      icon: email
+    Github:
+      link: 'https://github.com/username'
+      icon: layers
+  homepage:
+    use: true
+    icon: home
+    divider: false
+  archives:
+    use: true
+    icon: inbox
+    divider: false
+  categories:
+    use: true
+    icon: chrome_reader_mode
+    divider: false
+  pages:
+    標籤:
+      link: '/tags'
+      icon: bookmark
+      divider: false
+    時間軸:
+      link: '/timeline'
+      icon: timeline
+      divider: false
+    #About:
+    #link: "/about"
+    #icon: person
+    #divider: false
+  article_num:
+    use: true
+    divider: false
+  footer:
+    divider: true
+    theme: true
+    support: false
+    feedback: false
+    material: false
 ```
 
 如此就一個看起來蠻完整的外觀囉。

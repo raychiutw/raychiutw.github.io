@@ -1,8 +1,11 @@
 # rss-seo Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: RSS Feed 產生
 
 網站 MUST 使用 `@astrojs/rss` 產生 `/rss.xml`，該 Feed SHALL 包含所有已發佈文章的全文內容（非摘要）。
@@ -98,4 +101,3 @@ Open Graph 圖片 MUST 為固定尺寸 1200x630 像素，確保在社群平台�
 
 WHEN 使用者在社群平台分享一篇文章連結
 THEN 平台 SHALL 抓取到 1200x630 像素的 OG 圖片作為預覽
-

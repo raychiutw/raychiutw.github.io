@@ -1,8 +1,11 @@
 # homepage Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 文章列表時間排序
 
 首頁 SHALL 顯示部落格文章列表，且 MUST 按照發佈日期倒序排列（最新文章在最上方）。
@@ -114,4 +117,3 @@ TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after 
   - `date`：發佈日期
   - `description`：文章摘要
   - `url`：文章連結路徑
-

@@ -1,13 +1,13 @@
 ---
-title: "Hexo（4）－部署到 GitHub Pages"
-description: "Hexo 產生的靜態網誌預設可以本機執行，但若要讓大家看到勢必要部署到外部網路空間，由於是靜態網站部署到哪個網頁空間都不成問題，本文建議部署到 GitHub Pages 上，以下就一步步說明步驟"
+title: 'Hexo（4）－部署到 GitHub Pages'
+description: 'Hexo 產生的靜態網誌預設可以本機執行，但若要讓大家看到勢必要部署到外部網路空間，由於是靜態網站部署到哪個網頁空間都不成問題，本文建議部署到 GitHub Pages 上，以下就一步步說明步驟'
 date: 2018-05-20
-category: "程式開發"
-tags: ["Hexo", "Git", "GitHub", "Static Site Generator"]
-postSlug: "hexo-tutorial-4-deploy-to-github-pages"
+category: '程式開發'
+tags: ['Hexo', 'Git', 'GitHub', 'Static Site Generator']
+postSlug: 'hexo-tutorial-4-deploy-to-github-pages'
 ---
 
->Hexo 產生的靜態網誌預設可以本機執行，但若要讓大家看看到勢必要部署到外部網路空間，由於是靜態網站部署到哪個網頁空間都不成問題，本文是建議部署到 GitHub Pages 上，以下就一步步說明步驟。
+> Hexo 產生的靜態網誌預設可以本機執行，但若要讓大家看看到勢必要部署到外部網路空間，由於是靜態網站部署到哪個網頁空間都不成問題，本文是建議部署到 GitHub Pages 上，以下就一步步說明步驟。
 
 <!--more-->
 
@@ -35,7 +35,7 @@ npm install hexo-deployer-git --save
 
 到 GitHub 上新增一個 repo，名稱必須是 `{username}.github.io`
 
-![GitHub Pages](/images/blog/github-pages-1.png "GitHub Pages")
+![GitHub Pages](/images/blog/github-pages-1.png 'GitHub Pages')
 
 #### 設定 `_config.yml`
 
@@ -52,10 +52,10 @@ repo 有幾種驗證方式可以 push 到 Github，這裡選擇最簡單的自�
 
 ```yaml
 deploy:
-   type: git
-   repo:
-      github: https://github.com/<username>/<username>.github.io.git,master
-      gitcafe: https://gitcafe.com/<username>/<username>.git,gitcafe-pages
+  type: git
+  repo:
+    github: https://github.com/<username>/<username>.github.io.git,master
+    gitcafe: https://gitcafe.com/<username>/<username>.git,gitcafe-pages
 ```
 
 若是多種部署方式可參考以下設定

@@ -1,13 +1,13 @@
 ---
-title: "MongoDB Sharding with Docker"
-description: "sharding 為 MongoDB 所擁有的一種資料分散處理架構，簡單的說就是將資料分片 (shard) 儲存到不同的機器中，最常應用在大數據的案例上。在海量資料的儲存情境上，垂直擴充架構是無法滿足的，必須透過水平擴充來實現"
+title: 'MongoDB Sharding with Docker'
+description: 'sharding 為 MongoDB 所擁有的一種資料分散處理架構，簡單的說就是將資料分片 (shard) 儲存到不同的機器中，最常應用在大數據的案例上。在海量資料的儲存情境上，垂直擴充架構是無法滿足的，必須透過水平擴充來實現'
 date: 2019-03-20
-category: "程式開發"
-tags: ["MongoDB", "NoSQL"]
-postSlug: "mongodb-sharding-with-docker"
+category: '程式開發'
+tags: ['MongoDB', 'NoSQL']
+postSlug: 'mongodb-sharding-with-docker'
 ---
 
->sharding 為 MongoDB 所擁有的一種資料分散處理架構，簡單的說就是將資料分片 (shard) 儲存到不同的機器中，最常應用在大數據的案例上。在海量資料的儲存情境上，垂直擴充架構是無法滿足的，必須透過水平擴充來實現。
+> sharding 為 MongoDB 所擁有的一種資料分散處理架構，簡單的說就是將資料分片 (shard) 儲存到不同的機器中，最常應用在大數據的案例上。在海量資料的儲存情境上，垂直擴充架構是無法滿足的，必須透過水平擴充來實現。
 
 ## 基本觀念
 
@@ -65,18 +65,18 @@ container 清單：
 
 ### 產生 keyfile
 
->keyfile 適合在開發或測試環境中使用，正式環境建議使用 [x.509 certificates](https://docs.mongodb.com/manual/core/security-x.509/)
+> keyfile 適合在開發或測試環境中使用，正式環境建議使用 [x.509 certificates](https://docs.mongodb.com/manual/core/security-x.509/)
 
 使用 keyfile 身份驗證，replica set 中的每個 mongod 都使用 keyfile 的內容作為共享密碼來驗證部署中的其他成員。只有具有正確 keyfile 的 mongod 才能加入 replica set。
 
->在 UNIX 系統上，密鑰文件不得具有 group 或 world 權限。 在 Windows 系統上，不檢查密鑰文件權限。
+> 在 UNIX 系統上，密鑰文件不得具有 group 或 world 權限。 在 Windows 系統上，不檢查密鑰文件權限。
 
 ```sh
 openssl rand -base64 756 > <path-to-keyfile>
 chmod 400 <path-to-keyfile>
 ```
 
-產生好的 keyfile 名稱為 ```mongo-keyfile``` 路徑為 ```c:\data\mongo\```
+產生好的 keyfile 名稱為 `mongo-keyfile` 路徑為 `c:\data\mongo\`
 
 ### 建立 volume
 

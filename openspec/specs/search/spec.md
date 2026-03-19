@@ -1,8 +1,11 @@
 # search Specification
 
 ## Purpose
+
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 編譯時建立搜尋索引
 
 系統 MUST 於編譯時自動建立 Pagefind 搜尋索引。
@@ -75,4 +78,3 @@ THEN 搜尋 React Island 元件 SHALL 以 `client:idle` 方式進行 hydration
 
 WHEN 使用者輸入的關鍵字查無任何符合的文章
 THEN 搜尋 modal SHALL 顯示友善提示訊息（例如「找不到相關文章，請嘗試其他關鍵字」）
-

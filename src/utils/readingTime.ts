@@ -13,9 +13,7 @@ export function calculateReadingTime(text: string): number {
 
   // 計算英文單字數（移除中文後以空白分隔）
   const withoutChinese = trimmed.replace(/[\u4e00-\u9fff\u3400-\u4dbf]/g, ' ');
-  const englishWords = withoutChinese
-    .split(/\s+/)
-    .filter((word) => word.length > 0).length;
+  const englishWords = withoutChinese.split(/\s+/).filter((word) => word.length > 0).length;
 
   const totalWords = chineseChars + englishWords;
   const minutes = Math.ceil(totalWords / WORDS_PER_MINUTE);

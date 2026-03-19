@@ -3,9 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const sorted = allPosts.sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-);
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 // Group by year -> month
 type PostEntry = (typeof sorted)[number];
@@ -35,33 +33,35 @@ function getPostUrl(post: PostEntry) {
   <p class="mt-2 text-text/50">{sorted.length} 篇文章</p>
 
   <div class="mt-10 space-y-10">
-    {[...grouped.entries()].map(([year, months]) => (
-      <section>
-        <h2 class="font-sans text-2xl font-bold tracking-tight">{year}</h2>
-        {[...months.entries()].map(([month, posts]) => (
-          <div class="mt-4 ml-4">
-            <h3 class="text-lg font-semibold text-text/70">{month} 月</h3>
-            <ul class="mt-2 space-y-2">
-              {posts.map((post) => {
-                const dateStr = post.data.date.toISOString().slice(0, 10);
-                return (
-                  <li class="flex items-baseline gap-3">
-                    <time datetime={dateStr} class="shrink-0 text-sm text-text/50">
-                      {dateStr}
-                    </time>
-                    <a
-                      href={getPostUrl(post)}
-                      class="text-text no-underline transition-colors duration-200 hover:text-accent"
-                    >
-                      {post.data.title}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
-      </section>
-    ))}
+    {
+      [...grouped.entries()].map(([year, months]) => (
+        <section>
+          <h2 class="font-sans text-2xl font-bold tracking-tight">{year}</h2>
+          {[...months.entries()].map(([month, posts]) => (
+            <div class="mt-4 ml-4">
+              <h3 class="text-lg font-semibold text-text/70">{month} 月</h3>
+              <ul class="mt-2 space-y-2">
+                {posts.map((post) => {
+                  const dateStr = post.data.date.toISOString().slice(0, 10);
+                  return (
+                    <li class="flex items-baseline gap-3">
+                      <time datetime={dateStr} class="shrink-0 text-sm text-text/50">
+                        {dateStr}
+                      </time>
+                      <a
+                        href={getPostUrl(post)}
+                        class="text-text no-underline transition-colors duration-200 hover:text-accent"
+                      >
+                        {post.data.title}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </section>
+      ))
+    }
   </div>
 </BaseLayout>

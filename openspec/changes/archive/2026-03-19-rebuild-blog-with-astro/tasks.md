@@ -19,8 +19,8 @@
 
 - [x] 3.1 定義 Content Collection schema（Zod）：title, description, date, category, tags, slug 【檔案：src/content/config.ts】
 - [x] 3.2 撰寫 Hexo → Astro frontmatter 轉換腳本 【檔案：scripts/migrate.ts】
-- [x] 3.3 遷移 27 篇 Markdown 文章至 src/content/blog/，檔名 kebab-case 【檔案：src/content/blog/*.md】
-- [x] 3.4 搬移文章圖片至 public/images/，更新文章內圖片路徑 【檔案：public/images/, src/content/blog/*.md】
+- [x] 3.3 遷移 27 篇 Markdown 文章至 src/content/blog/，檔名 kebab-case 【檔案：src/content/blog/\*.md】
+- [x] 3.4 搬移文章圖片至 public/images/，更新文章內圖片路徑 【檔案：public/images/, src/content/blog/\*.md】
 - [x] 3.5 驗證全部文章 astro build 通過且 frontmatter 符合 schema 【驗證：astro check + astro build】
 
 ## 4. 頁面路由
@@ -74,12 +74,12 @@
 
 - [x] 10.1 建立 GitHub Actions workflow：pnpm install → lint → format:check → tsc → build → test 【檔案：.github/workflows/deploy.yml】
 - [x] 10.2 設定 GitHub Pages 部署（actions/deploy-pages@v4，Node.js 20 LTS，僅 master 觸發）【檔案：.github/workflows/deploy.yml】
-- [x] 10.3 設定 feature/* 分支僅跑 CI 不部署 【檔案：.github/workflows/ci.yml】
+- [x] 10.3 設定 feature/\* 分支僅跑 CI 不部署 【檔案：.github/workflows/ci.yml】
 - [x] 10.4 啟用 Dependabot 自動更新 + npm audit 檢查 【檔案：.github/dependabot.yml】
 
 ## 11. 測試與品質驗證
 
-- [x] 11.1 設定 Vitest 單元測試環境，撰寫 utility 函式測試 【檔案：vitest.config.ts, src/utils/__tests__/】
+- [x] 11.1 設定 Vitest 單元測試環境，撰寫 utility 函式測試 【檔案：vitest.config.ts, src/utils/**tests**/】
 - [x] 11.2 設定 Playwright E2E 測試，涵蓋首頁、文章頁、搜尋、深色模式、導覽 【檔案：playwright.config.ts, tests/】
 - [ ] 11.3 執行連結檢查（內部連結 100% 200 OK）【驗證：lychee / htmltest】
 - [ ] 11.4 執行 Lighthouse 驗證：Performance ≥ 90、Accessibility ≥ 95、Best Practices ≥ 95、SEO ≥ 95 【驗證：Lighthouse CI】

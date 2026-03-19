@@ -16,16 +16,18 @@ const categories = [...categoryMap.entries()].sort((a, b) => b[1] - a[1]);
 <BaseLayout title="分類" description="所有文章分類">
   <h1 class="font-sans text-3xl font-bold tracking-tight md:text-4xl">分類</h1>
   <ul class="mt-8 space-y-3">
-    {categories.map(([category, count]) => (
-      <li>
-        <a
-          href={`/categories/${category}`}
-          class="text-lg text-text no-underline transition-colors duration-200 hover:text-accent"
-        >
-          {category}
-        </a>
-        <span class="ml-2 text-sm text-text/50">({count})</span>
-      </li>
-    ))}
+    {
+      categories.map(([category, count]) => (
+        <li>
+          <a
+            href={`/categories/${category}`}
+            class="text-lg text-text no-underline transition-colors duration-200 hover:text-accent"
+          >
+            {category}
+          </a>
+          <span class="ml-2 text-sm text-text/50">({count})</span>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>

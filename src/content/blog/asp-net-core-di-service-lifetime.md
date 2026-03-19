@@ -1,13 +1,13 @@
 ---
-title: "ASP.Net Core DI 容器中 Service 生命週期"
-description: "使用 DI 的時候，註冊服務的生命週期是個很重要的議題，用的好，節省記憶體。提升程式效率，用不好，則可能造成重大的異常錯誤"
+title: 'ASP.Net Core DI 容器中 Service 生命週期'
+description: '使用 DI 的時候，註冊服務的生命週期是個很重要的議題，用的好，節省記憶體。提升程式效率，用不好，則可能造成重大的異常錯誤'
 date: 2019-08-22
-category: "程式開發"
-tags: ["ASP.NET Core", "DI", "IoC", "CSharp"]
-postSlug: "asp-net-core-di-service-lifetime"
+category: '程式開發'
+tags: ['ASP.NET Core', 'DI', 'IoC', 'CSharp']
+postSlug: 'asp-net-core-di-service-lifetime'
 ---
 
->使用 DI 的時候，註冊服務的生命週期是個很重要的議題，用的好，節省記憶體。提升程式效率，用不好，則可能造成重大的異常錯誤，本篇來簡單說明一下 ASP.NET Core 注入服務的三種生命週期。
+> 使用 DI 的時候，註冊服務的生命週期是個很重要的議題，用的好，節省記憶體。提升程式效率，用不好，則可能造成重大的異常錯誤，本篇來簡單說明一下 ASP.NET Core 注入服務的三種生命週期。
 
 ### Service 生命週期
 

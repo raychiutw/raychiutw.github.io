@@ -1,10 +1,10 @@
 ---
-title: "AutoMapper.Extensions.Microsoft.DependencyInjection - AddAutoMapper 已過時"
-description: "AutoMapper.Extensions.Microsoft.DependencyInjection 簡單的讓 AutoMapper 註冊到 ASP.NET Core 中，但更版之後出現以 AddAutoMapper() 已過期的訊息"
+title: 'AutoMapper.Extensions.Microsoft.DependencyInjection - AddAutoMapper 已過時'
+description: 'AutoMapper.Extensions.Microsoft.DependencyInjection 簡單的讓 AutoMapper 註冊到 ASP.NET Core 中，但更版之後出現以 AddAutoMapper() 已過期的訊息'
 date: 2019-08-07
-category: "程式開發"
-tags: ["ASP.NET Core", "AutoMapper", "CSharp", "Nuget Package"]
-postSlug: "automapper-extensions-microsoft-dependencyinjection-addautomapper-obsolete"
+category: '程式開發'
+tags: ['ASP.NET Core', 'AutoMapper', 'CSharp', 'Nuget Package']
+postSlug: 'automapper-extensions-microsoft-dependencyinjection-addautomapper-obsolete'
 ---
 
 > AutoMapper.Extensions.Microsoft.DependencyInjection 簡單的讓 AutoMapper 註冊到 ASP.NET Core 中，但更版之後出現以 AddAutoMapper() 已過期的訊息，紀錄一下新版的用法。

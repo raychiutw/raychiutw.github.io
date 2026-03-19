@@ -13,6 +13,7 @@
 ```
 
 同時 `package.json` 也沒有 `packageManager` 欄位。`pnpm/action-setup@v4` 會依序檢查：
+
 1. Action input 的 `version`
 2. `package.json` 的 `packageManager`
 
@@ -30,11 +31,13 @@ GitHub Pages 預設會啟用 `pages-build-deployment` workflow（從 branch 部�
 ### 修復 1: 在 package.json 加入 packageManager
 
 在 `package.json` 加入：
+
 ```json
 "packageManager": "pnpm@10.32.1"
 ```
 
 選擇此方案而非在 workflow YAML 中硬寫 version，原因：
+
 - 單一來源（Single source of truth）
 - 本地開發環境也可受益（corepack 會使用此欄位）
 - 兩個 workflow 都自動取用，無需分別維護

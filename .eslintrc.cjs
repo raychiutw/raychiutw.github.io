@@ -1,6 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
+  ignorePatterns: ['dist/', '.astro/', 'node_modules/', 'playwright-report/', 'test-results/'],
   env: {
     node: true,
     browser: true,
@@ -29,6 +30,12 @@ module.exports = {
       extends: ['plugin:@typescript-eslint/recommended'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'error',
+      },
+    },
+    {
+      files: ['src/env.d.ts'],
+      rules: {
+        '@typescript-eslint/triple-slash-reference': 'off',
       },
     },
   ],
