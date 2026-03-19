@@ -3,12 +3,10 @@
 ## Purpose
 
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
-
 ## Requirements
-
 ### Requirement: BaseLayout 基礎佈局元件
 
-`BaseLayout.astro` SHALL 作為全站的基礎佈局元件，MUST 包含完整的 HTML head 區塊、Header 元件、主要內容插槽（slot）與 Footer 元件。
+`BaseLayout.astro` SHALL 作為全站的基礎佈局元件，MUST 包含完整的 HTML head 區塊、Header 元件、主要內容插槽（slot）與 Footer 元件。程式碼區塊語法高亮 MUST 使用 Astro 5 的 Shiki CSS 變數名稱。
 
 #### Scenario: BaseLayout 結構驗證
 
@@ -19,13 +17,12 @@ TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after 
   - `<main>` 標籤內含 `<slot />` 作為內容插槽
   - `<Footer />` 元件引用
 
-#### Scenario: Meta 標籤完整性
+#### Scenario: Shiki CSS 變數名稱更新
 
-- WHEN 建置後檢視任一頁面的 HTML head
-- THEN SHALL 包含 `charset`、`viewport`、`title`、`description` 等基本 meta 標籤
-- AND SHALL 包含 Open Graph 相關 meta 標籤
-
----
+- WHEN 檢查 `src/styles/global.css` 中的 Shiki 相關樣式
+- THEN SHALL 使用 `--astro-code-foreground` 取代 `--astro-code-color-text`
+- AND SHALL 使用 `--astro-code-background` 取代 `--astro-code-color-background`
+- AND 所有 `--astro-code-color-*` 前綴 SHALL 更新為 `--astro-code-*`
 
 ### Requirement: PostLayout 文章佈局元件
 
@@ -123,3 +120,4 @@ TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after 
 - WHEN 使用螢幕閱讀器瀏覽網站
 - THEN 頁面結構 SHALL 能透過語義標籤正確辨識各區塊
 - AND 導覽列 SHALL 使用 `<nav>` 標籤包裹
+

@@ -3,9 +3,7 @@
 ## Purpose
 
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
-
 ## Requirements
-
 ### Requirement: 編譯時建立搜尋索引
 
 系統 MUST 於編譯時自動建立 Pagefind 搜尋索引。
@@ -56,19 +54,17 @@ THEN 搜尋 modal 對話框 SHALL 彈出顯示
 
 搜尋功能 SHALL 以 modal 對話框形式呈現，即時顯示搜尋結果。
 
-搜尋元件 MUST 使用 React Island 並以 `client:idle` 指令載入。
+搜尋元件 MUST 使用 React 19 Island 並以 `client:idle` 指令載入，透過 `@astrojs/react` 5.x 整合。
 
 #### Scenario: 使用者輸入搜尋關鍵字
 
-WHEN 使用者在搜尋 modal 中輸入關鍵字
-THEN modal SHALL 即時顯示符合的搜尋結果
+- WHEN 使用者在搜尋 modal 中輸入關鍵字
+- THEN modal SHALL 即時顯示符合的搜尋結果
 
 #### Scenario: 搜尋元件載入方式
 
-WHEN 頁面載入完成且瀏覽器進入閒置狀態
-THEN 搜尋 React Island 元件 SHALL 以 `client:idle` 方式進行 hydration
-
----
+- WHEN 頁面載入完成且瀏覽器進入閒置狀態
+- THEN 搜尋 React 19 Island 元件 SHALL 以 `client:idle` 方式進行 hydration
 
 ### Requirement: 無結果提示
 
@@ -78,3 +74,4 @@ THEN 搜尋 React Island 元件 SHALL 以 `client:idle` 方式進行 hydration
 
 WHEN 使用者輸入的關鍵字查無任何符合的文章
 THEN 搜尋 modal SHALL 顯示友善提示訊息（例如「找不到相關文章，請嘗試其他關鍵字」）
+

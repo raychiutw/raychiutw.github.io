@@ -3,9 +3,7 @@
 ## Purpose
 
 TBD - created by archiving change rebuild-blog-with-astro. Update Purpose after archive.
-
 ## Requirements
-
 ### Requirement: GitHub Actions Workflow 觸發條件
 
 CI/CD Pipeline MUST 使用 GitHub Actions workflow 實作。觸發條件 SHALL 包含：push to `master` 分支以及 Pull Request 事件。
@@ -24,14 +22,12 @@ THEN GitHub Actions workflow SHALL 被觸發執行 CI 檢查流程
 
 ### Requirement: Pipeline 步驟
 
-Pipeline MUST 依序執行以下步驟：`pnpm install` → `ESLint` → `Prettier check` → `tsc`（TypeScript 型別檢查）→ `astro build` → `Vitest`（單元測試）→ `Playwright`（E2E 測試）。
+Pipeline MUST 依序執行以下步驟：`pnpm install` → `ESLint` → `Prettier check` → `astro check`（TypeScript 型別檢查，使用 @astrojs/check 0.9.x）→ `astro build` → `Vitest`（單元測試）→ `Playwright`（E2E 測試）。
 
 #### Scenario: 完整 Pipeline 執行
 
-WHEN Pipeline 被觸發
-THEN 所有步驟 SHALL 依照指定順序執行，每個步驟的輸出與結果 SHALL 可在 GitHub Actions 介面中檢視
-
----
+- WHEN Pipeline 被觸發
+- THEN 所有步驟 SHALL 依照指定順序執行，每個步驟的輸出與結果 SHALL 可在 GitHub Actions 介面中檢視
 
 ### Requirement: 失敗阻擋合併
 
@@ -51,14 +47,13 @@ THEN Pipeline SHALL 標記為失敗，且 Pull Request SHALL 無法合併
 
 ### Requirement: 部署設定
 
-部署 MUST 使用 `actions/deploy-pages@v4`，Node.js 版本 SHALL 為 20 LTS。
+部署 MUST 使用 `actions/deploy-pages@v4`，Node.js 版本 SHALL 為 20 LTS。所有 Astro 5 + Tailwind 4 + React 19 相關依賴 SHALL 能在 Node.js 20 環境下正常安裝與建置。
 
 #### Scenario: 部署環境
 
-WHEN Pipeline 執行部署步驟
-THEN SHALL 使用 `actions/deploy-pages@v4` action 與 Node.js 20 LTS 環境
-
----
+- WHEN Pipeline 執行部署步驟
+- THEN SHALL 使用 `actions/deploy-pages@v4` action 與 Node.js 20 LTS 環境
+- AND `pnpm build` SHALL 在 Node.js 20 環境下成功完成
 
 ### Requirement: 僅 master 分支觸發部署
 
@@ -116,3 +111,4 @@ GitHub Dependabot MUST 啟用，自動偵測依賴套件更新並建立 Pull Req
 
 WHEN 專案的某個依賴套件發佈新版本
 THEN Dependabot SHALL 自動建立 Pull Request 提議更新該套件
+
