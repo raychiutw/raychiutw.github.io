@@ -17,7 +17,7 @@ export async function GET(context: { site: URL }) {
       const year = String(d.getFullYear());
       const month = String(d.getMonth() + 1).padStart(2, '0');
       const day = String(d.getDate()).padStart(2, '0');
-      const slug = post.data.postSlug || post.slug;
+      const slug = post.data.postSlug || post.id.replace(/\.md$/, '');
       return {
         title: post.data.title,
         description: post.data.description,

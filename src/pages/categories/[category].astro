@@ -30,7 +30,7 @@ function getPostUrl(post: (typeof posts)[number]) {
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, '0');
   const dd = String(d.getDate()).padStart(2, '0');
-  const slug = post.data.postSlug || post.slug;
+  const slug = post.data.postSlug || post.id.replace(/\.md$/, '');
   return `/${yyyy}/${mm}/${dd}/${slug}/`;
 }
 ---

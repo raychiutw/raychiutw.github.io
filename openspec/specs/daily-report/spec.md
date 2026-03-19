@@ -1,8 +1,11 @@
 # daily-report Specification
 
 ## Purpose
+
 TBD - created by archiving change daily-report-gmail. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 每日排程觸發報告產生
 
 系統 SHALL 在每日 UTC 00:00（台灣時間 08:00）自動觸發報告產生流程，同時 MUST 支援手動觸發（workflow_dispatch）。
@@ -118,4 +121,3 @@ TBD - created by archiving change daily-report-gmail. Update Purpose after archi
 
 - **WHEN** GitHub Token 有效且 label 存在
 - **THEN** 在 repository 建立帶有 `daily-report` label 的 Issue
-

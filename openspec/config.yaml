@@ -9,10 +9,10 @@ context: |
   極簡文字風格，專注閱讀體驗。
 
   ## 技術架構
-  - 靜態網站產生器: Astro 4.x (static output)
-  - 樣式框架: Tailwind CSS 3.x
+  - 靜態網站產生器: Astro 5.x (static output)
+  - 樣式框架: Tailwind CSS 4.x
   - 語言: TypeScript (strict mode)
-  - 互動元件: React 18.x (Island 模式)
+  - 互動元件: React 19.x (Island 模式)
   - 套件管理: pnpm
   - 部署平台: GitHub Pages (master branch)
   - CI/CD: GitHub Actions
@@ -112,10 +112,10 @@ rules:
     - "跨瀏覽器：Chrome/Firefox/Safari/Edge ≥ 90，Playwright 三引擎通過"
 
   tech_stack:
-    - "核心框架：Astro 4.x（static output mode）"
-    - "樣式：Tailwind CSS 3.x"
+    - "核心框架：Astro 5.x（static output mode）"
+    - "樣式：Tailwind CSS 4.x"
     - "語言：TypeScript strict mode"
-    - "互動元件：React 18.x，僅限 Island 模式"
+    - "互動元件：React 19.x，僅限 Island 模式"
     - "套件管理：pnpm，lockfile 必須提交"
     - "內容管理：Content Collections + Zod schema，Markdown/MDX 格式"
     - "品質工具：ESLint（含 eslint-plugin-astro）+ Prettier 為必備"

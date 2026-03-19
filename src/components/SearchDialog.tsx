@@ -15,7 +15,7 @@ export default function SearchDialog() {
   const [isDev, setIsDev] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const pagefindRef = useRef<any>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   // Load pagefind on first open
   const loadPagefind = useCallback(async () => {
@@ -166,7 +166,7 @@ export default function SearchDialog() {
             placeholder="搜尋文章..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent text-base outline-none"
+            className="w-full bg-transparent text-base outline-hidden"
             style={{
               color: 'var(--text)',
               fontFamily: 'system-ui, -apple-system, sans-serif',

@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import PostLayout from '../../../../layouts/PostLayout.astro';
 
 export const getStaticPaths = (async () => {
@@ -10,7 +10,7 @@ export const getStaticPaths = (async () => {
     const year = String(d.getFullYear());
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
-    const slug = post.data.postSlug || post.slug;
+    const slug = post.data.postSlug || post.id.replace(/\.md$/, '');
     return {
       params: { year, month, day, slug },
       props: { post },
@@ -19,7 +19,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 // Calculate reading time (~250 words per minute)
 const rawText = post.body ?? '';

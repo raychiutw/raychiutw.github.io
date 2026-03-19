@@ -78,7 +78,7 @@ export default function ThemeToggle() {
     return (
       <button
         type="button"
-        className="flex h-11 w-11 items-center justify-center rounded transition-colors duration-200"
+        className="flex h-11 w-11 items-center justify-center rounded-sm transition-colors duration-200"
         aria-label="切換深色模式"
         style={{ minWidth: 44, minHeight: 44 }}
       >
@@ -91,7 +91,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="flex h-11 w-11 items-center justify-center rounded transition-colors duration-200 hover:opacity-80"
+      className="flex h-11 w-11 items-center justify-center rounded-sm transition-colors duration-200 hover:opacity-80"
       aria-label={theme === 'dark' ? '切換為淺色模式' : '切換為深色模式'}
       style={{ minWidth: 44, minHeight: 44, color: 'var(--text-muted)' }}
     >
