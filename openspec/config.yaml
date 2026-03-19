@@ -46,12 +46,6 @@ rules:
     - 提案需明確列出受影響的檔案範圍與元件
     - 保持繁體中文撰寫
 
-  tasks:
-    - 任務應標注受影響的檔案範圍
-    - 一個 PR 對應一個 task
-    - PR 標題含 change-id，必須關聯 openspec change
-    - 任務完成後需經完整檢核流程才能上版
-
   coding:
     - Astro 元件 PascalCase、工具函式 camelCase、Markdown 檔案 kebab-case
     - 檔案結構：layouts/ 放佈局、components/ 放元件、pages/ 僅放路由、content/ 放文章、utils/ 放工具函式
@@ -63,6 +57,8 @@ rules:
     - 圖片使用 Astro <Image /> 自動產生 WebP/AVIF + srcset，非首屏圖片 loading="lazy"
     - 靜態優先：文章排序、標籤聚合、RSS、sitemap 全部 build time 處理，不留到 runtime
     - 共用常數集中於 src/consts.ts，佈局最多兩層巢狀，元件 Props 超過 4 個用物件參數
+    - "package.json 必須包含 packageManager 欄位，指定精確版本，作為 CI 與本地的 single source of truth"
+    - "新增或修改 GitHub Actions workflow 時，必須交叉驗證每個 Action 的所有必填 input 及隱性依賴"
 
   uiux:
     - 極簡設計：無裝飾性邊框陰影，僅用色彩與間距區隔區塊，視覺元素非必要不加
@@ -88,6 +84,9 @@ rules:
     - 搜尋測試：Pagefind index 存在、中文搜尋正常、無結果提示
     - RSS 驗證：W3C 格式合法、路徑為絕對路徑、30 筆 entry
     - 遷移完整性：30 篇 frontmatter 齊全、URL 與舊站一致、語法高亮正確
+    - "CI 環境一致性：QC 必須使用 pnpm install --frozen-lockfile 驗證，禁止僅用 pnpm install"
+    - ".github/workflows/*.yml 視為待測產出物，QC 須確認語法正確且每步可本地重現"
+    - "首次部署前，必須先用測試分支驗證 CI workflow 可正常執行"
 
   quality:
     - "Lighthouse：Performance ≥ 90、Accessibility ≥ 95、Best Practices ≥ 95、SEO ≥ 95"
@@ -125,6 +124,9 @@ rules:
     - 環境變數透過 GitHub Secrets 管理，禁止寫入程式碼
     - 建置產出目錄 dist/，禁止手動修改產出檔案
     - 部署紀錄保留在 GitHub Actions 歷史中，可追溯任一版本
+    - "GitHub Pages Source 必須設為 GitHub Actions（非 Deploy from a branch），QC 須用 gh api 驗證"
+    - "首次部署 Checklist：packageManager 欄位、Pages Source 設定、permissions 宣告、測試分支 CI green，四項缺一不可"
+    - "Workflow 修改視同程式碼變更，須經 Code Review → QC → PM 驗收完整流程"
 
   review_process:
     - "PR 標題含 change-id，必須關聯 openspec change，一 PR 對一 task"
@@ -138,3 +140,14 @@ rules:
     - 合併後自動刪除 feature 分支
     - "緊急修復允許簡化驗證範圍，但 Key User Approve 仍不可省略"
     - 所有流程紀錄保留在 PR comments 中，可追溯審查歷程
+    - "每個 Phase 完成後必須觸發 Code Review，禁止累積多個 Phase 後才一次性審查"
+    - "Code Review 五面向擴充為六面向，新增第六面向：CI/CD 與部署完整性"
+    - "CI/CD PR 合併前，必須在 feature branch 成功觸發 workflow 至少一次，附 run link 佐證"
+    - "涉及 repo settings 變更（Pages Source、Secrets）的 task，PR 中必須列出變更項目"
+
+  tasks:
+    - 任務應標注受影響的檔案範圍
+    - 一個 PR 對應一個 task
+    - PR 標題含 change-id，必須關聯 openspec change
+    - 任務完成後需經完整檢核流程才能上版
+    - "CI/CD 類 task 的受影響檔案範圍必須包含所有聯動檔案（workflow YAML + package.json + 平台設定）"
