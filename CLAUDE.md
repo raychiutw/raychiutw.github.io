@@ -14,7 +14,13 @@
 
 **平行作業規則：** 團隊成員依任務性質可自行招募 Subagent 平行作業，無需事先請示。例如工程師可同時派出多個 Subagent 處理獨立的元件開發；QC 可同時派出 Subagent 進行連結檢查、版面驗證、跨瀏覽器測試等互不相依的驗證工作。
 
-**團隊技能要求：** 所有團隊成員（PM、工程師、Code Reviewer、QC）均須具備 OpenSpec 技能。每位成員在執行任務前，必須先閱讀 `openspec/changes/` 下的相關 proposal、design、specs、tasks 文件，確保理解需求與規範後再動手。任務進度須回報至 tasks.md（勾選 checkbox）。
+**團隊技能要求：** 所有團隊成員（PM、工程師、Code Reviewer、QC）均須具備 OpenSpec 技能。每位成員在執行任務前，必須先閱讀 `openspec/changes/` 下的相關 proposal、design、specs、tasks 文件，確保理解需求與規範後再動手。
+
+**任務完成規則（嚴格執行）：**
+- 工程師完成任務後，**必須**將對應的 tasks.md checkbox 從 `- [ ]` 改為 `- [x]`
+- PM 派任務時，**必須**在 prompt 中明確要求工程師完成後勾選 tasks.md
+- 每個 OpenSpec change 的所有 tasks 完成後，PM **必須**立即執行 `npx openspec archive "<change-name>" -y` 歸檔
+- 違反以上規則視為流程疏失，PM 需負責補正
 
 ### 開發流程（嚴格執行）
 
