@@ -45,6 +45,16 @@ rules:
     - 禁止未經 Explore 就提案
     - 提案需明確列出受影響的檔案範圍與元件
     - 保持繁體中文撰寫
+    - "proposal.md 必須包含 ## Why 和 ## What Changes 兩個 section"
+    - "建立前必須先執行 npx openspec instructions proposal --change <name> --json 取得 template"
+
+  specs:
+    - "spec 檔案必須使用 ## ADDED/MODIFIED/REMOVED Requirements 作為 delta header"
+    - "每個 Requirement 必須用 ### Requirement: 開頭（不得用其他格式如 ### REQ-xxx）"
+    - "每個 Requirement 的描述中必須包含 SHALL 或 MUST 關鍵字"
+    - "每個 Requirement 至少一個 #### Scenario: 搭配 WHEN/THEN 格式"
+    - "建立前必須先執行 npx openspec instructions specs --change <name> --json 取得 template"
+    - "禁止使用 --no-validate 繞過 archive 驗證，格式錯誤必須修正後重新 archive"
 
   coding:
     - Astro 元件 PascalCase、工具函式 camelCase、Markdown 檔案 kebab-case
