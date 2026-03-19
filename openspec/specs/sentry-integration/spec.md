@@ -1,8 +1,11 @@
 # sentry-integration Specification
 
 ## Purpose
+
 TBD - created by archiving change integrate-sentry. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Sentry SDK 初始化
 
 系統 MUST 在每個頁面載入時初始化 Sentry SDK，使用指定的 DSN 連線至 Sentry 平台。
@@ -53,4 +56,3 @@ Sentry SDK 的載入 MUST 不阻塞頁面的首屏渲染。
 
 - **WHEN** 使用者載入頁面
 - **THEN** Sentry script MUST 放置於 `</body>` 前，由 Astro 打包處理，不使用 `is:inline` 且不阻塞 DOM 解析
-
