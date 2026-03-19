@@ -6,11 +6,13 @@
 
 - **位置**：文章最底部 `## 參考` 區塊
 - **原內容**：
+
   ```markdown
   ## 參考
 
   - [Facebook 原始貼文](https://www.facebook.com/share/p/1FVqM4pjjk/)
   ```
+
 - **處理方式**：整段移除。該段落僅有一筆 Facebook 連結，無其他有價值的參考資料，移除後文章以結語自然收尾。
 
 ### 修改 2：改寫結語中的 Facebook 提及

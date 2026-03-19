@@ -68,5 +68,8 @@ const { title, description, image, article, publishDate, tags } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      import '../utils/sentry';
+    </script>
   </body>
 </html>

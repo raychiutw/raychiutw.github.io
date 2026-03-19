@@ -1,8 +1,11 @@
 # edit-article Specification
 
 ## Purpose
+
 TBD - created by archiving change edit-ai-agent-article. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 文章不得包含 Facebook 連結
 
 文章 `ai-agent-team-rebuild-blog.md` MUST NOT 包含任何指向 `facebook.com` 的超連結。
@@ -43,4 +46,3 @@ TBD - created by archiving change edit-ai-agent-article. Update Purpose after ar
 - When 檢查 frontmatter
 - Then `tags` 的第一個值 SHALL 為 `'AI生成'`
 - And `title`、`description`、`date`、`category`、`postSlug` 欄位 MUST 皆存在且非空
-

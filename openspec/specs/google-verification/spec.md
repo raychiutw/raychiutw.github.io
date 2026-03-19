@@ -1,8 +1,11 @@
 # google-verification Specification
 
 ## Purpose
+
 TBD - created by archiving change add-google-verification-meta. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Google Search Console 驗證 meta 標籤
 
 SEO 元件 MUST 在每個頁面的 `<head>` 區域輸出 Google Search Console 驗證 meta 標籤 `<meta name="google-site-verification" content="googlefebc379374f1e9b3" />`。
@@ -25,4 +28,3 @@ SEO 元件 MUST 在每個頁面的 `<head>` 區域輸出 Google Search Console �
 
 - **WHEN** 檢查專案的 `public/` 目錄
 - **THEN** `googlefebc379374f1e9b3.html` 檔案 MUST 存在
-

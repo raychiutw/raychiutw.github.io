@@ -1,8 +1,11 @@
 # line-endings Specification
 
 ## Purpose
+
 TBD - created by archiving change git-global-line-endings. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Global autocrlf configuration
 
 The developer's global git configuration MUST set `core.autocrlf` to `input`.
@@ -69,4 +72,3 @@ Any files previously stored with CRLF SHALL be re-staged with LF line endings.
 - When the developer runs `git add --renormalize .`
 - Then those files SHALL be staged with LF line endings
 - And `git status` SHALL show them as modified
-
