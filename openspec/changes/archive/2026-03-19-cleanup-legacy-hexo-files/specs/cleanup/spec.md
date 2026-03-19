@@ -2,7 +2,7 @@
 
 ## ADDED Requirements
 
-### REQ-CLEANUP-001: Remove Hexo build output directories
+### Requirement: REQ-CLEANUP-001: Remove Hexo build output directories
 
 All Hexo-generated directories at the repo root must be removed from git tracking: `2018/`, `2019/`, `archives/`, `categories/`, `tags/`, `about/`, `schedule/`, `css/`, `js/`, `lib/`, `images/`, `gitment/`, `page/`.
 
@@ -13,7 +13,7 @@ All Hexo-generated directories at the repo root must be removed from git trackin
 - THEN none of these directories exist in the working tree
 - AND `git status` shows them as staged deletions
 
-### REQ-CLEANUP-002: Remove Hexo build output files
+### Requirement: REQ-CLEANUP-002: Remove Hexo build output files
 
 All Hexo-generated files at the repo root must be removed: `atom.xml`, `search.xml`, `sitemap.xml`, `robots.txt`, `index.html`, `googlefebc379374f1e9b3.html`.
 
@@ -23,7 +23,7 @@ All Hexo-generated files at the repo root must be removed: `atom.xml`, `search.x
 - WHEN `git rm` is executed on all identified Hexo files
 - THEN none of these files exist in the working tree
 
-### REQ-CLEANUP-003: Preserve Astro project files
+### Requirement: REQ-CLEANUP-003: Preserve Astro project files
 
 No Astro project files or directories shall be removed during cleanup. This includes `src/`, `public/`, `.github/`, `tests/`, configuration files, and all content under `public/images/blog/`.
 
@@ -34,7 +34,7 @@ No Astro project files or directories shall be removed during cleanup. This incl
 - THEN `src/`, `public/`, `public/images/blog/`, `.github/`, `tests/` all exist
 - AND `package.json`, `astro.config.mjs`, `tsconfig.json` all exist
 
-### REQ-CLEANUP-004: ESLint passes after cleanup
+### Requirement: REQ-CLEANUP-004: ESLint passes after cleanup
 
 ESLint must not scan build output or legacy files. The `.eslintrc.cjs` must include `ignorePatterns` for `dist/`, `.astro/`, `node_modules/`, and test output directories.
 
@@ -44,7 +44,7 @@ ESLint must not scan build output or legacy files. The `.eslintrc.cjs` must incl
 - WHEN `pnpm lint` is executed
 - THEN the command exits with code 0 and reports no errors
 
-### REQ-CLEANUP-005: Astro build succeeds
+### Requirement: REQ-CLEANUP-005: Astro build succeeds
 
 The Astro build must complete successfully after cleanup.
 
@@ -54,7 +54,7 @@ The Astro build must complete successfully after cleanup.
 - WHEN `npx astro build` is executed
 - THEN the command exits with code 0
 
-### REQ-CLEANUP-006: Prettier formatting passes
+### Requirement: REQ-CLEANUP-006: Prettier formatting passes
 
 All source files must pass Prettier formatting checks.
 

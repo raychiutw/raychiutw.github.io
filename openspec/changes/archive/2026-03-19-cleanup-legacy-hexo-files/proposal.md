@@ -4,7 +4,7 @@
 
 This repository was originally a Hexo-generated static site deployed to GitHub Pages. After rebuilding as an Astro project, the root directory still contained ~191 old Hexo build output files (HTML, CSS, JS, XML, images, libraries). These legacy files caused ESLint CI failures because ESLint scanned bundled vendor JS (e.g., jQuery, Velocity.js) that violates modern linting rules.
 
-## What
+## What Changes
 
 ### Deleted Directories (13 directories)
 
