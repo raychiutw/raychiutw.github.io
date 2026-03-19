@@ -1,0 +1,140 @@
+schema: spec-driven
+
+context: |
+  # Ray's Notes - 技術部落格重建
+
+  ## 專案概述
+  重建 Ray 的個人技術部落格，從 Hexo 遷移至 Astro，
+  部署於 GitHub Pages (raychiutw.github.io)。
+  極簡文字風格，專注閱讀體驗。
+
+  ## 技術架構
+  - 靜態網站產生器: Astro 4.x (static output)
+  - 樣式框架: Tailwind CSS 3.x
+  - 語言: TypeScript (strict mode)
+  - 互動元件: React 18.x (Island 模式)
+  - 套件管理: pnpm
+  - 部署平台: GitHub Pages (master branch)
+  - CI/CD: GitHub Actions
+  - 內容語言: 繁體中文 (zh-TW)
+
+  ## 功能需求
+  - 留言系統: Giscus (GitHub Discussions)
+  - 站內搜尋: Pagefind (編譯時索引)
+  - 深色模式: prefers-color-scheme + 手動切換
+  - RSS Feed: @astrojs/rss
+  - SEO: Open Graph、sitemap、JSON-LD 結構化資料
+
+  ## 內容遷移
+  - 從 Hexo 原始 Markdown 遷移 30 篇文章
+  - 分類 (5): 程式開發、應用程式、系統安裝、版本控制、雜記
+  - 標籤: 30+ 個
+
+  ## 團隊組織
+  - Key User (Ray): 需求提出、最終 Approve、驗收
+  - PM / Product Owner (Claude): 需求分析、自主提出建議、任務拆分、協調團隊
+  - 工程師 (Teammate Agent): 開發實作、PR 提交
+  - Code Reviewer (Teammate Agent): PR 審查
+  - QC (Teammate Agent): 測試驗證
+  - 團隊成員可自行招募 Subagent 平行作業
+
+rules:
+  proposal:
+    - 所有提案必須走 OpenSpec 流程：Explore → Propose → Apply → Archive
+    - 禁止跳過 Propose 直接寫 code
+    - 禁止未經 Explore 就提案
+    - 提案需明確列出受影響的檔案範圍與元件
+    - 保持繁體中文撰寫
+
+  tasks:
+    - 任務應標注受影響的檔案範圍
+    - 一個 PR 對應一個 task
+    - PR 標題含 change-id，必須關聯 openspec change
+    - 任務完成後需經完整檢核流程才能上版
+
+  coding:
+    - Astro 元件 PascalCase、工具函式 camelCase、Markdown 檔案 kebab-case
+    - 檔案結構：layouts/ 放佈局、components/ 放元件、pages/ 僅放路由、content/ 放文章、utils/ 放工具函式
+    - TypeScript strict:true，Props 必須定義 interface，禁止 any，Content Collection 使用 Zod schema
+    - 預設使用 .astro 元件（零 JS），僅互動功能使用 React Island + client:visible 或 client:idle
+    - 禁止行內 style，Tailwind utility class 為主，重複樣式超過 3 處抽成元件
+    - Git commit 遵循 Conventional Commits：type(scope):description，subject 限 50 字元
+    - 外部連結加 rel="noopener noreferrer"，禁止前端存放 API key，使用者輸入必須 sanitize
+    - 圖片使用 Astro <Image /> 自動產生 WebP/AVIF + srcset，非首屏圖片 loading="lazy"
+    - 靜態優先：文章排序、標籤聚合、RSS、sitemap 全部 build time 處理，不留到 runtime
+    - 共用常數集中於 src/consts.ts，佈局最多兩層巢狀，元件 Props 超過 4 個用物件參數
+
+  uiux:
+    - 極簡設計：無裝飾性邊框陰影，僅用色彩與間距區隔區塊，視覺元素非必要不加
+    - 排版：內文襯線 Noto Serif TC / Georgia，標題無襯線 system-ui，內文 18px/1.8 行高，最大寬度 680px
+    - 留白：段落間距 1.5em，h2 前留 3em 後留 1em，頁面上下 padding ≥ 4rem
+    - 色彩：明模式 #FAFAF9 底 + #1C1917 字，暗模式反轉，強調色僅一個 #2563EB，全部定義為 CSS custom properties
+    - 深色模式：prefers-color-scheme 預設 + 手動切換存 localStorage，class 策略 html.dark，transition 200ms
+    - 響應式：三斷點 sm:640/md:768/lg:1024，mobile first，手機漢堡選單 md 以上展開
+    - 無障礙：圖片必須 alt、觸控面積 ≥ 44x44px、色彩對比 WCAG AA ≥ 4.5:1、語義標籤 h1-h6 不跳級
+    - 互動回饋：hover 0.2s 過渡、連結 underline-offset:4px、focus-visible 用 outline
+    - 圖片：寬度 100% + border-radius:4px、figure+figcaption 語義結構、OG 圖片 1200x630
+    - 閱讀體驗：程式碼 Shiki 高亮+複製按鈕、行內代碼淡背景、顯示預估閱讀時間、長文提供 TOC
+
+  testing:
+    - astro build + astro check 必須零錯誤零 warning
+    - 單元測試：Vitest + @testing-library/react，涵蓋 utility 與 React Island
+    - 整合測試：Astro Container API 驗證 meta 標籤、RSS、sitemap、分類/標籤頁
+    - E2E 測試：Playwright 涵蓋 5 大場景，Chromium/Firefox/WebKit 三引擎
+    - 連結檢查：內部連結 100% 200 OK、圖片路徑、anchor 有效
+    - SEO 驗證：h1 唯一、title/description 長度合規、OG/Twitter Card、JSON-LD
+    - 視覺回歸：3 斷點 × 明暗模式 = 至少 30 張基準截圖，差異閾值 0.1%
+    - 深色模式：對比度 WCAG AA、localStorage 持久化、prefers-color-scheme 跟隨
+    - 搜尋測試：Pagefind index 存在、中文搜尋正常、無結果提示
+    - RSS 驗證：W3C 格式合法、路徑為絕對路徑、30 筆 entry
+    - 遷移完整性：30 篇 frontmatter 齊全、URL 與舊站一致、語法高亮正確
+
+  quality:
+    - "Lighthouse：Performance ≥ 90、Accessibility ≥ 95、Best Practices ≥ 95、SEO ≥ 95"
+    - "測試覆蓋率：整體 ≥ 80%、utility ≥ 90%、React 元件 ≥ 85%"
+    - "Bundle 大小：頁面 JS ≤ 50KB gzip、CSS ≤ 20KB gzip"
+    - "圖片：WebP 必備、單張 ≤ 200KB、必填 width/height/alt"
+    - 無障礙：axe-core 零 violation、鍵盤可操作、對比度 AA
+    - SEO：sitemap 自動產生、canonical 唯一、404.html 正確
+    - "Core Web Vitals：LCP ≤ 2.5s、INP ≤ 200ms、CLS ≤ 0.1"
+    - 依賴安全：npm audit high/critical 阻擋合併、Dependabot 啟用
+    - 靜態分析：ESLint 零 error、TypeScript strict、禁止 any
+    - "效能預算：首頁 ≤ 3s (Fast 3G)、請求 ≤ 30、Island 用 client:visible"
+    - "跨瀏覽器：Chrome/Firefox/Safari/Edge ≥ 90，Playwright 三引擎通過"
+
+  tech_stack:
+    - "核心框架：Astro 4.x（static output mode）"
+    - "樣式：Tailwind CSS 3.x"
+    - "語言：TypeScript strict mode"
+    - "互動元件：React 18.x，僅限 Island 模式"
+    - "套件管理：pnpm，lockfile 必須提交"
+    - "內容管理：Content Collections + Zod schema，Markdown/MDX 格式"
+    - "品質工具：ESLint（含 eslint-plugin-astro）+ Prettier 為必備"
+    - "測試：Vitest（單元）+ Playwright（E2E）"
+    - "部署：GitHub Actions + actions/deploy-pages"
+    - "禁止使用：jQuery、Lodash、Moment.js、CSS-in-JS、SSR adapter、Bootstrap"
+
+  deployment:
+    - "CI pipeline：install → lint → format:check → tsc → build → test，任一失敗阻擋合併"
+    - 僅 master 分支觸發自動部署，feature/* 分支僅跑 CI 檢查
+    - "使用 GitHub Actions + actions/deploy-pages@v4，Node.js 20 LTS"
+    - "部署前五項必要條件：CI 通過、Reviewer Approve、QC PASS、PM 驗收、Key User Approve"
+    - "部署後 5 分鐘內驗證：首頁、文章頁、RSS、sitemap、搜尋功能"
+    - 回滾策略：使用上一個正常 commit SHA 重新部署，修復後仍需完整走 PR 流程
+    - Lighthouse 四項指標皆 ≥ 90 才允許部署
+    - 環境變數透過 GitHub Secrets 管理，禁止寫入程式碼
+    - 建置產出目錄 dist/，禁止手動修改產出檔案
+    - 部署紀錄保留在 GitHub Actions 歷史中，可追溯任一版本
+
+  review_process:
+    - "PR 標題含 change-id，必須關聯 openspec change，一 PR 對一 task"
+    - "Code Review 五面向逐項檢查：規範、安全、設計原則、效能、型別安全，不得僅留 LGTM"
+    - "QC 六面向 checklist：連結、版面、功能、跨瀏覽器、SEO、無障礙，附截圖佐證"
+    - "PM 驗收：確認與 proposal 一致、所有 task 完成、無遺留問題"
+    - "Key User Approve 為最終關卡，未經 Key User 明確 Approve 禁止合併，違反視為嚴重流程疏失"
+    - "上版五關缺一不可：CI 通過 → Reviewer Approve → QC PASS → PM 驗收 → Key User Approve"
+    - "開發完成後，PM 彙整成果向 Key User 報告，取得 Approve 後才能 commit 上版"
+    - "合併方式：Squash Merge，確保 master 歷史乾淨"
+    - 合併後自動刪除 feature 分支
+    - "緊急修復允許簡化驗證範圍，但 Key User Approve 仍不可省略"
+    - 所有流程紀錄保留在 PR comments 中，可追溯審查歷程

@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import PostLayout from '../../../../layouts/PostLayout.astro';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => {
+    const d = post.data.date;
+    const year = String(d.getFullYear());
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const slug = post.data.postSlug || post.slug;
+    return {
+      params: { year, month, day, slug },
+      props: { post },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Calculate reading time (~250 words per minute)
+const rawText = post.body ?? '';
+const wordCount = rawText.length;
+const minutesRead = Math.max(1, Math.ceil(wordCount / 250));
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  category={post.data.category}
+  tags={post.data.tags}
+  minutesRead={minutesRead}
+>
+  <Content />
+</PostLayout>

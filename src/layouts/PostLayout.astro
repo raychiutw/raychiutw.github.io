@@ -1,0 +1,84 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Giscus from '../components/Giscus.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category?: string;
+  tags?: string[];
+  minutesRead?: number;
+}
+
+const { title, description, date, category, tags = [], minutesRead } = Astro.props;
+
+const formattedDate = date.toISOString().slice(0, 10);
+
+// Warm color palette for tags - hash tag name to pick a color
+const tagColors = [
+  { bg: '#FFCCBC', text: '#BF360C' }, // 珊瑚橘
+  { bg: '#C8E6C9', text: '#2E7D32' }, // 抹茶綠
+  { bg: '#D7CCC8', text: '#4E342E' }, // 奶茶棕
+  { bg: '#E1BEE7', text: '#6A1B9A' }, // 薰衣草
+  { bg: '#B3E5FC', text: '#01579B' }, // 天空藍
+];
+
+function getTagColor(tag: string) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return tagColors[Math.abs(hash) % tagColors.length];
+}
+---
+
+<BaseLayout title={title} description={description} article={true} publishDate={date} tags={tags}>
+  <article>
+    <header class="mb-12">
+      <h1 class="font-sans text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+        {title}
+      </h1>
+      <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-text/60">
+        <time datetime={formattedDate}>{formattedDate}</time>
+        {category && (
+          <a
+            href={`/categories/${category}`}
+            class="text-text/60 underline decoration-text/30 underline-offset-4 transition-colors duration-200 hover:text-accent"
+          >
+            {category}
+          </a>
+        )}
+        {minutesRead && (
+          <span>{minutesRead} 分鐘閱讀</span>
+        )}
+      </div>
+      {tags.length > 0 && (
+        <div class="mt-3 flex flex-wrap gap-2">
+          {tags.map((tag) => {
+            const color = getTagColor(tag);
+            return (
+              <a
+                href={`/tags/${tag}`}
+                class="rounded-lg px-2.5 py-0.5 text-sm no-underline transition-opacity duration-200 hover:opacity-80"
+                style={`background-color: ${color.bg}; color: ${color.text};`}
+              >
+                #{tag}
+              </a>
+            );
+          })}
+        </div>
+      )}
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    <!-- Giscus 留言區 -->
+    <section class="mt-16 border-t pt-8" style="border-color: var(--border);" aria-label="留言區">
+      <h2 class="mb-8 font-sans text-2xl font-bold">留言</h2>
+      <Giscus />
+    </section>
+  </article>
+</BaseLayout>

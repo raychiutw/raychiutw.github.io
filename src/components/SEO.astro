@@ -1,0 +1,64 @@
+---
+import { SITE_TITLE, SITE_URL } from '../consts';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  article?: boolean;
+  publishDate?: Date;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  image,
+  article = false,
+  publishDate,
+  tags = [],
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL).toString();
+const ogImage = image ? new URL(image, SITE_URL).toString() : undefined;
+const ogType = article ? 'article' : 'website';
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content={SITE_TITLE} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+<!-- RSS Autodiscovery -->
+<link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} RSS`} href="/rss.xml" />
+
+<!-- JSON-LD Structured Data (Article pages only) -->
+{article && publishDate && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description: description,
+    datePublished: publishDate.toISOString(),
+    url: canonicalURL,
+    author: {
+      '@type': 'Person',
+      name: 'Ray Chiu',
+    },
+    ...(ogImage ? { image: ogImage } : {}),
+    ...(tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+  })} />
+)}

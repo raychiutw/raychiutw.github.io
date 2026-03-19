@@ -1,0 +1,93 @@
+---
+/**
+ * Giscus 留言元件
+ *
+ * 使用 GitHub Discussions 作為留言後端。
+ * 透過 IntersectionObserver 實現 lazy load，僅在元件進入 viewport 時才載入 giscus script。
+ * 支援深色模式自動切換（MutationObserver 監聽 html.dark class 變化）。
+ *
+ * 【設定須知】
+ * 請前往 https://giscus.app/ 取得你的 repo-id 和 category-id，
+ * 然後替換下方 data-repo-id 和 data-category-id 的 placeholder 值。
+ */
+---
+
+<div id="giscus-wrapper">
+  <div class="giscus"></div>
+</div>
+
+<script>
+  /**
+   * 根據目前 html 是否有 dark class 回傳 giscus theme 名稱
+   */
+  function getGiscusTheme(): string {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  }
+
+  /**
+   * 動態建立 giscus script tag 並插入 DOM
+   */
+  function loadGiscus(): void {
+    const wrapper = document.getElementById('giscus-wrapper');
+    if (!wrapper || wrapper.querySelector('script')) return;
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'raychiutw/raychiutw.github.io');
+    script.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxMzA4MzIzMjY=');
+    script.setAttribute('data-category', 'Q&A');
+    script.setAttribute('data-category-id', 'DIC_kwDOB8xXxs4C4v07');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'bottom');
+    script.setAttribute('data-theme', getGiscusTheme());
+    script.setAttribute('data-lang', 'zh-TW');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    wrapper.appendChild(script);
+  }
+
+  /**
+   * 透過 postMessage 通知 giscus iframe 切換 theme
+   */
+  function setGiscusTheme(theme: string): void {
+    const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+    if (iframe?.contentWindow) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        'https://giscus.app',
+      );
+    }
+  }
+
+  // --- Lazy Load：IntersectionObserver ---
+  const wrapper = document.getElementById('giscus-wrapper');
+  if (wrapper) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadGiscus();
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(wrapper);
+  }
+
+  // --- 深色模式自動切換：MutationObserver ---
+  const htmlEl = document.documentElement;
+  const mutationObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        setGiscusTheme(getGiscusTheme());
+      }
+    }
+  });
+  mutationObserver.observe(htmlEl, { attributes: true, attributeFilter: ['class'] });
+</script>

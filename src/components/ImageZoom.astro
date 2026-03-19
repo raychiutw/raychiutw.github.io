@@ -1,0 +1,16 @@
+---
+/**
+ * ImageZoom - 對文章內所有圖片套用 medium-zoom 放大效果
+ */
+---
+
+<script>
+  import mediumZoom from 'medium-zoom';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    mediumZoom('.prose img', {
+      margin: 24,
+      background: 'var(--bg)',
+    });
+  });
+</script>

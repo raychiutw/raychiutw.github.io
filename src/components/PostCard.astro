@@ -1,0 +1,26 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+  url: string;
+}
+
+const { title, date, description, url } = Astro.props;
+
+const formattedDate = date.toISOString().slice(0, 10);
+const truncated = description.length > 150 ? description.slice(0, 150) + '...' : description;
+---
+
+<article class="py-4">
+  <time datetime={formattedDate} class="text-sm text-text/50">{formattedDate}</time>
+  <h2 class="mt-1 font-sans text-xl font-semibold leading-snug tracking-tight">
+    <a
+      href={url}
+      class="text-text no-underline transition-colors duration-200 hover:text-accent"
+    >
+      {title}
+    </a>
+  </h2>
+  <p class="mt-2 text-sm leading-relaxed text-text/60">{truncated}</p>
+</article>

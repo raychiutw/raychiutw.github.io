@@ -1,0 +1,55 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export const getStaticPaths = (async () => {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+  const tagMap = new Map<string, typeof allPosts>();
+  for (const post of allPosts) {
+    for (const tag of post.data.tags) {
+      if (!tagMap.has(tag)) tagMap.set(tag, []);
+      tagMap.get(tag)!.push(post);
+    }
+  }
+
+  return [...tagMap.entries()].map(([tag, posts]) => ({
+    params: { tag },
+    props: {
+      posts: posts.sort(
+        (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+      ),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+
+function getPostUrl(post: (typeof posts)[number]) {
+  const d = post.data.date;
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const slug = post.data.postSlug || post.slug;
+  return `/${yyyy}/${mm}/${dd}/${slug}/`;
+}
+---
+
+<BaseLayout title={`標籤：${tag}`} description={`帶有 ${tag} 標籤的所有文章`}>
+  <h1 class="font-sans text-3xl font-bold tracking-tight md:text-4xl">#{tag}</h1>
+  <p class="mt-2 text-text/50">{posts.length} 篇文章</p>
+
+  <div class="mt-8 divide-y divide-text/10">
+    {posts.map((post) => (
+      <PostCard
+        title={post.data.title}
+        date={post.data.date}
+        description={post.data.description}
+        url={getPostUrl(post)}
+      />
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,68 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  const sorted = allPosts.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  );
+  return paginate(sorted, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+function getPostUrl(post: (typeof page.data)[number]) {
+  const d = post.data.date;
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const slug = post.data.postSlug || post.slug;
+  return `/${yyyy}/${mm}/${dd}/${slug}/`;
+}
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <h1 class="font-sans text-3xl font-bold tracking-tight md:text-4xl">{SITE_TITLE}</h1>
+  <p class="mt-4 text-text/60">{SITE_DESCRIPTION}</p>
+
+  <div class="mt-10 divide-y divide-text/10">
+    {page.data.map((post) => (
+      <PostCard
+        title={post.data.title}
+        date={post.data.date}
+        description={post.data.description}
+        url={getPostUrl(post)}
+      />
+    ))}
+  </div>
+
+  <nav class="mt-10 flex items-center justify-between text-sm" aria-label="分頁導覽">
+    {page.url.prev ? (
+      <a
+        href={page.url.prev}
+        class="text-text/70 no-underline transition-colors duration-200 hover:text-accent"
+      >
+        &larr; 上一頁
+      </a>
+    ) : (
+      <span />
+    )}
+    <span class="text-text/50">
+      {page.currentPage} / {page.lastPage}
+    </span>
+    {page.url.next ? (
+      <a
+        href={page.url.next}
+        class="text-text/70 no-underline transition-colors duration-200 hover:text-accent"
+      >
+        下一頁 &rarr;
+      </a>
+    ) : (
+      <span />
+    )}
+  </nav>
+</BaseLayout>
