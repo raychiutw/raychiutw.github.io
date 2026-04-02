@@ -21,7 +21,7 @@
     "@astrojs/check": "^0.9.8",
     "@astrojs/react": "^5.0.1",
     "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/sitemap": "^3.7.2",
     "@sentry/browser": "^10.45.0",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.6",
