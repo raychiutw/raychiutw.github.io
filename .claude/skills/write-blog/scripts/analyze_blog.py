@@ -114,6 +114,47 @@ def score_structure(content: str) -> dict[str, Any]:
     return {"score": max(score, 0), "max": 20, "issues": issues}
 
 
+def score_readability(content: str) -> dict[str, Any]:
+    """Score readability: sentence length + paragraph length + code ratio + heading hierarchy."""
+    issues: list[str] = []
+    score = 15
+
+    body = re.sub(r"^---.*?---\s*", "", content, count=1, flags=re.DOTALL)
+    text_no_code = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
+    sentences = split_sentences_zh(text_no_code)
+
+    if sentences:
+        avg = sum(len(s) for s in sentences) / len(sentences)
+        if avg > 50 or avg < 10:
+            score -= 4
+            issues.append(f"avg sentence length {avg:.0f} chars out of 10-50 range")
+
+    paragraphs = [p.strip() for p in text_no_code.split("\n\n") if p.strip() and not p.startswith("#")]
+    long_paras = [p for p in paragraphs if len(p) > 200]
+    if long_paras:
+        score -= 3
+        issues.append(f"{len(long_paras)} paragraphs over 200 chars")
+
+    code_chars = sum(len(cb) for cb in re.findall(r"```.*?```", body, re.DOTALL))
+    total_chars = len(body)
+    if total_chars > 0:
+        ratio = code_chars / total_chars
+        if ratio < 0.10 or ratio > 0.70:
+            score -= 4
+            issues.append(f"code ratio {ratio:.0%} out of 10-70% range")
+
+    headings = re.findall(r"^(#{1,6}) ", body, re.MULTILINE)
+    for i in range(1, len(headings)):
+        prev_level = len(headings[i - 1])
+        curr_level = len(headings[i])
+        if curr_level > prev_level + 1:
+            score -= 4
+            issues.append(f"heading jumps from H{prev_level} to H{curr_level}")
+            break
+
+    return {"score": max(score, 0), "max": 15, "issues": issues}
+
+
 def score_technical(content: str) -> dict[str, Any]:
     """Score technical: code completeness + link format."""
     issues: list[str] = []

@@ -54,7 +54,7 @@ class TestAnalyzeIntegration(unittest.TestCase):
         self.assertIn("total", result)
 
 
-from analyze_blog import score_structure, score_style, score_originality, score_technical
+from analyze_blog import score_structure, score_style, score_originality, score_technical, score_readability
 
 INVALID_POST_NO_FRONTMATTER = "# Just a title\n\nNo frontmatter."
 
@@ -115,6 +115,18 @@ class TestStyleScoring(unittest.TestCase):
         self.assertLess(result["score"], 25)
         issues_text = " ".join(result["issues"])
         self.assertIn("至關重要", issues_text)
+
+
+class TestReadabilityScoring(unittest.TestCase):
+    def test_valid_post_readable(self):
+        result = score_readability(VALID_POST)
+        self.assertGreaterEqual(result["score"], 10)
+
+    def test_heading_skip_penalized(self):
+        bad = VALID_POST.replace("## H2 標題一", "## H2 標題一\n\n#### H4 跳級標題")
+        result = score_readability(bad)
+        issues_text = " ".join(result["issues"])
+        self.assertIn("heading", issues_text.lower())
 
 
 class TestTechnicalScoring(unittest.TestCase):
