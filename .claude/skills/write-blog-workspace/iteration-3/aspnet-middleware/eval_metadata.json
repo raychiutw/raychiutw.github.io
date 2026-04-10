@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "aspnet-middleware",
+  "prompt": "幫我寫一篇文章，介紹如何在 ASP.NET Core 中使用 Middleware 處理全域例外",
+  "assertions": [
+    { "name": "frontmatter-complete", "description": "Has title, description, date, category, tags, postSlug" },
+    { "name": "description-length", "description": "Description is 100-160 characters" },
+    { "name": "ai-tag-first", "description": "First tag is AI生成" },
+    { "name": "slug-kebab-case", "description": "postSlug uses kebab-case" },
+    { "name": "blockquote-opening", "description": "First content is a blockquote" },
+    { "name": "code-language-tags", "description": "ALL code blocks have language specifiers" },
+    { "name": "h2-h3-structure", "description": "Uses ## headers" },
+    { "name": "no-banned-phrases", "description": "No EN/ZH AI phrases from blacklist" }
+  ]
+}
