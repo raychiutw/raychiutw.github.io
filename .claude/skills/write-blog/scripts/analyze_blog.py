@@ -48,6 +48,72 @@ def split_sentences_zh(text: str) -> list[str]:
     return [s.strip() for s in sentences if s.strip()]
 
 
+def score_structure(content: str) -> dict[str, Any]:
+    """Score structure dimension: 7 assertions, ~3 points each (20 total)."""
+    issues: list[str] = []
+    score = 20
+    fm = parse_frontmatter(content)
+
+    required = ["title", "description", "date", "category", "tags", "postSlug"]
+    missing = [f for f in required if not re.search(rf"^{f}\s*:", fm, re.MULTILINE)]
+    if missing:
+        score -= 3
+        issues.append(f"frontmatter missing: {missing}")
+
+    dm = re.search(r"^description:\s*['\"](.+?)['\"]", fm, re.MULTILINE)
+    if not dm:
+        score -= 3
+        issues.append("description not found or not quoted")
+    else:
+        length = len(dm.group(1))
+        if not (100 <= length <= 160):
+            score -= 3
+            issues.append(f"description length {length} out of range 100-160")
+
+    tm = re.search(r"^tags:\s*\[(.+?)\]", fm, re.MULTILINE)
+    if tm:
+        first = re.match(r"\s*['\"](.+?)['\"]", tm.group(1))
+        if not first or first.group(1) != "AI生成":
+            score -= 3
+            issues.append("first tag is not 'AI生成'")
+    else:
+        score -= 3
+        issues.append("tags not found")
+
+    sm = re.search(r"^postSlug:\s*['\"](.+?)['\"]", fm, re.MULTILINE)
+    if not sm or not re.match(r"^[a-z0-9]+(-[a-z0-9]+)*$", sm.group(1)):
+        score -= 3
+        issues.append("postSlug missing or not kebab-case")
+
+    after_fm = re.sub(r"^---.*?---\s*", "", content, count=1, flags=re.DOTALL)
+    first_line = after_fm.strip().split("\n")[0] if after_fm.strip() else ""
+    if not first_line.startswith(">"):
+        score -= 3
+        issues.append("no blockquote opening")
+
+    in_block = False
+    bare = 0
+    for line in content.split("\n"):
+        s = line.strip()
+        if s.startswith("```"):
+            if not in_block:
+                if not s[3:].strip():
+                    bare += 1
+                in_block = True
+            else:
+                in_block = False
+    if bare > 0:
+        score -= 3
+        issues.append(f"{bare} code blocks without language tag")
+
+    h2_count = len(re.findall(r"^## ", content, re.MULTILINE))
+    if h2_count < 2:
+        score -= 2
+        issues.append(f"only {h2_count} H2 headers (need >= 2)")
+
+    return {"score": max(score, 0), "max": 20, "issues": issues}
+
+
 def analyze(content: str) -> dict[str, Any]:
     """Run all 5 category analyzers. Returns flat dict with scores and issues."""
     result: dict[str, Any] = {

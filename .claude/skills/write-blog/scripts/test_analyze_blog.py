@@ -54,5 +54,22 @@ class TestAnalyzeIntegration(unittest.TestCase):
         self.assertIn("total", result)
 
 
+from analyze_blog import score_structure
+
+INVALID_POST_NO_FRONTMATTER = "# Just a title\n\nNo frontmatter."
+
+class TestStructureScoring(unittest.TestCase):
+    def test_valid_post_full_score(self):
+        result = score_structure(VALID_POST)
+        self.assertEqual(result["score"], 20)
+        self.assertEqual(result["max"], 20)
+        self.assertEqual(len(result["issues"]), 0)
+
+    def test_missing_frontmatter_penalized(self):
+        result = score_structure(INVALID_POST_NO_FRONTMATTER)
+        self.assertLess(result["score"], 20)
+        self.assertGreater(len(result["issues"]), 0)
+
+
 if __name__ == "__main__":
     unittest.main()
