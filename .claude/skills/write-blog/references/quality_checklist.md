@@ -62,6 +62,22 @@
 - Em dash explicitly allowed (Ray's signature style, not treated as AI pattern)
 - Voice guidance added (soft rule, validated qualitatively via hexo-to-astro test case)
 
+## Benchmark Results (Iteration 4)
+
+- Scoring script: `.claude/skills/write-blog/scripts/analyze_blog.py`
+- Test coverage: 19 unittest tests (all PASS)
+- Threshold: 80/100
+- with_skill mean total: **88.5/100** (PASS)
+- baseline mean total: 77.0/100
+- Delta: **+11.5** (exit criteria ≥ 10 met)
+- Category breakdown (with_skill vs baseline):
+  - Structure: 20.0/20 vs 11.8/20 (+8.2) — dominant differentiator
+  - Style: 20.0/25 vs 19.2/25 (+0.8)
+  - Originality: 25.0/25 vs 23.0/25 (+2.0)
+  - Technical: 12.5/15 vs 11.2/15 (+1.3)
+  - Readability: 11.0/15 vs 11.8/15 (-0.8) — with_skill posts have longer paragraphs
+- Best eval: hexo-to-astro-upgrade with_skill (92/100)
+
 ## Final Gate
 
-- [x] PASS — skill passed iter-3 with banned phrases enforcement active (100% pass rate)
+- [x] PASS — skill passed iter-4 5-dimension benchmark (88.5/100, +11.5 delta)
