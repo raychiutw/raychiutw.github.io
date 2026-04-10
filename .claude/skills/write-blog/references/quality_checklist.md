@@ -48,6 +48,20 @@
 - description-length: 3/3 PASS (was 2/3) — added explicit counting instruction + sweet spot guidance
 - blockquote-opening: 3/3 PASS (unchanged from iter-1)
 
+## Benchmark Results (Iteration 3)
+
+- Test cases: 4 (added hexo-to-astro-upgrade for personal context testing)
+- New assertion: `no-banned-phrases` (EN + ZH AI phrase blacklist)
+- with_skill pass rate: **100%** (32/32 assertions across 4 evals, all 8/8)
+- baseline pass rate: 62.5% (20/32 assertions)
+- Delta: **+37.5 percentage points**
+- no-banned-phrases result: with_skill 4/4 PASS vs baseline 3/4 PASS
+  - Baseline failure: aspnet-middleware hit ZH phrase "不僅"
+- Mean tokens: with_skill 39,588 vs baseline 31,469 (+26%)
+- Mean duration: with_skill 143.3s vs baseline 108.1s (+33%)
+- Em dash explicitly allowed (Ray's signature style, not treated as AI pattern)
+- Voice guidance added (soft rule, validated qualitatively via hexo-to-astro test case)
+
 ## Final Gate
 
-- [x] PASS — skill is functional, tested, and benchmarked (iteration 2, 100% pass rate)
+- [x] PASS — skill passed iter-3 with banned phrases enforcement active (100% pass rate)
