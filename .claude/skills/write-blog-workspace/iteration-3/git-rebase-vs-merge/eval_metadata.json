@@ -3,7 +3,10 @@
   "eval_name": "git-rebase-vs-merge",
   "prompt": "寫一篇 Git rebase vs merge 的比較文章",
   "assertions": [
-    { "name": "frontmatter-complete", "description": "Has title, description, date, category, tags, postSlug" },
+    {
+      "name": "frontmatter-complete",
+      "description": "Has title, description, date, category, tags, postSlug"
+    },
     { "name": "description-length", "description": "Description is 100-160 characters" },
     { "name": "ai-tag-first", "description": "First tag is AI生成" },
     { "name": "slug-kebab-case", "description": "postSlug uses kebab-case" },

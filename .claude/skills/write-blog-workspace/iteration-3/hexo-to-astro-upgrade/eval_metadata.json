@@ -3,7 +3,10 @@
   "eval_name": "hexo-to-astro-upgrade",
   "prompt": "我剛把部落格從 Hexo 升級到 Astro，過程中踩了幾個坑，想寫一篇記錄",
   "assertions": [
-    { "name": "frontmatter-complete", "description": "Has title, description, date, category, tags, postSlug" },
+    {
+      "name": "frontmatter-complete",
+      "description": "Has title, description, date, category, tags, postSlug"
+    },
     { "name": "description-length", "description": "Description is 100-160 characters" },
     { "name": "ai-tag-first", "description": "First tag is AI生成" },
     { "name": "slug-kebab-case", "description": "postSlug uses kebab-case" },

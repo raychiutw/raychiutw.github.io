@@ -309,14 +309,14 @@ dive myapp:prod
 
 Multi-stage build 不是什麼新東西,但真正用好的人其實不多。歸納幾個 key takeaway:
 
-| 原則                              | 目的                     |
-| --------------------------------- | ------------------------ |
-| 把 build 工具和 runtime 分開      | runtime 映像檔瘦身       |
+| 原則                                           | 目的                       |
+| ---------------------------------------------- | -------------------------- |
+| 把 build 工具和 runtime 分開                   | runtime 映像檔瘦身         |
 | 用最小的 base image(alpine/scratch/distroless) | 減少攻擊面、加快 pull 速度 |
-| 善用 `--target` 一份 Dockerfile 多用 | 減少維護成本             |
-| BuildKit cache mount 加速 CI      | 開發者體驗 up            |
-| 寫好 `.dockerignore`              | 避免安全事故和肥胖       |
-| 非 root user + 鎖版本             | 生產環境基本素養         |
+| 善用 `--target` 一份 Dockerfile 多用           | 減少維護成本               |
+| BuildKit cache mount 加速 CI                   | 開發者體驗 up              |
+| 寫好 `.dockerignore`                           | 避免安全事故和肥胖         |
+| 非 root user + 鎖版本                          | 生產環境基本素養           |
 
 最後的最後:**不要為了優化而優化**。如果你的專案還在 PoC 階段,先求跑得起來再求瘦。但一旦進到 production,這些瘦身功夫會在 CI/CD 時間、雲端 egress 費用、安全稽核上全都還你本錢。
 

@@ -116,11 +116,7 @@ for (const file of await readdir(SRC)) {
     postSlug: path.basename(file, '.md'),
   };
 
-  await writeFile(
-    path.join(DEST, file),
-    matter.stringify(content, newData),
-    'utf8'
-  );
+  await writeFile(path.join(DEST, file), matter.stringify(content, newData), 'utf8');
 }
 ```
 
@@ -168,8 +164,7 @@ Astro 預設會用 `src/content/blog/<filename>.md` 當作 slug，產生的 URL 
 ```js
 export default defineConfig({
   redirects: {
-    '/2019/03/20/hexo-tutorial-quick-install':
-      '/blog/hexo-tutorial-quick-install',
+    '/2019/03/20/hexo-tutorial-quick-install': '/blog/hexo-tutorial-quick-install',
     // ... 其他 30 篇
   },
 });

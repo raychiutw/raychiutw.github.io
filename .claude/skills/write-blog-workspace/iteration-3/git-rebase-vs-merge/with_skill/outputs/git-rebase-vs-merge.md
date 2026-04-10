@@ -98,14 +98,14 @@ Rebase 的核心動作是把 commit 拆成 patch、回退到新的起點、再�
 
 ## 兩者的關鍵差異
 
-| 比較項目      | git merge                 | git rebase                 |
-| ------------- | ------------------------- | -------------------------- |
-| 產生 commit   | 新的 merge commit         | 不產生 merge commit        |
-| Commit hash   | 不變                      | 被重寫                     |
-| 歷史形狀      | 保留分岔,真實的開發軌跡 | 變成線性,乾淨好讀         |
-| 衝突處理      | 一次解決所有衝突          | 每個 commit 可能都要解一次 |
-| 對已 push 的 branch | 安全              | **危險**(需 force push)  |
-| 可回溯性      | 原始 commit 都還在        | 原本的 commit 已被取代     |
+| 比較項目            | git merge               | git rebase                 |
+| ------------------- | ----------------------- | -------------------------- |
+| 產生 commit         | 新的 merge commit       | 不產生 merge commit        |
+| Commit hash         | 不變                    | 被重寫                     |
+| 歷史形狀            | 保留分岔,真實的開發軌跡 | 變成線性,乾淨好讀          |
+| 衝突處理            | 一次解決所有衝突        | 每個 commit 可能都要解一次 |
+| 對已 push 的 branch | 安全                    | **危險**(需 force push)    |
+| 可回溯性            | 原始 commit 都還在      | 原本的 commit 已被取代     |
 
 兩個欄位裡最需要注意的是最後兩項。Rebase 重寫歷史這件事在單人開發時沒差,但一旦 branch 已經 push 出去、別人 pull 過了,force push 會讓同事的本地分支錯亂。這是所謂 **Golden Rule of Rebase**:不要對公開分支做 rebase。
 

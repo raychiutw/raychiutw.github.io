@@ -250,11 +250,11 @@ app.UseExceptionHandler();
 
 全域例外處理 Middleware 看起來只是個小東西，但它直接影響到 API 的穩定度與可維護性。三種做法我會這樣選：
 
-| 方案                      | 適用情境                              |
-| ------------------------- | ------------------------------------- |
-| 自訂 Middleware 類別      | 需要高度客製化、.NET 6/7 專案         |
-| `UseExceptionHandler`     | 簡單情境、不想額外建檔                |
-| `IExceptionHandler`       | .NET 8+，推薦首選                     |
+| 方案                  | 適用情境                      |
+| --------------------- | ----------------------------- |
+| 自訂 Middleware 類別  | 需要高度客製化、.NET 6/7 專案 |
+| `UseExceptionHandler` | 簡單情境、不想額外建檔        |
+| `IExceptionHandler`   | .NET 8+，推薦首選             |
 
 把例外處理統一化，Controller 就能專心做自己的事，程式碼乾淨又好維護，何樂而不為。
 

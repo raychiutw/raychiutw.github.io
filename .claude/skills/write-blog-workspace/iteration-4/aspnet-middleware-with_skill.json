@@ -8,9 +8,7 @@
     "style": {
       "score": 20,
       "max": 25,
-      "issues": [
-        "low TTR 0.15 (< 0.35)"
-      ]
+      "issues": ["low TTR 0.15 (< 0.35)"]
     },
     "originality": {
       "score": 25,
@@ -25,10 +23,7 @@
     "readability": {
       "score": 8,
       "max": 15,
-      "issues": [
-        "avg sentence length 56 chars out of 10-50 range",
-        "2 paragraphs over 200 chars"
-      ]
+      "issues": ["avg sentence length 56 chars out of 10-50 range", "2 paragraphs over 200 chars"]
     }
   },
   "total": 88,

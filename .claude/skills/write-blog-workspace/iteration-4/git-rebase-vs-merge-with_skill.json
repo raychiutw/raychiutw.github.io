@@ -8,9 +8,7 @@
     "style": {
       "score": 20,
       "max": 25,
-      "issues": [
-        "low TTR 0.14 (< 0.35)"
-      ]
+      "issues": ["low TTR 0.14 (< 0.35)"]
     },
     "originality": {
       "score": 25,
@@ -20,16 +18,12 @@
     "technical": {
       "score": 10,
       "max": 15,
-      "issues": [
-        "code blocks look like fragments (no import/using/#include/def)"
-      ]
+      "issues": ["code blocks look like fragments (no import/using/#include/def)"]
     },
     "readability": {
       "score": 12,
       "max": 15,
-      "issues": [
-        "1 paragraphs over 200 chars"
-      ]
+      "issues": ["1 paragraphs over 200 chars"]
     }
   },
   "total": 87,

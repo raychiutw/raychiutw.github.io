@@ -53,15 +53,12 @@ Astro 的 content collections 沒這套行為。你有兩個選擇：
 
 ```javascript
 // 批次改寫圖片路徑的腳本
-const updatedMarkdown = rawMarkdown.replace(
-  /!\[([^\]]*)\]\(([^)]+)\)/g,
-  (match, alt, src) => {
-    // 排除已經是絕對路徑或 http 的
-    if (src.startsWith('/') || src.startsWith('http')) return match;
-    const filename = src.split('/').pop();
-    return `![${alt}](/images/blog/${filename})`;
-  }
-);
+const updatedMarkdown = rawMarkdown.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
+  // 排除已經是絕對路徑或 http 的
+  if (src.startsWith('/') || src.startsWith('http')) return match;
+  const filename = src.split('/').pop();
+  return `![${alt}](/images/blog/${filename})`;
+});
 ```
 
 這裡有一個我本來沒注意的細節：Hexo 的 asset folder 允許同名檔案存在不同資料夾，但搬到 `public/images/blog/` 這種扁平結構就會互相覆蓋。我跑腳本的時候還特別加了一個 filename collision 檢查，結果真的撈出三個撞名的檔案。差點直接覆蓋掉。
