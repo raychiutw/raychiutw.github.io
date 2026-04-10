@@ -54,7 +54,7 @@ class TestAnalyzeIntegration(unittest.TestCase):
         self.assertIn("total", result)
 
 
-from analyze_blog import score_structure, score_style, score_originality
+from analyze_blog import score_structure, score_style, score_originality, score_technical
 
 INVALID_POST_NO_FRONTMATTER = "# Just a title\n\nNo frontmatter."
 
@@ -115,6 +115,19 @@ class TestStyleScoring(unittest.TestCase):
         self.assertLess(result["score"], 25)
         issues_text = " ".join(result["issues"])
         self.assertIn("至關重要", issues_text)
+
+
+class TestTechnicalScoring(unittest.TestCase):
+    def test_valid_post_with_import(self):
+        post = VALID_POST.replace("public void Test() { }", "using System;\npublic void Test() { }")
+        result = score_technical(post)
+        self.assertGreaterEqual(result["score"], 10)
+
+    def test_bare_url_penalized(self):
+        bad = VALID_POST + "\n\n參考：https://example.com 這個網站。"
+        result = score_technical(bad)
+        issues_text = " ".join(result["issues"])
+        self.assertIn("link", issues_text.lower())
 
 
 class TestOriginalityScoring(unittest.TestCase):

@@ -114,6 +114,32 @@ def score_structure(content: str) -> dict[str, Any]:
     return {"score": max(score, 0), "max": 20, "issues": issues}
 
 
+def score_technical(content: str) -> dict[str, Any]:
+    """Score technical: code completeness + link format."""
+    issues: list[str] = []
+    score = 15
+
+    code_blocks = re.findall(r"```\w+\n(.*?)\n```", content, re.DOTALL)
+    if code_blocks:
+        has_complete = any(
+            re.search(r"\b(import|using|#include|def |function |public |class )\b", cb)
+            for cb in code_blocks
+        )
+        if not has_complete:
+            score -= 5
+            issues.append("code blocks look like fragments (no import/using/#include/def)")
+
+    body = re.sub(r"\[([^\]]+)\]\(([^\)]+)\)", "", content)
+    body = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
+    body = re.sub(r"`[^`]+`", "", body)
+    bare_urls = re.findall(r"https?://[^\s\)]+", body)
+    if bare_urls:
+        score -= 5
+        issues.append(f"{len(bare_urls)} bare URLs (not markdown-linked)")
+
+    return {"score": max(score, 0), "max": 15, "issues": issues}
+
+
 def score_originality(content: str) -> dict[str, Any]:
     """Score originality: first-person presence + opinion markers + generic intro check."""
     issues: list[str] = []
