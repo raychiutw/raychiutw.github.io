@@ -54,7 +54,7 @@ class TestAnalyzeIntegration(unittest.TestCase):
         self.assertIn("total", result)
 
 
-from analyze_blog import score_structure, score_style
+from analyze_blog import score_structure, score_style, score_originality
 
 INVALID_POST_NO_FRONTMATTER = "# Just a title\n\nNo frontmatter."
 
@@ -73,6 +73,38 @@ class TestStructureScoring(unittest.TestCase):
 
 BANNED_POST = VALID_POST + "\n\n這個功能至關重要，讓我們一起深入探討。"
 
+IMPERSONAL_POST = """---
+title: 'T'
+description: '一個沒有第一人稱和沒有意見標記的測試文章描述，用來驗證 originality 維度扣分功能正常，需要湊滿字數測試驗證'
+date: 2026-04-10
+category: 'a'
+tags: ['AI生成']
+postSlug: 't'
+---
+
+> 客觀描述
+
+## H2
+
+這是一個完全客觀的技術說明，沒有任何個人觀點。
+"""
+
+GENERIC_INTRO_POST = """---
+title: 'T'
+description: '一個有 generic intro 的測試文章，用來驗證 generic-intro-check 可以偵測到在本文中這類 AI 開場白，需要湊滿字數'
+date: 2026-04-10
+category: 'a'
+tags: ['AI生成']
+postSlug: 't'
+---
+
+> 在本文中我們將會探討這個主題
+
+## H2
+
+內容。
+"""
+
 class TestStyleScoring(unittest.TestCase):
     def test_clean_post_no_penalty(self):
         result = score_style(VALID_POST)
@@ -83,6 +115,23 @@ class TestStyleScoring(unittest.TestCase):
         self.assertLess(result["score"], 25)
         issues_text = " ".join(result["issues"])
         self.assertIn("至關重要", issues_text)
+
+
+class TestOriginalityScoring(unittest.TestCase):
+    def test_post_with_opinion_markers_full_score(self):
+        result = score_originality(VALID_POST)
+        self.assertEqual(result["score"], 25)
+
+    def test_no_first_person_penalized(self):
+        result = score_originality(IMPERSONAL_POST)
+        self.assertLess(result["score"], 25)
+        issues_text = " ".join(result["issues"])
+        self.assertIn("first-person", issues_text.lower())
+
+    def test_generic_intro_penalized(self):
+        result = score_originality(GENERIC_INTRO_POST)
+        issues_text = " ".join(result["issues"])
+        self.assertIn("generic", issues_text.lower())
 
 
 if __name__ == "__main__":

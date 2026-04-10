@@ -114,6 +114,34 @@ def score_structure(content: str) -> dict[str, Any]:
     return {"score": max(score, 0), "max": 20, "issues": issues}
 
 
+def score_originality(content: str) -> dict[str, Any]:
+    """Score originality: first-person presence + opinion markers + generic intro check."""
+    issues: list[str] = []
+    score = 25
+
+    body = re.sub(r"^---.*?---\s*", "", content, count=1, flags=re.DOTALL)
+
+    first_person_count = body.count("我") + body.count("筆者")
+    if first_person_count == 0:
+        score -= 10
+        issues.append("no first-person pronouns (我/筆者)")
+
+    opinion_count = sum(1 for m in OPINION_MARKERS if m in body)
+    if opinion_count < 1:
+        score -= 8
+        issues.append(f"no opinion markers from {OPINION_MARKERS}")
+
+    intro = body.strip()[:200]
+    generic_patterns = ["在本文中", "讓我們", "本篇文章將", "本文將"]
+    for pattern in generic_patterns:
+        if pattern in intro:
+            score -= 7
+            issues.append(f"generic intro phrase '{pattern}'")
+            break
+
+    return {"score": max(score, 0), "max": 25, "issues": issues}
+
+
 def score_style(content: str) -> dict[str, Any]:
     """Score style dimension: AI phrase detection + burstiness + TTR + repetitive structures."""
     issues: list[str] = []
