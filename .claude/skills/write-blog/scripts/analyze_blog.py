@@ -262,19 +262,36 @@ def score_style(content: str) -> dict[str, Any]:
 
 
 def analyze(content: str) -> dict[str, Any]:
-    """Run all 5 category analyzers. Returns flat dict with scores and issues."""
-    result: dict[str, Any] = {
-        "categories": {},
-        "total": 0,
+    """Run all 5 category analyzers."""
+    categories = {
+        "structure": score_structure(content),
+        "style": score_style(content),
+        "originality": score_originality(content),
+        "technical": score_technical(content),
+        "readability": score_readability(content),
     }
-    # Filled in by subsequent tasks
-    return result
+    total = sum(c["score"] for c in categories.values())
+    return {
+        "categories": categories,
+        "total": total,
+    }
 
 
 def format_table(result: dict[str, Any], file_path: str, threshold: int = 80) -> str:
     """Format result as human-readable table."""
-    # Filled in by subsequent tasks
-    return ""
+    lines = [f"\nBlog Analysis: {Path(file_path).name}\n"]
+    lines.append(f"{'Category':<13} {'Score':<10} Issues")
+    lines.append("-" * 70)
+    for name, data in result["categories"].items():
+        score_str = f"{data['score']}/{data['max']}"
+        issues_str = "PASS" if not data["issues"] else data["issues"][0]
+        lines.append(f"{name.capitalize():<13} {score_str:<10} {issues_str}")
+        for issue in data["issues"][1:]:
+            lines.append(f"{'':<13} {'':<10} {issue}")
+    lines.append("-" * 70)
+    status = "PASS" if result["total"] >= threshold else "FAIL"
+    lines.append(f"{'Total':<13} {result['total']}/100    {status} (threshold {threshold})")
+    return "\n".join(lines)
 
 
 def format_json(result: dict[str, Any], file_path: str) -> str:

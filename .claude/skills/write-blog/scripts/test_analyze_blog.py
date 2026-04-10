@@ -159,5 +159,24 @@ class TestOriginalityScoring(unittest.TestCase):
         self.assertIn("generic", issues_text.lower())
 
 
+class TestIntegration(unittest.TestCase):
+    def test_analyze_returns_all_categories(self):
+        result = analyze(VALID_POST)
+        self.assertEqual(set(result["categories"].keys()), {"structure", "style", "originality", "technical", "readability"})
+        self.assertLessEqual(result["total"], 100)
+        self.assertGreaterEqual(result["total"], 0)
+
+    def test_valid_post_above_threshold(self):
+        result = analyze(VALID_POST)
+        self.assertGreaterEqual(result["total"], 70)
+
+    def test_format_table_contains_scores(self):
+        from analyze_blog import format_table
+        result = analyze(VALID_POST)
+        output = format_table(result, "test.md")
+        self.assertIn("Structure", output)
+        self.assertIn("Total", output)
+
+
 if __name__ == "__main__":
     unittest.main()
