@@ -54,7 +54,7 @@ class TestAnalyzeIntegration(unittest.TestCase):
         self.assertIn("total", result)
 
 
-from analyze_blog import score_structure
+from analyze_blog import score_structure, score_style
 
 INVALID_POST_NO_FRONTMATTER = "# Just a title\n\nNo frontmatter."
 
@@ -69,6 +69,20 @@ class TestStructureScoring(unittest.TestCase):
         result = score_structure(INVALID_POST_NO_FRONTMATTER)
         self.assertLess(result["score"], 20)
         self.assertGreater(len(result["issues"]), 0)
+
+
+BANNED_POST = VALID_POST + "\n\n這個功能至關重要，讓我們一起深入探討。"
+
+class TestStyleScoring(unittest.TestCase):
+    def test_clean_post_no_penalty(self):
+        result = score_style(VALID_POST)
+        self.assertEqual(result["score"], 25)
+
+    def test_banned_phrase_detected(self):
+        result = score_style(BANNED_POST)
+        self.assertLess(result["score"], 25)
+        issues_text = " ".join(result["issues"])
+        self.assertIn("至關重要", issues_text)
 
 
 if __name__ == "__main__":

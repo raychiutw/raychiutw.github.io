@@ -114,6 +114,58 @@ def score_structure(content: str) -> dict[str, Any]:
     return {"score": max(score, 0), "max": 20, "issues": issues}
 
 
+def score_style(content: str) -> dict[str, Any]:
+    """Score style dimension: AI phrase detection + burstiness + TTR + repetitive structures."""
+    issues: list[str] = []
+    score = 25
+
+    content_lower = content.lower()
+    for phrase in BANNED_EN:
+        count = content_lower.count(phrase.lower())
+        if count > 0:
+            penalty = 3 * count
+            score -= penalty
+            issues.append(f"banned EN '{phrase.strip()}' x{count} (-{penalty})")
+    for phrase in BANNED_ZH:
+        count = content.count(phrase)
+        if count > 0:
+            penalty = 3 * count
+            score -= penalty
+            issues.append(f"banned ZH '{phrase}' x{count} (-{penalty})")
+
+    body = re.sub(r"^---.*?---\s*", "", content, count=1, flags=re.DOTALL)
+    body = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
+    # Strip markdown structural lines (headings, blockquotes, blank lines) before sentence analysis
+    prose_lines = [
+        line for line in body.split("\n")
+        if line.strip() and not re.match(r"^#{1,6}\s", line) and not line.strip().startswith(">")
+    ]
+    sentences = split_sentences_zh("\n".join(prose_lines))
+
+    if len(sentences) >= 5:
+        lengths = [len(s) for s in sentences]
+        mean = sum(lengths) / len(lengths)
+        variance = sum((x - mean) ** 2 for x in lengths) / len(lengths)
+        stddev = variance ** 0.5
+        if stddev < 15:
+            score -= 5
+            issues.append(f"low burstiness {stddev:.1f} (std dev < 15)")
+
+        all_chars = "".join(sentences)
+        unique = len(set(all_chars))
+        total = len(all_chars)
+        ttr = unique / total if total > 0 else 0
+        if ttr < 0.35:
+            score -= 5
+            issues.append(f"low TTR {ttr:.2f} (< 0.35)")
+
+    if re.search(r"首先.*?其次.*?最後", content, re.DOTALL):
+        score -= 3
+        issues.append("repetitive '首先...其次...最後' structure")
+
+    return {"score": max(score, 0), "max": 25, "issues": issues}
+
+
 def analyze(content: str) -> dict[str, Any]:
     """Run all 5 category analyzers. Returns flat dict with scores and issues."""
     result: dict[str, Any] = {
