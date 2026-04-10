@@ -15,15 +15,53 @@ postSlug: 'claude-code-skill-development-workflow'
 
 把這些規範封裝成 skill，讓 Claude 每次寫文章時自動載入，就不用重複交代了。
 
-## 開發工具鏈
+## 開發工具鏈：三個 Skill 各司其職
 
-整個過程用了三個 skill 搭配使用：
+整個開發過程用了三個 skill 搭配使用，各自負責不同階段：
 
-| Skill                         | 用途                                                      |
-| ----------------------------- | --------------------------------------------------------- |
-| `/skill-creator`              | 起草 SKILL.md、跑 iteration benchmark、產生 review viewer |
-| `/superpowers:writing-skills` | 結構審查、few-shot 範例品質確認                           |
-| `/skill-creator-advanced`     | 八階段正式審核（format、overlap、regression gates）       |
+### /skill-creator — 起草與迭代測試
+
+這是 skill 開發的起點。它會引導你從意圖釐清開始，一路走到測試與迭代：
+
+- **起草 SKILL.md**：根據你描述的需求，產出包含 frontmatter、指令本體、output contract 的完整草稿
+- **建立測試案例**：幫你設計 2-3 個真實的 eval prompt，存成 `evals.json`
+- **平行 benchmark**：同時啟動 with_skill 和 without_skill 的 subagent 跑測試，用自動化腳本評分每個 assertion（frontmatter 完整性、description 字數、code block 語言標記等）
+- **產生 review viewer**：把結果輸出成互動式 HTML，讓你可以逐篇檢閱文章品質、留下回饋，還有 benchmark 數據對照
+- **Description optimization**：產生 trigger eval set（should-trigger / should-not-trigger 查詢），優化 description 的觸發準確率
+
+簡單說，skill-creator 負責「做出來」和「測出來」。
+
+### /superpowers:writing-skills — 結構與品質審查
+
+這個 skill 專注在 SKILL.md 本身的寫作品質：
+
+- 檢查 skill 結構是否符合最佳實踐（frontmatter、語意區塊、output contract）
+- 確認 few-shot 範例的品質 — 範例不夠好，model 的輸出也不會好
+- 審查指令是否用祈使句、步驟是否有 I/O、規則是否有驗證點
+- 找出 context 膨脹問題 — 哪些內容應該從 SKILL.md 移到 `references/`
+
+它的角色比較像「skill 的 code reviewer」，不跑測試，但會抓出寫法上的問題。
+
+### /skill-creator-advanced — 八階段正式審核
+
+這是最嚴格的審核流程，用自動化腳本逐項檢查：
+
+- **Phase -1**：Portfolio audit — 判斷 skill 的 archetype（router / executor / ops / utility），列出鄰近 skill 確認不會互搶
+- **Phase 2**：Naming & description — 檢查 slug、description 長度、trigger phrase 覆蓋率
+- **Phase 4**：Compatibility — 跑 `format_check.py`、`quick_validate.py`、`audit_unreferenced_files.py` 等自動化腳本
+- **Phase 5**：Trigger & overlap — 建立 overlap matrix，計算 repo 內所有 skill 之間的相似度
+- **Phase 6**：Functional benchmark — 驗證 with_skill 的 pass rate、ROI 是否值得額外的 token 成本
+- **Phase 7**：Regression gates — 檢查是否達到發版門檻
+
+它會把所有結果回填到 `references/quality_checklist.md`，作為 skill 的 readiness gate。沒有通過這份 checklist 的 skill 不算完成。
+
+三個工具的分工：
+
+```text
+skill-creator    → 開發 & 測試（做出來、測出來）
+writing-skills   → 寫作品質審查（寫得好不好）
+advanced         → 正式發版審核（能不能上線）
+```
 
 ## Phase 1：用 skill-creator 起草與測試
 
