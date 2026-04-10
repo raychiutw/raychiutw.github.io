@@ -19,11 +19,11 @@ postSlug: 'claude-code-skill-development-workflow'
 
 整個過程用了三個 skill 搭配使用：
 
-| Skill | 用途 |
-| --- | --- |
-| `/skill-creator` | 起草 SKILL.md、跑 iteration benchmark、產生 review viewer |
-| `/superpowers:writing-skills` | 結構審查、few-shot 範例品質確認 |
-| `/skill-creator-advanced` | 八階段正式審核（format、overlap、regression gates） |
+| Skill                         | 用途                                                      |
+| ----------------------------- | --------------------------------------------------------- |
+| `/skill-creator`              | 起草 SKILL.md、跑 iteration benchmark、產生 review viewer |
+| `/superpowers:writing-skills` | 結構審查、few-shot 範例品質確認                           |
+| `/skill-creator-advanced`     | 八階段正式審核（format、overlap、regression gates）       |
 
 ## Phase 1：用 skill-creator 起草與測試
 
@@ -65,10 +65,10 @@ h2-h3-structure         ✓ 至少 2 個 H2
 
 Iteration-1 的成績：
 
-| 指標 | with_skill | baseline | 差異 |
-| --- | --- | --- | --- |
-| 平均通過率 | 81% | 71% | +10% |
-| 平均耗時 | 76.6s | 106.4s | -28% |
+| 指標       | with_skill | baseline | 差異 |
+| ---------- | ---------- | -------- | ---- |
+| 平均通過率 | 81%        | 71%      | +10% |
+| 平均耗時   | 76.6s      | 106.4s   | -28% |
 
 有提升，但 81% 不夠好。兩個問題浮出水面：
 
@@ -109,11 +109,11 @@ aspnet-middleware/without_skill:    6/7 (86%)
 git-rebase-vs-merge/without_skill: 4/7 (57%)
 ```
 
-| 指標 | Iter-1 | Iter-2 | 變化 |
-| --- | --- | --- | --- |
-| with_skill | 81% | **100%** | +19% |
-| baseline | 71% | 76.2% | +5.2% |
-| Delta | +10% | **+23.8%** | — |
+| 指標       | Iter-1 | Iter-2     | 變化  |
+| ---------- | ------ | ---------- | ----- |
+| with_skill | 81%    | **100%**   | +19%  |
+| baseline   | 71%    | 76.2%      | +5.2% |
+| Delta      | +10%   | **+23.8%** | —     |
 
 **code-language-tags 從 0/3 變成 3/3**，反面教材範例策略完全奏效。
 
@@ -171,7 +171,7 @@ description: Do NOT trigger for: editing/reviewing...
 YAML 把 `for:` 當成一個新的 key-value pair。修正方式是用單引號包裹整個 description，並把 em dash `—` 換成 `--`：
 
 ```yaml
-description: 'Use when the user wants to create NEW blog content for Ray''s Notes -- writing...'
+description: "Use when the user wants to create NEW blog content for Ray's Notes -- writing..."
 ```
 
 ### Overlap 矩陣
@@ -180,15 +180,15 @@ description: 'Use when the user wants to create NEW blog content for Ray''s Note
 
 ### 最終結果
 
-| 檢查 | 結果 |
-| --- | --- |
-| format_check | 0 errors |
-| quick_validate | PASS |
-| name_surface | PASS (0 blocking) |
-| unreferenced_files | PASS |
-| skill_overlap | 最高 0.077（無風險） |
-| Benchmark | 100% pass rate |
-| ROI | +18% tokens 換 +23.8% 品質 |
+| 檢查               | 結果                       |
+| ------------------ | -------------------------- |
+| format_check       | 0 errors                   |
+| quick_validate     | PASS                       |
+| name_surface       | PASS (0 blocking)          |
+| unreferenced_files | PASS                       |
+| skill_overlap      | 最高 0.077（無風險）       |
+| Benchmark          | 100% pass rate             |
+| ROI                | +18% tokens 換 +23.8% 品質 |
 
 ## 學到的事
 

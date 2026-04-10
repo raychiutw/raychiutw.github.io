@@ -1,6 +1,6 @@
 ---
 name: write-blog
-description: 'Use when the user wants to create NEW blog content for Ray''s Notes -- writing technical tutorials, comparison articles, experience write-ups, or adding to an article series. Trigger on phrases like「寫一篇」「幫我寫文章」「新增文章」「發文」「blog post」「draft 一篇」「記錄一下」「整理成文章」, or when given a technical topic with writing intent. Also trigger when users mention wanting to publish, document an experience, or create content about a technology, even without explicitly saying blog. Do NOT trigger for editing/reviewing existing posts, fixing blog site bugs, writing code (not articles), updating README/docs, checking frontmatter format, translating posts, or optimizing site performance.'
+description: "Use when the user wants to create NEW blog content for Ray's Notes -- writing technical tutorials, comparison articles, experience write-ups, or adding to an article series. Trigger on phrases like「寫一篇」「幫我寫文章」「新增文章」「發文」「blog post」「draft 一篇」「記錄一下」「整理成文章」, or when given a technical topic with writing intent. Also trigger when users mention wanting to publish, document an experience, or create content about a technology, even without explicitly saying blog. Do NOT trigger for editing/reviewing existing posts, fixing blog site bugs, writing code (not articles), updating README/docs, checking frontmatter format, translating posts, or optimizing site performance."
 ---
 
 # Write Blog — Ray's Notes 部落格文章撰寫
@@ -60,18 +60,21 @@ Ray 的文章有一個明確的節奏感，遵循這個模式：
 用 H2（`##`）和 H3（`###`）建立清楚的層級結構。常見的組織方式：
 
 **教學型文章：**
+
 - `## 定義` 或 `## 什麼是 X`
 - `## 安裝` / `## 設定`
 - `## 實作說明`（搭配程式碼）
 - `## 結語`
 
 **問題解決型文章：**
+
 - `## 問題描述`
 - `## 原因分析`
 - `## 解決方案`
 - `## 結語`
 
 **比較型文章：**
+
 - `## 方案 A`
 - `## 方案 B`
 - `## 比較表`
@@ -80,6 +83,7 @@ Ray 的文章有一個明確的節奏感，遵循這個模式：
 ### 4. 結語（選用但建議）
 
 用 2-3 句話收尾。可以是：
+
 - 總結重點
 - 補充使用建議（什麼場景適合、什麼場景不適合）
 - 指向延伸閱讀
@@ -123,11 +127,13 @@ Ray 的寫作風格有幾個鮮明特徵，理解這些特徵背後的原因比�
 部落格的 syntax highlighting 依賴語言標記。**每一個** code block 開頭的 ` ``` ` 後面都要有語言標記，沒有任何例外。寫完文章後，搜尋所有 ` ``` ` 確認每一個都有標記。
 
 容易漏掉的情境（這些全部標記為 `text`）：
+
 - ASCII art 圖（commit graph、樹狀結構、架構圖）
 - 命令列輸出、log 輸出
 - 純文字的比較說明
 
 **錯誤示範：**
+
 ````markdown
 ```
 *   merge commit
@@ -137,6 +143,7 @@ Ray 的寫作風格有幾個鮮明特徵，理解這些特徵背後的原因比�
 ````
 
 **正確做法：**
+
 ````markdown
 ```text
 *   merge commit
@@ -150,6 +157,7 @@ Ray 的寫作風格有幾個鮮明特徵，理解這些特徵背後的原因比�
 ## 圖片使用
 
 圖片不是每篇都需要，只在真正有幫助時才加：
+
 - 架構圖、流程圖、UML 圖
 - UI 截圖（教學需要時）
 - 比較表格或視覺化資料
@@ -159,6 +167,7 @@ Ray 的寫作風格有幾個鮮明特徵，理解這些特徵背後的原因比�
 ## 文章長度
 
 根據主題複雜度調整，沒有硬性規定：
+
 - 快速技巧：40-60 行
 - 標準教學：80-120 行
 - 深度解析：120-180 行
@@ -189,6 +198,7 @@ Ray 的寫作風格有幾個鮮明特徵，理解這些特徵背後的原因比�
 ## 完成 Checklist
 
 交稿前逐項確認（詳細品質標準見 `references/quality_checklist.md`）：
+
 - [ ] frontmatter 所有必填欄位都有填
 - [ ] description 在 100-160 字之間（數過了）
 - [ ] AI 撰寫的文章 tags 第一個是 `AI生成`
