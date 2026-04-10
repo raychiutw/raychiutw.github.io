@@ -15,53 +15,59 @@ postSlug: 'claude-code-skill-development-workflow'
 
 把這些規範封裝成 skill，讓 Claude 每次寫文章時自動載入，就不用重複交代了。
 
-## 開發工具鏈：三個 Skill 各司其職
+## 開發工具鏈：三個 Skill 從不同角度壓測
 
-整個開發過程用了三個 skill 搭配使用，各自負責不同階段：
+這三個工具都有完整的 skill 開發能力，不是線性的「開發 → 審查 → 發版」流水線。我的用法是拿它們從不同角度反覆測試同一個 skill，每個工具有自己的測試哲學和盲點，交叉使用才能抓出單一工具漏掉的問題。
 
-### /skill-creator — 起草與迭代測試
+### /skill-creator（官方外掛）
 
-這是 skill 開發的起點。它會引導你從意圖釐清開始，一路走到測試與迭代：
+Anthropic 官方的 skill 開發工具。核心能力是**互動式迭代與量化 benchmark**：
 
-- **起草 SKILL.md**：根據你描述的需求，產出包含 frontmatter、指令本體、output contract 的完整草稿
-- **建立測試案例**：幫你設計 2-3 個真實的 eval prompt，存成 `evals.json`
-- **平行 benchmark**：同時啟動 with_skill 和 without_skill 的 subagent 跑測試，用自動化腳本評分每個 assertion（frontmatter 完整性、description 字數、code block 語言標記等）
-- **產生 review viewer**：把結果輸出成互動式 HTML，讓你可以逐篇檢閱文章品質、留下回饋，還有 benchmark 數據對照
-- **Description optimization**：產生 trigger eval set（should-trigger / should-not-trigger 查詢），優化 description 的觸發準確率
+- 從意圖釐清到 SKILL.md 草稿、測試案例設計、evals.json 建立，一條龍完成
+- **平行 subagent 測試**：同時啟動 with_skill 和 without_skill 兩組 subagent，用自動化腳本對每個 assertion 評分，產出 benchmark.json 做量化對比
+- **Review viewer**：把測試結果輸出成互動式 HTML，可以逐篇檢閱輸出品質、留下回饋、看 benchmark 數據
+- **Description optimization**：產生 trigger eval set（should-trigger / should-not-trigger），用迭代 loop 優化觸發準確率
+- 支援 blind comparison（A/B 盲測）和跨迭代對比（iteration-1 vs iteration-2）
+- 最後可打包成 `.skill` 檔案
 
-簡單說，skill-creator 負責「做出來」和「測出來」。
+強項是**資料驅動**：用數字告訴你 skill 有沒有用、用了多少額外 token、哪個 assertion 是弱點。
 
-### /superpowers:writing-skills — 結構與品質審查
+### /superpowers:writing-skills（官方 superpowers）
 
-這個 skill 專注在 SKILL.md 本身的寫作品質：
+把 **TDD（測試驅動開發）的哲學搬到 skill 寫作**上：
 
-- 檢查 skill 結構是否符合最佳實踐（frontmatter、語意區塊、output contract）
-- 確認 few-shot 範例的品質 — 範例不夠好，model 的輸出也不會好
-- 審查指令是否用祈使句、步驟是否有 I/O、規則是否有驗證點
-- 找出 context 膨脹問題 — 哪些內容應該從 SKILL.md 移到 `references/`
+- **RED → GREEN → REFACTOR 循環**：先在沒有 skill 的情況下觀察 model 的自然行為（RED），再寫最小可行的 skill 讓測試通過（GREEN），最後找出 model 能理性化繞過的漏洞並堵住（REFACTOR）
+- **壓力測試**：測時間壓力、沉沒成本、權威壓力、疲勞等多重情境組合下，skill 的規則是否還能被遵守
+- **反模式清單**：列出 18 種常見的 skill 寫作錯誤（如「把常識當規則寫」「description 寫成功能介紹」「規則沒有驗證點」）
+- **Skill 分類**：區分 Technique（技巧型）、Pattern（模式型）、Reference（參考型），不同類型有不同的結構建議
+- **部署前 checklist**：16 項必檢項目
 
-它的角色比較像「skill 的 code reviewer」，不跑測試，但會抓出寫法上的問題。
+強項是**找出 model 能繞過規則的地方**。它不只問「能不能通過」，還問「model 會不會理性化自己不遵守」。
 
-### /skill-creator-advanced — 八階段正式審核
+### /skill-creator-advanced（社群外掛）
 
-這是最嚴格的審核流程，用自動化腳本逐項檢查：
+把 skill 開發變成**可重複執行的工程流程**，提供八階段檢查與 12+ 自動化腳本：
 
-- **Phase -1**：Portfolio audit — 判斷 skill 的 archetype（router / executor / ops / utility），列出鄰近 skill 確認不會互搶
-- **Phase 2**：Naming & description — 檢查 slug、description 長度、trigger phrase 覆蓋率
-- **Phase 4**：Compatibility — 跑 `format_check.py`、`quick_validate.py`、`audit_unreferenced_files.py` 等自動化腳本
-- **Phase 5**：Trigger & overlap — 建立 overlap matrix，計算 repo 內所有 skill 之間的相似度
-- **Phase 6**：Functional benchmark — 驗證 with_skill 的 pass rate、ROI 是否值得額外的 token 成本
-- **Phase 7**：Regression gates — 檢查是否達到發版門檻
+- **Portfolio audit**（Phase -1）：判斷 archetype（router / executor / ops / utility），列出鄰近 skill 確認不互搶
+- **Naming & description**（Phase 2）：discoverability-first 命名審計，description 寫成 decision boundary
+- **Compatibility**（Phase 4）：`format_check.py`、`quick_validate.py`、`audit_unreferenced_files.py` 等腳本自動檢查
+- **Trigger & overlap**（Phase 5）：建立 overlap matrix，計算 repo 內 skill 之間的相似度
+- **Functional benchmark**（Phase 6）：with_skill vs baseline 對比，ROI 分析
+- **Regression gates**（Phase 7）：用門檻設定判斷是否達到發版標準
+- 所有結果回填到 `references/quality_checklist.md` 作為 readiness gate
+- 16 項核心強制規則、跨工具可攜性設計
 
-它會把所有結果回填到 `references/quality_checklist.md`，作為 skill 的 readiness gate。沒有通過這份 checklist 的 skill 不算完成。
+強項是**自動化腳本和結構化流程**。YAML 格式、未引用檔案、命名衝突這類人眼難抓的問題，靠腳本一次掃完。
 
-三個工具的分工：
+### 為什麼要交叉使用
 
-```text
-skill-creator    → 開發 & 測試（做出來、測出來）
-writing-skills   → 寫作品質審查（寫得好不好）
-advanced         → 正式發版審核（能不能上線）
-```
+每個工具有自己的盲點：
+
+- skill-creator 擅長量化 benchmark，但不會質疑你的 skill 結構是否合理
+- writing-skills 擅長找出 model 能繞過的漏洞，但不跑自動化腳本
+- skill-creator-advanced 的腳本能抓格式和 overlap 問題，但不做 subagent 平行測試
+
+我的做法是在不同 session 各跑一輪，讓每個工具獨立判斷。前一輪的改善可能在下一輪的角度下暴露新問題 — 這就是反覆壓測的價值。
 
 ## Phase 1：用 skill-creator 起草與測試
 
