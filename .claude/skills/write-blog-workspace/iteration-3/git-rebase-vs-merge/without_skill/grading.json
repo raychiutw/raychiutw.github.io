@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": false,
+      "evidence": "Description length: 81 chars"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": true,
+      "evidence": "First tag: 'AI生成'"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": false,
+      "evidence": "No postSlug found"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": false,
+      "evidence": "First line: '## 前言：那個永遠爭不完的話題...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": false,
+      "evidence": "9 code blocks, 4 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "8 H2 headers, 9 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": true,
+      "evidence": "No banned phrases"
+    }
+  ]
+}

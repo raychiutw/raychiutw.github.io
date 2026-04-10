@@ -1,0 +1,160 @@
+{
+  "skill_name": "write-blog",
+  "iteration": 3,
+  "configurations": [
+    {
+      "name": "with_skill",
+      "evals": [
+        {
+          "eval_name": "docker-multistage",
+          "pass_rate": 1.0,
+          "total_tokens": 37612,
+          "duration_seconds": 130.7,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": true,
+            "ai-tag-first": true,
+            "slug-kebab-case": true,
+            "blockquote-opening": true,
+            "code-language-tags": true,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        },
+        {
+          "eval_name": "aspnet-middleware",
+          "pass_rate": 1.0,
+          "total_tokens": 37950,
+          "duration_seconds": 117.5,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": true,
+            "ai-tag-first": true,
+            "slug-kebab-case": true,
+            "blockquote-opening": true,
+            "code-language-tags": true,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        },
+        {
+          "eval_name": "git-rebase-vs-merge",
+          "pass_rate": 1.0,
+          "total_tokens": 40900,
+          "duration_seconds": 149.7,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": true,
+            "ai-tag-first": true,
+            "slug-kebab-case": true,
+            "blockquote-opening": true,
+            "code-language-tags": true,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        },
+        {
+          "eval_name": "hexo-to-astro-upgrade",
+          "pass_rate": 1.0,
+          "total_tokens": 41891,
+          "duration_seconds": 175.5,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": true,
+            "ai-tag-first": true,
+            "slug-kebab-case": true,
+            "blockquote-opening": true,
+            "code-language-tags": true,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        }
+      ],
+      "summary": {
+        "mean_pass_rate": 1.0,
+        "mean_tokens": 39588,
+        "mean_duration_seconds": 143.3
+      }
+    },
+    {
+      "name": "without_skill",
+      "evals": [
+        {
+          "eval_name": "docker-multistage",
+          "pass_rate": 0.375,
+          "total_tokens": 30879,
+          "duration_seconds": 121.8,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": false,
+            "ai-tag-first": false,
+            "slug-kebab-case": false,
+            "blockquote-opening": false,
+            "code-language-tags": false,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        },
+        {
+          "eval_name": "aspnet-middleware",
+          "pass_rate": 0.75,
+          "total_tokens": 32849,
+          "duration_seconds": 92.4,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": true,
+            "ai-tag-first": true,
+            "slug-kebab-case": true,
+            "blockquote-opening": true,
+            "code-language-tags": false,
+            "h2-h3-structure": true,
+            "no-banned-phrases": false
+          }
+        },
+        {
+          "eval_name": "git-rebase-vs-merge",
+          "pass_rate": 0.5,
+          "total_tokens": 28616,
+          "duration_seconds": 94.6,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": false,
+            "ai-tag-first": true,
+            "slug-kebab-case": false,
+            "blockquote-opening": false,
+            "code-language-tags": false,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        },
+        {
+          "eval_name": "hexo-to-astro-upgrade",
+          "pass_rate": 0.875,
+          "total_tokens": 33534,
+          "duration_seconds": 123.5,
+          "assertions": {
+            "frontmatter-complete": true,
+            "description-length": true,
+            "ai-tag-first": true,
+            "slug-kebab-case": true,
+            "blockquote-opening": true,
+            "code-language-tags": false,
+            "h2-h3-structure": true,
+            "no-banned-phrases": true
+          }
+        }
+      ],
+      "summary": {
+        "mean_pass_rate": 0.625,
+        "mean_tokens": 31469,
+        "mean_duration_seconds": 108.1
+      }
+    }
+  ],
+  "delta": {
+    "pass_rate": "+37.5% (with_skill 100% vs baseline 62%)",
+    "tokens": "+8119",
+    "duration": "+35.2s"
+  },
+  "no_banned_phrases_result": "with_skill 4/4 vs baseline 3/4"
+}

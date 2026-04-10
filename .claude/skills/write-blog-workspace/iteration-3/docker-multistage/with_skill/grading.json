@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": true,
+      "evidence": "Description length: 136 chars"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": true,
+      "evidence": "First tag: 'AI生成'"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": true,
+      "evidence": "postSlug: 'docker-multi-stage-build'"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": true,
+      "evidence": "First line: '> Multi-stage build 是 Docker 17.05 以後加入的功能，用多個 `FROM` 把建置環境和執行環境切開，讓最終 image 只留下...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": true,
+      "evidence": "8 code blocks, 0 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "10 H2 headers, 0 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": true,
+      "evidence": "No banned phrases"
+    }
+  ]
+}

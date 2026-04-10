@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": false,
+      "evidence": "No description found"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": false,
+      "evidence": "No tags found"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": false,
+      "evidence": "No postSlug found"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": false,
+      "evidence": "First line: '## 前言:那個讓你 CI 跑半小時的 Dockerfile...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": false,
+      "evidence": "13 code blocks, 1 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "10 H2 headers, 5 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": true,
+      "evidence": "No banned phrases"
+    }
+  ]
+}

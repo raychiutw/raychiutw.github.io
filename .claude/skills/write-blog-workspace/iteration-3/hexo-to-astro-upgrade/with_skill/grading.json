@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": true,
+      "evidence": "Description length: 138 chars"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": true,
+      "evidence": "First tag: 'AI生成'"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": true,
+      "evidence": "postSlug: 'hexo-to-astro-upgrade'"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": true,
+      "evidence": "First line: '> 舊站跑 Hexo 跑了好幾年，文章累積快兩百篇。這次一狠心搬到 Astro，本以為只是換個靜態產生器，結果光 Markdown 行為差異就讓我重寫了半個晚上...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": true,
+      "evidence": "10 code blocks, 0 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "7 H2 headers, 0 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": true,
+      "evidence": "No banned phrases"
+    }
+  ]
+}

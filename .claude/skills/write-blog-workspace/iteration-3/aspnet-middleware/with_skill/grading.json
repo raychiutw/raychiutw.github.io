@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": true,
+      "evidence": "Description length: 132 chars"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": true,
+      "evidence": "First tag: 'AI生成'"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": true,
+      "evidence": "postSlug: 'aspnet-core-global-exception-middleware'"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": true,
+      "evidence": "First line: '> 每個 Controller 都包一層 try/catch 是反模式 — ASP.NET Core 提供 Middleware pipeline，把例外處理集...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": true,
+      "evidence": "9 code blocks, 0 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "9 H2 headers, 0 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": true,
+      "evidence": "No banned phrases"
+    }
+  ]
+}

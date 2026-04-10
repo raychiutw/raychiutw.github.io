@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": true,
+      "evidence": "Description length: 108 chars"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": true,
+      "evidence": "First tag: 'AI生成'"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": true,
+      "evidence": "postSlug: 'git-rebase-vs-merge'"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": true,
+      "evidence": "First line: '> 同樣是整合分支,`git merge` 保留了完整的歷史脈絡,`git rebase` 則把提交重寫成一條直線。兩者沒有絕對的對錯,只有適不適合當下的情境。...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": true,
+      "evidence": "11 code blocks, 0 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "7 H2 headers, 0 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": true,
+      "evidence": "No banned phrases"
+    }
+  ]
+}

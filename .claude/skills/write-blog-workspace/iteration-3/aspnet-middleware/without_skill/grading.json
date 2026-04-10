@@ -1,0 +1,44 @@
+{
+  "expectations": [
+    {
+      "text": "frontmatter-complete",
+      "passed": true,
+      "evidence": "All required fields present"
+    },
+    {
+      "text": "description-length",
+      "passed": true,
+      "evidence": "Description length: 105 chars"
+    },
+    {
+      "text": "ai-tag-first",
+      "passed": true,
+      "evidence": "First tag: 'AI生成'"
+    },
+    {
+      "text": "slug-kebab-case",
+      "passed": true,
+      "evidence": "postSlug: 'aspnet-core-global-exception-middleware'"
+    },
+    {
+      "text": "blockquote-opening",
+      "passed": true,
+      "evidence": "First line: '> 在 ASP.NET Core 專案中，例外處理如果散落在各 Controller 會難以維護。本篇帶你用自訂 Middleware 打造一套全域例外處理機制...'"
+    },
+    {
+      "text": "code-language-tags",
+      "passed": false,
+      "evidence": "7 code blocks, 1 without language tag"
+    },
+    {
+      "text": "h2-h3-structure",
+      "passed": true,
+      "evidence": "8 H2 headers, 4 H3 headers"
+    },
+    {
+      "text": "no-banned-phrases",
+      "passed": false,
+      "evidence": "Found: ZH: '不僅'"
+    }
+  ]
+}
