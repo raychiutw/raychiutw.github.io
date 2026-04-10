@@ -1,0 +1,41 @@
+{
+  "categories": {
+    "structure": {
+      "score": 17,
+      "max": 20,
+      "issues": [
+        "1 code blocks without language tag"
+      ]
+    },
+    "style": {
+      "score": 20,
+      "max": 25,
+      "issues": [
+        "low TTR 0.13 (< 0.35)"
+      ]
+    },
+    "originality": {
+      "score": 25,
+      "max": 25,
+      "issues": []
+    },
+    "technical": {
+      "score": 10,
+      "max": 15,
+      "issues": [
+        "1 bare URLs (not markdown-linked)"
+      ]
+    },
+    "readability": {
+      "score": 12,
+      "max": 15,
+      "issues": [
+        "3 paragraphs over 200 chars"
+      ]
+    }
+  },
+  "total": 84,
+  "file": ".claude\\skills\\write-blog-workspace\\iteration-3\\hexo-to-astro-upgrade\\without_skill\\outputs\\hexo-to-astro-upgrade.md",
+  "eval_name": "hexo-to-astro-upgrade",
+  "config": "without_skill"
+}

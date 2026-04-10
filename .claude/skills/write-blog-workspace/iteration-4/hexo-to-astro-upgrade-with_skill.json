@@ -1,0 +1,37 @@
+{
+  "categories": {
+    "structure": {
+      "score": 20,
+      "max": 20,
+      "issues": []
+    },
+    "style": {
+      "score": 20,
+      "max": 25,
+      "issues": [
+        "low TTR 0.16 (< 0.35)"
+      ]
+    },
+    "originality": {
+      "score": 25,
+      "max": 25,
+      "issues": []
+    },
+    "technical": {
+      "score": 15,
+      "max": 15,
+      "issues": []
+    },
+    "readability": {
+      "score": 12,
+      "max": 15,
+      "issues": [
+        "1 paragraphs over 200 chars"
+      ]
+    }
+  },
+  "total": 92,
+  "file": ".claude\\skills\\write-blog-workspace\\iteration-3\\hexo-to-astro-upgrade\\with_skill\\outputs\\hexo-to-astro-upgrade.md",
+  "eval_name": "hexo-to-astro-upgrade",
+  "config": "with_skill"
+}

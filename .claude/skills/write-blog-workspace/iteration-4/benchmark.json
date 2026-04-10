@@ -1,0 +1,128 @@
+{
+  "skill_name": "write-blog",
+  "iteration": 4,
+  "configurations": [
+    {
+      "name": "with_skill",
+      "evals": [
+        {
+          "eval_name": "docker-multistage",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 10,
+            "readability": 12
+          },
+          "total": 87
+        },
+        {
+          "eval_name": "aspnet-middleware",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 15,
+            "readability": 8
+          },
+          "total": 88
+        },
+        {
+          "eval_name": "git-rebase-vs-merge",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 10,
+            "readability": 12
+          },
+          "total": 87
+        },
+        {
+          "eval_name": "hexo-to-astro-upgrade",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 15,
+            "readability": 12
+          },
+          "total": 92
+        }
+      ],
+      "mean_scores": {
+        "structure": 20.0,
+        "style": 20.0,
+        "originality": 25.0,
+        "technical": 12.5,
+        "readability": 11.0,
+        "total": 88.5
+      }
+    },
+    {
+      "name": "without_skill",
+      "evals": [
+        {
+          "eval_name": "docker-multistage",
+          "scores": {
+            "structure": 5,
+            "style": 20,
+            "originality": 25,
+            "technical": 10,
+            "readability": 8
+          },
+          "total": 68
+        },
+        {
+          "eval_name": "aspnet-middleware",
+          "scores": {
+            "structure": 17,
+            "style": 17,
+            "originality": 25,
+            "technical": 15,
+            "readability": 12
+          },
+          "total": 86
+        },
+        {
+          "eval_name": "git-rebase-vs-merge",
+          "scores": {
+            "structure": 8,
+            "style": 20,
+            "originality": 17,
+            "technical": 10,
+            "readability": 15
+          },
+          "total": 70
+        },
+        {
+          "eval_name": "hexo-to-astro-upgrade",
+          "scores": {
+            "structure": 17,
+            "style": 20,
+            "originality": 25,
+            "technical": 10,
+            "readability": 12
+          },
+          "total": 84
+        }
+      ],
+      "mean_scores": {
+        "structure": 11.8,
+        "style": 19.2,
+        "originality": 23.0,
+        "technical": 11.2,
+        "readability": 11.8,
+        "total": 77.0
+      }
+    }
+  ],
+  "delta": {
+    "structure": "+8.2",
+    "style": "+0.8",
+    "originality": "+2.0",
+    "technical": "+1.3",
+    "readability": "-0.8",
+    "total": "+11.5"
+  }
+}

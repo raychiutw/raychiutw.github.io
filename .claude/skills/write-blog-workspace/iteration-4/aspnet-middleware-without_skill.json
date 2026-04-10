@@ -1,0 +1,40 @@
+{
+  "categories": {
+    "structure": {
+      "score": 17,
+      "max": 20,
+      "issues": [
+        "1 code blocks without language tag"
+      ]
+    },
+    "style": {
+      "score": 17,
+      "max": 25,
+      "issues": [
+        "banned ZH '不僅' x1 (-3)",
+        "low TTR 0.17 (< 0.35)"
+      ]
+    },
+    "originality": {
+      "score": 25,
+      "max": 25,
+      "issues": []
+    },
+    "technical": {
+      "score": 15,
+      "max": 15,
+      "issues": []
+    },
+    "readability": {
+      "score": 12,
+      "max": 15,
+      "issues": [
+        "4 paragraphs over 200 chars"
+      ]
+    }
+  },
+  "total": 86,
+  "file": ".claude\\skills\\write-blog-workspace\\iteration-3\\aspnet-middleware\\without_skill\\outputs\\aspnet-core-global-exception-middleware.md",
+  "eval_name": "aspnet-middleware",
+  "config": "without_skill"
+}

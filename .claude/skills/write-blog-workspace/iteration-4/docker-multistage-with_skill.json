@@ -1,0 +1,39 @@
+{
+  "categories": {
+    "structure": {
+      "score": 20,
+      "max": 20,
+      "issues": []
+    },
+    "style": {
+      "score": 20,
+      "max": 25,
+      "issues": [
+        "low TTR 0.15 (< 0.35)"
+      ]
+    },
+    "originality": {
+      "score": 25,
+      "max": 25,
+      "issues": []
+    },
+    "technical": {
+      "score": 10,
+      "max": 15,
+      "issues": [
+        "code blocks look like fragments (no import/using/#include/def)"
+      ]
+    },
+    "readability": {
+      "score": 12,
+      "max": 15,
+      "issues": [
+        "2 paragraphs over 200 chars"
+      ]
+    }
+  },
+  "total": 87,
+  "file": ".claude\\skills\\write-blog-workspace\\iteration-3\\docker-multistage\\with_skill\\outputs\\docker-multi-stage-build.md",
+  "eval_name": "docker-multistage",
+  "config": "with_skill"
+}
