@@ -1,0 +1,74 @@
+{
+  "skill_name": "write-blog",
+  "iteration": 5,
+  "branch": "D — Few-shot Writing Style Calibration",
+  "baseline_iteration": 4,
+  "configurations": [
+    {
+      "name": "with_skill_iter5",
+      "evals": [
+        {
+          "eval_name": "docker-multistage",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 10,
+            "readability": 12
+          },
+          "total": 87
+        },
+        {
+          "eval_name": "aspnet-middleware",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 15,
+            "readability": 8
+          },
+          "total": 88
+        },
+        {
+          "eval_name": "git-rebase-vs-merge",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 25,
+            "technical": 10,
+            "readability": 8
+          },
+          "total": 83
+        },
+        {
+          "eval_name": "hexo-to-astro-upgrade",
+          "scores": {
+            "structure": 20,
+            "style": 20,
+            "originality": 17,
+            "technical": 15,
+            "readability": 12
+          },
+          "total": 84
+        }
+      ],
+      "mean_scores": {
+        "structure": 20.0,
+        "style": 20.0,
+        "originality": 23.0,
+        "technical": 12.5,
+        "readability": 10.0,
+        "total": 85.5
+      }
+    }
+  ],
+  "delta_vs_iter4": {
+    "structure": "+0.0",
+    "style": "+0.0",
+    "originality": "-2.0",
+    "technical": "+0.0",
+    "readability": "-1.0",
+    "total": "-3.0"
+  },
+  "target_dimension_met": "false"
+}

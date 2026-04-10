@@ -1,0 +1,35 @@
+{
+  "categories": {
+    "structure": {
+      "score": 20,
+      "max": 20,
+      "issues": []
+    },
+    "style": {
+      "score": 20,
+      "max": 25,
+      "issues": ["low TTR 0.16 (< 0.35)"]
+    },
+    "originality": {
+      "score": 17,
+      "max": 25,
+      "issues": [
+        "no opinion markers from ['我的做法', '實務上', '我覺得', '踩過的坑', '我通常', '我會選']"
+      ]
+    },
+    "technical": {
+      "score": 15,
+      "max": 15,
+      "issues": []
+    },
+    "readability": {
+      "score": 12,
+      "max": 15,
+      "issues": ["2 paragraphs over 200 chars"]
+    }
+  },
+  "total": 84,
+  "file": ".claude\\skills\\write-blog-workspace\\iteration-5\\hexo-to-astro-upgrade\\with_skill\\outputs\\hexo-to-astro-upgrade.md",
+  "eval_name": "hexo-to-astro-upgrade",
+  "config": "with_skill"
+}

@@ -1,0 +1,33 @@
+{
+  "categories": {
+    "structure": {
+      "score": 20,
+      "max": 20,
+      "issues": []
+    },
+    "style": {
+      "score": 20,
+      "max": 25,
+      "issues": ["low TTR 0.11 (< 0.35)"]
+    },
+    "originality": {
+      "score": 25,
+      "max": 25,
+      "issues": []
+    },
+    "technical": {
+      "score": 10,
+      "max": 15,
+      "issues": ["code blocks look like fragments (no import/using/#include/def)"]
+    },
+    "readability": {
+      "score": 8,
+      "max": 15,
+      "issues": ["4 paragraphs over 200 chars", "code ratio 10% out of 10-70% range"]
+    }
+  },
+  "total": 83,
+  "file": ".claude\\skills\\write-blog-workspace\\iteration-5\\git-rebase-vs-merge\\with_skill\\outputs\\git-rebase-vs-merge.md",
+  "eval_name": "git-rebase-vs-merge",
+  "config": "with_skill"
+}
