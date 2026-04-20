@@ -2,7 +2,7 @@ name: Daily Report
 
 on:
   schedule:
-    - cron: '7 0 * * *' # UTC 00:07 = 台灣 08:07
+    - cron: '17 22 * * *' # UTC 22:17 = 台灣 06:17
   workflow_dispatch: # 手動觸發用於測試
 
 jobs:
