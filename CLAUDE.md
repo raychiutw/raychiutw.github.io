@@ -191,7 +191,7 @@ Key User 需求 → PM 建立 GitHub Issue
 - Key User Approve 為最終關卡，未經 Key User 明確 Approve 禁止合併，違反視為嚴重流程疏失
 - 上版五關缺一不可：CI 通過 → Reviewer Approve → QC PASS → PM 驗收 → Key User Approve
 - 開發完成後，PM 彙整成果向 Key User 報告，取得 Approve 後才能 commit 上版
-- 合併方式：Squash Merge，確保 master 歷史乾淨
+- 合併方式：Merge commit（不用 squash），保留 PR 的 commit 歷史
 - 合併後自動刪除 feature 分支
 - 緊急修復允許簡化驗證範圍，但 Key User Approve 仍不可省略
 - 所有流程紀錄保留在 PR comments 中，可追溯審查歷程
