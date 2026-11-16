@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>隱私權政策 Privacy Policy — Purrdr</title>
+<meta name="description" content="Purrdr 隱私權政策：蒐集哪些資料、存在哪裡、怎麼刪除。Purrdr Privacy Policy: what we collect, where it is kept, and how to delete it.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!--
+  內容依程式實際行為撰寫，依據寫在 docs/launch/privacy-labels.md。
+  改 app 或 backend/ 的資料處理時，這頁、docs/launch/privacy-labels.md 與 App Store 隱私標籤要一起更新。
+-->
+<header class="site">
+  <a class="brand" href="../">Purrdr</a>
+  <nav>
+    <a href="../support/">支援 Support</a>
+    <a href="./">隱私權政策 Privacy</a>
+  </nav>
+</header>
+<main>
+  <p class="lang-switch"><a href="#zh">繁體中文</a> · <a href="#en">English</a></p>
+
+  <section lang="zh-Hant" id="zh">
+    <h1>隱私權政策</h1>
+    <p class="meta">適用於 iOS／iPadOS App「Purrdr: Agent Chat」與其後台服務。生效日期:2026 年 11 月 16 日。</p>
+
+    <div class="card">
+      <p><strong>重點</strong></p>
+      <ul>
+        <li>聊天、終端機與你傳給 Agent 的圖片，都是 App 經 SSH <strong>直接</strong>連到你自己的電腦，<strong>不經過我們的伺服器</strong>。</li>
+        <li>不需要帳號就能用聊天與終端機。只有訂閱 Purrdr Plus(推播與主機同步)才需要登入會員。</li>
+        <li>沒有廣告、沒有分析或追蹤 SDK、不跨 App 或網站追蹤你，也不販售任何資料。</li>
+        <li>SSH 私鑰、密碼與 passphrase 只存在你的裝置上，永不上傳。</li>
+        <li>你可以隨時在 App 裡刪除會員，伺服器上的會員資料會立即刪除。</li>
+      </ul>
+    </div>
+
+    <h2>1. 只存在你裝置上的資料</h2>
+    <p>以下資料存在裝置本機，我們拿不到：</p>
+    <ul>
+      <li><strong>主機設定</strong>(名稱、位址與埠、使用者名稱、連線方式、作業系統、herdr 路徑與 session、host key 指紋):存在 iOS Keychain,設定為「裝置解鎖時、僅此裝置」,不經 iCloud 鑰匙圈同步。</li>
+      <li><strong>主機祕密</strong>(OpenSSH 密碼，或你匯入的私鑰與 passphrase):另存一份 Keychain 項目，同樣「僅此裝置」,永不上傳(包括主機同步)。</li>
+      <li><strong>裝置 SSH 金鑰</strong>:Purrdr 在裝置的 Secure Enclave 產生一把 P-256 金鑰，私鑰無法離開 Secure Enclave;Keychain 只存它的加密參照(僅此裝置)。公鑰附註解 <code>purrdr@iPhone</code>／<code>purrdr@iPad</code>,由你自己加到主機的 <code>authorized_keys</code>。</li>
+      <li><strong>會員登入權杖</strong>:登入後的更新權杖存在 Keychain(第一次解鎖後可讀、僅此裝置)。</li>
+      <li><strong>App 偏好與狀態</strong>(存在 App 的 UserDefaults):選取中的主機、列表檢視模式、聊天偏好、Return 鍵與觸覺回饋設定、是否看過歡迎頁、評分提示的計數、主機寫入的同意紀錄、推播配對紀錄(隨機裝置代號、配對密鑰的 SHA-256 雜湊、上次的 APNs device token)與主機同步的版本紀錄。</li>
+      <li><strong>對話快取</strong>:只放在記憶體裡，關掉 App 就消失。</li>
+    </ul>
+
+    <h2>2. 直接在你的裝置與你的電腦之間傳輸的資料</h2>
+    <p>App 以 SSH(Tailscale SSH 或 OpenSSH,加密連線)直接連到你設定的主機，執行 herdr 的指令並讀取對話紀錄。下列內容只在你的裝置與你的電腦之間傳輸，<strong>不經過我們的伺服器，我們也看不到</strong>:</p>
+    <ul>
+      <li>Agent 的對話紀錄、你送出的 prompt、slash 指令、提問的答案。</li>
+      <li>終端機的輸入與輸出。</li>
+      <li>你用相機拍攝或從相簿選取、要傳給 Agent 的圖片：上傳到主機的 <code>~/.purrdr/uploads/</code>。相簿使用系統的選取器，App 不需要也不會取得整個相簿的權限;相機只在你按下拍照時使用。</li>
+      <li>你同意後才寫到主機上的檔案(例如推播外掛、主題參考檔、Claude 用量設定),都可以在 App 裡還原。</li>
+    </ul>
+    <p>使用 Tailscale SSH 時，連線經你自己的 Tailscale 網路(tailnet)建立，受 Tailscale 的隱私權政策規範;若主機要求重新驗證，App 會以瀏覽器打開 Tailscale 的驗證頁面。</p>
+
+    <h2>3. 會員(只有登入時)</h2>
+    <p>Purrdr Plus 需要會員，會員可以用 <strong>Sign in with Apple</strong> 或 <strong>Google 登入</strong>。登入時：</p>
+    <ul>
+      <li>Sign in with Apple 只要求 email(不要求姓名);你可以選擇「隱藏我的電子郵件」,我們收到的會是 Apple 的轉寄地址。</li>
+      <li>Google 登入使用系統瀏覽器(OAuth 2.0 + PKCE),只要求 <code>openid email</code>。</li>
+      <li>App 把 Apple／Google 簽發的 ID token 送到我們的後台驗證。</li>
+    </ul>
+    <p>後台保存：</p>
+    <ul>
+      <li>會員 ID(隨機產生)與建立時間。</li>
+      <li>每種登入方式的帳號識別碼(Apple／Google 的 subject)、email(可能是 Apple 轉寄地址，也可能沒有)與連結時間。email 只用來在 App 裡顯示「用哪個帳號登入」,我們不寄行銷信。</li>
+      <li>Sign in with Apple 的 refresh token:只用於刪除會員時向 Apple 撤銷授權(Apple 的規定)。</li>
+      <li>我們自己發的更新權杖的雜湊(不存原文),有效 90 天、每次使用就換新。</li>
+    </ul>
+
+    <h2>4. 訂閱(Purrdr Plus)</h2>
+    <p>付款由 Apple 處理，我們拿不到你的付款資訊。購買時 App 以會員 ID 作為 <code>appAccountToken</code>,並把 App Store 簽章的交易送到後台驗證;Apple 也會以 App Store Server Notifications 通知續訂、到期與退款。後台保存：</p>
+    <ul>
+      <li>商店(App Store)、App Store 的 original transaction ID 與目前的 transaction ID、環境(Production／Sandbox)、商品 ID。</li>
+      <li>購買時間、到期時間、退款或撤銷時間、是否自動續訂、帳單寬限期到期時間。</li>
+    </ul>
+    <p>這些資料用來判斷你是否有 Purrdr Plus 權限。</p>
+
+    <h2>5. 推播通知(Purrdr Plus)</h2>
+    <p>為某台主機開啟推播時：</p>
+    <ul>
+      <li>App 向 iOS 要求通知權限並取得 APNs device token。</li>
+      <li>App 產生一組隨機的配對密鑰，<strong>密鑰本身只寫到你的主機</strong>(<code>~/.purrdr/push-&lt;裝置代號&gt;/pairing</code>),並經 SSH 在主機安裝一個小型 herdr 外掛(來源是公開的 <code>raychiutw/purrdr-host-plugin</code>,由主機上的 herdr 下載)。</li>
+      <li>後台保存：配對密鑰的 SHA-256 雜湊、APNs device token、平台(APNs)與環境(production／sandbox)、建立與更新時間，以及每組密鑰每分鐘的速率限制計數。</li>
+    </ul>
+    <p>Agent 需要你時，主機外掛只送出 <strong>workspace 名稱、狀態與 pane id</strong>。後台據此組成通知(標題是 workspace 名稱，內文固定是「An agent needs you.」)交給 Apple Push Notification service(APNs)送到你的裝置。這些內容只在轉送當下處理，<strong>後台不保存</strong>;對話內容不會經過後台或 APNs。關閉推播或刪除主機時，App 會撤銷配對並移除主機上的配對檔。</p>
+
+    <h2>6. 主機同步(Purrdr Plus)</h2>
+    <p>開啟主機同步後，後台保存你每台主機的：名稱、位址與埠、使用者名稱、連線方式(Tailscale SSH／OpenSSH)、host key 指紋與修改時間;刪除的主機只留 ID 與刪除時間，避免其他裝置把它同步回來。</p>
+    <ul>
+      <li><strong>不上傳</strong>:私鑰、密碼、passphrase、登入方式、herdr 路徑與 session、作業系統。後台只接受上面列的欄位，多一個欄位整個請求都會被拒絕。</li>
+      <li>傳輸使用 HTTPS(TLS),資料庫由 Cloudflare 靜態加密;<strong>不是端對端加密</strong>,後台可以讀取這些欄位(用來合併不同裝置的修改)。</li>
+      <li>訂閱到期後資料保留(續訂後可接著用),刪除會員時一併刪除。</li>
+    </ul>
+
+    <h2>7. 我們不做的事</h2>
+    <ul>
+      <li>沒有廣告，沒有第三方分析、當機回報或追蹤 SDK;不使用廣告識別碼(IDFA),不跨 App 或網站追蹤你。</li>
+      <li>不販售、不出租、不分享你的資料給資料仲介。</li>
+      <li>「拷貝診斷資訊」只在你按下時複製到剪貼簿，內容是 App 版本、iOS 版本、裝置種類、主機數量與 herdr 版本，不含主機名稱、位址、使用者名稱或對話;要不要寄給我們由你決定。</li>
+    </ul>
+
+    <h2>8. 服務提供者</h2>
+    <table>
+      <thead><tr><th>對象</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>Cloudflare(Workers、D1)</td><td>代管後台與資料庫。Cloudflare 會在提供服務時處理請求的網路資訊(例如 IP 位址);後台開啟 Cloudflare 的執行紀錄(Workers Logs)用於除錯，依 Cloudflare 的設定短期保留。</td></tr>
+        <tr><td>Apple</td><td>Sign in with Apple、App 內購買與訂閱通知、推播(APNs)。</td></tr>
+        <tr><td>Google</td><td>Google 登入(只有你選擇用 Google 登入時)。</td></tr>
+      </tbody>
+    </table>
+    <p>除了法律要求，我們不會把你的資料提供給其他人。</p>
+
+    <h2>9. Demo 主機</h2>
+    <p>App 內建的 Demo 主機完全在 App 內模擬，不連任何電腦或伺服器;裡面的範例對話是我們寫的，你在 Demo 輸入的內容只在記憶體裡，關掉 App 就消失。</p>
+
+    <h2>10. 刪除與控制你的資料</h2>
+    <ul>
+      <li><strong>刪除會員</strong>:App 的「⋯ → Member → Delete Member…」。我們會先向 Apple 撤銷 Sign in with Apple 授權，再立即刪除會員、登入方式、權杖、訂閱紀錄、推播配對與同步的主機。刪除會員<strong>不會</strong>取消 Apple 的訂閱，請到「設定 › Apple 帳號 › 訂閱」取消。</li>
+      <li><strong>只關掉某項功能</strong>:關閉推播會撤銷該主機的配對;解除某個登入方式的連結會刪除那個登入方式的資料。</li>
+      <li><strong>裝置上的資料</strong>:在 App 裡刪除主機會一併刪除它的設定與祕密;刪除 App 會移除 UserDefaults 與快取(Keychain 項目依 iOS 行為可能保留到裝置重置)。</li>
+      <li>也可以寫信給我們要求查詢或刪除資料。</li>
+    </ul>
+
+    <h2>11. 兒童</h2>
+    <p>Purrdr 是給開發者的工具，不以 13 歲以下兒童為對象，我們也不會在知情下蒐集兒童的資料。</p>
+
+    <h2>12. 政策變更</h2>
+    <p>資料處理方式改變時，我們會更新這一頁與生效日期;重大變更會在 App 更新說明中告知。</p>
+
+    <h2>13. 聯絡我們</h2>
+    <p>Email:<a href="mailto:lean.lean@gmail.com">lean.lean@gmail.com</a></p>
+  </section>
+
+  <section lang="en" id="en">
+    <h1>Privacy Policy</h1>
+    <p class="meta">Applies to the iOS/iPadOS app “Purrdr: Agent Chat” and its backend service. Effective November 16, 2026.</p>
+
+    <div class="card">
+      <p><strong>In short</strong></p>
+      <ul>
+        <li>Chat, the terminal, and images you send to an agent go <strong>directly</strong> from the app to your own computer over SSH — <strong>never through our servers</strong>.</li>
+        <li>Chat and the terminal never need an account. You only sign in to subscribe to Purrdr Plus (notifications and host sync).</li>
+        <li>No ads, no analytics or tracking SDKs, no tracking across apps or websites, and we never sell data.</li>
+        <li>SSH private keys, passwords, and passphrases stay on your device and are never uploaded.</li>
+        <li>You can delete your member account in the app at any time; its data is deleted from our server right away.</li>
+      </ul>
+    </div>
+
+    <h2>1. Data that stays on your device</h2>
+    <p>The following is stored only on your device and is never available to us:</p>
+    <ul>
+      <li><strong>Host settings</strong> (name, address and port, user name, connection method, operating system, herdr path and session, host key fingerprint): stored in the iOS Keychain as “when unlocked, this device only”, not synced through iCloud Keychain.</li>
+      <li><strong>Host secrets</strong> (OpenSSH password, or a private key you import and its passphrase): a separate Keychain item, also this-device-only, never uploaded — including by host sync.</li>
+      <li><strong>Device SSH key</strong>: Purrdr creates a P-256 key in the device’s Secure Enclave; the private key can’t leave the Secure Enclave, and the Keychain only holds its encrypted reference (this device only). The public key, with the comment <code>purrdr@iPhone</code> or <code>purrdr@iPad</code>, is what you add to your host’s <code>authorized_keys</code>.</li>
+      <li><strong>Member sign-in token</strong>: after you sign in, the refresh token is kept in the Keychain (after first unlock, this device only).</li>
+      <li><strong>App preferences and state</strong> (the app’s UserDefaults): selected host, list view mode, chat preferences, Return key and haptics settings, whether you’ve seen the welcome screen, review prompt counts, your consent to host writes, push pairing records (a random device code, SHA-256 hashes of pairing keys, the last APNs device token), and host sync bookkeeping.</li>
+      <li><strong>Conversation cache</strong>: kept in memory only and gone when the app quits.</li>
+    </ul>
+
+    <h2>2. Data sent directly between your device and your computer</h2>
+    <p>The app connects directly to the hosts you set up over SSH (Tailscale SSH or OpenSSH, both encrypted), runs herdr commands, and reads conversation logs. The following travels only between your device and your computer — <strong>it never passes through our servers and we can’t see it</strong>:</p>
+    <ul>
+      <li>Agent conversations, the prompts and slash commands you send, and your answers to agent questions.</li>
+      <li>Terminal input and output.</li>
+      <li>Photos you take or pick to send to an agent, uploaded to <code>~/.purrdr/uploads/</code> on the host. Picking uses the system photo picker, so the app never needs access to your whole library; the camera is used only when you take a photo.</li>
+      <li>Files the app writes to your host only after you agree (such as the notification plugin, a theme reference file, or Claude usage settings), each of which you can undo in the app.</li>
+    </ul>
+    <p>With Tailscale SSH, the connection runs over your own Tailscale network (tailnet) under Tailscale’s privacy policy. If your host asks you to re-authenticate, the app opens Tailscale’s check page in your browser.</p>
+
+    <h2>3. Member account (only if you sign in)</h2>
+    <p>Purrdr Plus needs a member account, created with <strong>Sign in with Apple</strong> or <strong>Google</strong>. When you sign in:</p>
+    <ul>
+      <li>Sign in with Apple requests only your email (not your name). If you choose Hide My Email, we receive an Apple relay address.</li>
+      <li>Google sign-in uses the system browser (OAuth 2.0 with PKCE) and requests only <code>openid email</code>.</li>
+      <li>The app sends the ID token issued by Apple or Google to our backend for verification.</li>
+    </ul>
+    <p>Our backend keeps:</p>
+    <ul>
+      <li>A random member ID and when it was created.</li>
+      <li>For each sign-in method: the account identifier (Apple or Google “subject”), the email (possibly an Apple relay address, or none), and when it was linked. The email is only shown in the app so you know which account you used; we don’t send marketing email.</li>
+      <li>The Sign in with Apple refresh token, used only to revoke Apple’s authorization when you delete your member account (as Apple requires).</li>
+      <li>A hash (never the original) of the refresh tokens we issue; each lasts 90 days and is replaced every time it’s used.</li>
+    </ul>
+
+    <h2>4. Subscriptions (Purrdr Plus)</h2>
+    <p>Apple handles payment; we never see your payment details. When you subscribe, the app sets your member ID as the <code>appAccountToken</code> and sends the App Store–signed transaction to our backend for verification. Apple also notifies our backend of renewals, expirations, and refunds through App Store Server Notifications. The backend keeps:</p>
+    <ul>
+      <li>The store (App Store), the App Store original transaction ID and current transaction ID, the environment (Production or Sandbox), and the product ID.</li>
+      <li>Purchase date, expiration date, refund or revocation date, auto-renew status, and billing grace period end.</li>
+    </ul>
+    <p>We use this only to decide whether you have Purrdr Plus.</p>
+
+    <h2>5. Notifications (Purrdr Plus)</h2>
+    <p>When you turn on notifications for a host:</p>
+    <ul>
+      <li>The app asks iOS for notification permission and gets an APNs device token.</li>
+      <li>The app makes a random pairing key. <strong>The key itself is written only to your host</strong> (<code>~/.purrdr/push-&lt;device code&gt;/pairing</code>), and the app installs a small herdr plugin on the host over SSH (from the public repository <code>raychiutw/purrdr-host-plugin</code>, downloaded by herdr on your host).</li>
+      <li>Our backend keeps the SHA-256 hash of the pairing key, the APNs device token, the platform (APNs) and environment (production or sandbox), when it was created and updated, and a per-minute rate-limit counter for that key.</li>
+    </ul>
+    <p>When an agent needs you, the host plugin sends only the <strong>workspace name, the status, and the pane ID</strong>. Our backend builds the notification (the title is the workspace name; the text is always “An agent needs you.”) and hands it to the Apple Push Notification service (APNs) for delivery. This is processed only while it’s being relayed and <strong>is not stored</strong>; conversation content never goes through our backend or APNs. When you turn notifications off or remove the host, the app revokes the pairing and removes the pairing file from the host.</p>
+
+    <h2>6. Host sync (Purrdr Plus)</h2>
+    <p>With host sync on, our backend keeps, for each host: its name, address and port, user name, connection method (Tailscale SSH or OpenSSH), host key fingerprint, and when it was modified. For a deleted host it keeps only the ID and deletion time, so other devices don’t sync it back.</p>
+    <ul>
+      <li><strong>Never uploaded</strong>: private keys, passwords, passphrases, the sign-in method, herdr path and session, and operating system. The backend accepts only the fields listed above and rejects the whole request if anything else is included.</li>
+      <li>Data travels over HTTPS (TLS) and the database is encrypted at rest by Cloudflare. It is <strong>not end-to-end encrypted</strong>: the backend can read these fields (it needs to, to merge changes from different devices).</li>
+      <li>The data is kept if your subscription lapses (so you can pick up where you left off) and deleted with your member account.</li>
+    </ul>
+
+    <h2>7. What we don’t do</h2>
+    <ul>
+      <li>No ads and no third-party analytics, crash reporting, or tracking SDKs. We don’t use the advertising identifier (IDFA) or track you across apps or websites.</li>
+      <li>We don’t sell, rent, or share your data with data brokers.</li>
+      <li>“Copy Diagnostics” copies to your clipboard only when you tap it: the app version, iOS version, device type, number of hosts, and herdr version — never host names, addresses, user names, or conversations. Whether to send it to us is up to you.</li>
+    </ul>
+
+    <h2>8. Service providers</h2>
+    <table>
+      <thead><tr><th>Provider</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Cloudflare (Workers, D1)</td><td>Hosts our backend and database. Cloudflare processes network information such as IP addresses to deliver requests; our backend has Cloudflare’s execution logs (Workers Logs) on for debugging, kept briefly according to Cloudflare’s settings.</td></tr>
+        <tr><td>Apple</td><td>Sign in with Apple, in-app purchases and subscription notifications, and notifications (APNs).</td></tr>
+        <tr><td>Google</td><td>Google sign-in (only if you choose it).</td></tr>
+      </tbody>
+    </table>
+    <p>We don’t give your data to anyone else unless the law requires it.</p>
+
+    <h2>9. The Demo host</h2>
+    <p>The built-in Demo host is simulated entirely inside the app and doesn’t connect to any computer or server. Its sample conversations were written by us, and anything you type there stays in memory and is gone when the app quits.</p>
+
+    <h2>10. Deleting and controlling your data</h2>
+    <ul>
+      <li><strong>Delete your member account</strong>: in the app, “⋯ → Member → Delete Member…”. We first revoke Sign in with Apple with Apple, then immediately delete the member, its sign-in methods, tokens, subscription records, push pairings, and synced hosts. Deleting your member account does <strong>not</strong> cancel an Apple subscription — cancel it in Settings › Apple Account › Subscriptions.</li>
+      <li><strong>Turn off a single feature</strong>: turning off notifications revokes that host’s pairing; unlinking a sign-in method deletes that method’s data.</li>
+      <li><strong>On your device</strong>: removing a host in the app deletes its settings and secrets; deleting the app removes its UserDefaults and caches (iOS may keep Keychain items until the device is reset).</li>
+      <li>You can also email us to ask what we hold or to have it deleted.</li>
+    </ul>
+
+    <h2>11. Children</h2>
+    <p>Purrdr is a tool for developers. It isn’t directed to children under 13, and we don’t knowingly collect children’s data.</p>
+
+    <h2>12. Changes</h2>
+    <p>If how we handle data changes, we’ll update this page and its effective date, and call out significant changes in the app’s release notes.</p>
+
+    <h2>13. Contact</h2>
+    <p>Email: <a href="mailto:lean.lean@gmail.com">lean.lean@gmail.com</a></p>
+  </section>
+</main>
+<footer class="site">© 2026 Purrdr</footer>
+</body>
+</html>
