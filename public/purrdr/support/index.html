@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支援 Support — Purrdr</title>
+<meta name="description" content="Purrdr 常見問題與聯絡方式。Purrdr FAQ and contact.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <a class="brand" href="../">Purrdr</a>
+  <nav>
+    <a href="./">支援 Support</a>
+    <a href="../privacy/">隱私權政策 Privacy</a>
+  </nav>
+</header>
+<main>
+  <p class="lang-switch"><a href="#zh">繁體中文</a> · <a href="#en">English</a></p>
+
+  <section lang="zh-Hant" id="zh">
+    <h1>支援</h1>
+    <p>找不到答案的話，請寫信到 <a href="mailto:lean.lean@gmail.com">lean.lean@gmail.com</a>。方便的話附上 App 的「⋯ → Settings → Copy Diagnostics」(只有 App 與 iOS 版本、裝置種類、主機數量與 herdr 版本，不含主機名稱、位址或對話)。</p>
+
+    <h2>需要準備什麼?</h2>
+    <ul>
+      <li>iOS 26 或 iPadOS 26 以上的 iPhone 或 iPad。</li>
+      <li>一台跑著 <a href="https://herdr.dev">herdr</a> 0.9.5 以上的電腦(macOS、Linux 或 Windows),你的 coding agent 在 herdr 裡執行。</li>
+      <li>從 iPhone／iPad 連得到那台電腦的 SSH:Tailscale SSH(不用金鑰或密碼)或 OpenSSH。</li>
+      <li>推播通知是選用的，需要 Purrdr Plus。聊天與終端機不需要帳號也不需要訂閱。</li>
+    </ul>
+    <p>還沒準備好也沒關係：App 第一次開啟時選「Try the Demo」,Demo 主機有範例對話，可以先試遍每個畫面。</p>
+
+    <h2>用 Tailscale SSH 連線</h2>
+    <ol>
+      <li>電腦與 iPhone／iPad 都安裝 Tailscale,登入同一個 tailnet。</li>
+      <li>在電腦上開啟 Tailscale SSH(例如 <code>tailscale set --ssh</code>),並確認 tailnet 的 SSH 規則允許你的裝置以要登入的使用者連線。依 Tailscale 文件，Tailscale SSH 伺服器支援 Linux 與 macOS(macOS 需使用開源版 <code>tailscaled</code>);Windows 請改用 OpenSSH。</li>
+      <li>在 Purrdr 的「⋯ → Hosts → +」新增主機，連線方式選 Tailscale SSH,填入主機的 Tailscale 名稱或 IP 與使用者名稱。</li>
+      <li>第一次連線時核對並確認 host key 指紋。之後指紋改變，Purrdr 會停下來請你確認。</li>
+    </ol>
+    <p>若 tailnet 的 SSH 規則設為 check 模式，Purrdr 會請你在瀏覽器完成 Tailscale 的重新驗證後繼續。</p>
+
+    <h2>用 OpenSSH 連線</h2>
+    <ol>
+      <li>確認電腦的 SSH 伺服器已開啟(macOS:系統設定 › 一般 › 共享 › 遠端登入;Linux:<code>sshd</code>;Windows:OpenSSH Server)。</li>
+      <li>新增主機時連線方式選 OpenSSH,填位址、埠與使用者名稱。</li>
+      <li>驗證方式三選一：
+        <ul>
+          <li><strong>這支裝置的金鑰</strong>(建議):Purrdr 在裝置的 Secure Enclave 產生金鑰，畫面上會給你一行指令，把公鑰加到電腦的 <code>~/.ssh/authorized_keys</code>(Windows 管理員帳號是 <code>administrators_authorized_keys</code>,畫面上有 PowerShell 指令)。</li>
+          <li>匯入你自己的 OpenSSH 私鑰(可含 passphrase)。</li>
+          <li>密碼。</li>
+        </ul>
+      </li>
+      <li>第一次連線時核對並確認 host key 指紋。</li>
+    </ol>
+    <p>私鑰、密碼與 passphrase 只存在這支裝置的 Keychain,不會上傳，也不會被主機同步帶到其他裝置。</p>
+
+    <h2>Windows 主機支援到哪裡?</h2>
+    <ul>
+      <li>經 OpenSSH 連線，App 以 PowerShell 執行指令，不需要 Git Bash。</li>
+      <li>可以用：Agent 列表、聊天、回答提問、送 prompt 與圖片、Pane 終端機、資料夾瀏覽。</li>
+      <li>還不支援：推播通知的設定，以及主題、Claude 用量、Codex 啟動器這類會寫入主機的功能(會顯示「This isn’t available on Windows hosts yet.」)。</li>
+      <li>在 App 裡更新 herdr 後，Windows 沒有不中斷的接手，請在電腦上重新啟動 herdr 再測試連線。</li>
+    </ul>
+
+    <h2>推播通知怎麼運作?要裝什麼?</h2>
+    <ul>
+      <li>需要 Purrdr Plus,且主機是 macOS 或 Linux(需要 <code>sh</code> 與 <code>curl</code>)。</li>
+      <li>在「⋯ → Settings」為選取中的主機開啟通知。經你同意後，Purrdr 會在主機執行 <code>herdr plugin install</code> 安裝一個小型 herdr 外掛(公開原始碼:<code>raychiutw/purrdr-host-plugin</code>),並在 <code>~/.purrdr/</code> 寫入這支裝置的配對檔。</li>
+      <li>Agent 需要你時，外掛只送出 workspace 名稱、狀態與 pane id 給 Purrdr 的伺服器，再由 Apple 推播到你的裝置;對話內容不會送出。點通知會直接打開那個聊天。</li>
+      <li>關掉通知或刪除主機時，Purrdr 會移除這支裝置的配對;最後一支裝置關掉時，也會移除 Purrdr 安裝的外掛。</li>
+      <li>Demo 主機不能推播，請先選你自己的主機。</li>
+    </ul>
+
+    <h2>訂閱 Purrdr Plus、管理與取消</h2>
+    <ul>
+      <li>Purrdr Plus 月繳或年繳，新訂閱者各有 2 週免費試用。內容是 Agent 需要你時的推播，以及在你的裝置之間同步主機清單。</li>
+      <li>訂閱前要先以 Sign in with Apple 或 Google 登入會員(「⋯ → Member」),訂閱屬於這個會員。</li>
+      <li>管理或取消：iOS「設定 › Apple 帳號 › 訂閱」,或 App 的「⋯ → Purrdr Plus → Manage Subscription」(訂閱中才會出現)。</li>
+      <li>刪除會員不會取消 Apple 的訂閱，請另外取消。</li>
+    </ul>
+
+    <h2>恢復購買</h2>
+    <ul>
+      <li>在新裝置或重新安裝後，先登入同一個會員，再到「⋯ → Purrdr Plus → Restore Purchases」。</li>
+      <li>一個 App Store 訂閱只屬於一個 Purrdr 會員。若看到「這個 Apple 帳號的訂閱已屬於另一個會員」,請改用當初訂閱時的登入方式，或在 Member 頁把兩種登入方式連結到同一個會員。</li>
+    </ul>
+
+    <h2>兌換 Offer Code(優惠代碼)</h2>
+    <ul>
+      <li>在 App 裡：登入會員後，到「⋯ → Purrdr Plus → Redeem Code」輸入代碼。</li>
+      <li>從兌換連結或 App Store 兌換：兌換後打開 Purrdr、登入會員，訂閱會自動綁定;沒有出現的話按「Restore Purchases」。</li>
+      <li>目前的優惠代碼只適用於從沒訂閱過 Purrdr Plus 的 Apple 帳號。</li>
+    </ul>
+
+    <h2>刪除會員與資料</h2>
+    <p>「⋯ → Member → Delete Member…」會立即刪除會員、推播配對與同步的主機。詳見<a href="../privacy/">隱私權政策</a>。</p>
+
+    <h2>聯絡我們</h2>
+    <p>Email:<a href="mailto:lean.lean@gmail.com">lean.lean@gmail.com</a></p>
+  </section>
+
+  <section lang="en" id="en">
+    <h1>Support</h1>
+    <p>Can’t find your answer? Email <a href="mailto:lean.lean@gmail.com">lean.lean@gmail.com</a>. If you can, paste in “⋯ → Settings → Copy Diagnostics” (just the app and iOS versions, device type, number of hosts, and herdr version — no host names, addresses, or conversations).</p>
+
+    <h2>What do I need?</h2>
+    <ul>
+      <li>An iPhone or iPad on iOS or iPadOS 26 or later.</li>
+      <li>A computer (macOS, Linux, or Windows) running <a href="https://herdr.dev">herdr</a> 0.9.5 or later, with your coding agents running in herdr.</li>
+      <li>SSH access from your iPhone or iPad to that computer: Tailscale SSH (no keys or passwords) or OpenSSH.</li>
+      <li>Notifications are optional and need Purrdr Plus. Chat and the terminal need no account or subscription.</li>
+    </ul>
+    <p>Not ready yet? Tap “Try the Demo” the first time you open the app — the Demo host has sample conversations, so you can try every screen first.</p>
+
+    <h2>Connecting with Tailscale SSH</h2>
+    <ol>
+      <li>Install Tailscale on the computer and on your iPhone or iPad, signed in to the same tailnet.</li>
+      <li>Turn on Tailscale SSH on the computer (for example <code>tailscale set --ssh</code>) and make sure your tailnet’s SSH rules let your device log in as the user you want. According to Tailscale’s documentation, the Tailscale SSH server runs on Linux and macOS (on macOS, the open-source <code>tailscaled</code> variant); on Windows, use OpenSSH instead.</li>
+      <li>In Purrdr, go to “⋯ → Hosts → +”, choose Tailscale SSH, and enter the host’s Tailscale name or IP and your user name.</li>
+      <li>On the first connection, check and confirm the host key fingerprint. If it ever changes, Purrdr stops and asks you.</li>
+    </ol>
+    <p>If your tailnet’s SSH rule uses check mode, Purrdr asks you to finish Tailscale’s re-authentication in the browser, then continues.</p>
+
+    <h2>Connecting with OpenSSH</h2>
+    <ol>
+      <li>Make sure the computer’s SSH server is on (macOS: System Settings › General › Sharing › Remote Login; Linux: <code>sshd</code>; Windows: OpenSSH Server).</li>
+      <li>When adding the host, choose OpenSSH and enter the address, port, and user name.</li>
+      <li>Pick one way to sign in:
+        <ul>
+          <li><strong>This device’s key</strong> (recommended): Purrdr creates a key in the device’s Secure Enclave and shows a command that adds the public key to <code>~/.ssh/authorized_keys</code> on the computer (for a Windows administrator, <code>administrators_authorized_keys</code>; the PowerShell command is shown).</li>
+          <li>Import your own OpenSSH private key (with its passphrase, if any).</li>
+          <li>A password.</li>
+        </ul>
+      </li>
+      <li>On the first connection, check and confirm the host key fingerprint.</li>
+    </ol>
+    <p>Private keys, passwords, and passphrases stay in this device’s Keychain. They’re never uploaded and never carried to other devices by host sync.</p>
+
+    <h2>How well are Windows hosts supported?</h2>
+    <ul>
+      <li>Connect over OpenSSH; Purrdr runs commands with PowerShell, so Git Bash isn’t needed.</li>
+      <li>Works: the agent list, chat, answering questions, sending prompts and images, pane terminals, and browsing folders.</li>
+      <li>Not yet: setting up notifications, and features that write to the host such as themes, Claude usage, and the Codex launcher (you’ll see “This isn’t available on Windows hosts yet.”).</li>
+      <li>After updating herdr from the app, Windows has no seamless handoff — restart herdr on the computer, then test the connection again.</li>
+    </ul>
+
+    <h2>How do notifications work? What gets installed?</h2>
+    <ul>
+      <li>You need Purrdr Plus and a macOS or Linux host (with <code>sh</code> and <code>curl</code>).</li>
+      <li>Turn on notifications for the selected host in “⋯ → Settings”. With your consent, Purrdr runs <code>herdr plugin install</code> on the host to add a small herdr plugin (open source: <code>raychiutw/purrdr-host-plugin</code>) and writes this device’s pairing file under <code>~/.purrdr/</code>.</li>
+      <li>When an agent needs you, the plugin sends only the workspace name, the status, and the pane ID to Purrdr’s server, and Apple delivers the notification to your device. Conversation content is never sent. Tapping the notification opens that chat.</li>
+      <li>Turning notifications off or removing the host removes this device’s pairing; when the last device turns them off, the plugin Purrdr installed is removed too.</li>
+      <li>The Demo host can’t send notifications — choose your own host first.</li>
+    </ul>
+
+    <h2>Subscribing to Purrdr Plus, managing, and canceling</h2>
+    <ul>
+      <li>Purrdr Plus is monthly or yearly, each with a 2-week free trial for new subscribers. It adds notifications when an agent needs you and your host list synced across your devices.</li>
+      <li>Before subscribing, sign in to a member account with Sign in with Apple or Google (“⋯ → Member”). The subscription belongs to that member.</li>
+      <li>To manage or cancel: iOS Settings › Apple Account › Subscriptions, or “⋯ → Purrdr Plus → Manage Subscription” in the app (shown while you’re subscribed).</li>
+      <li>Deleting your member account doesn’t cancel an Apple subscription; cancel it separately.</li>
+    </ul>
+
+    <h2>Restoring purchases</h2>
+    <ul>
+      <li>On a new device or after reinstalling, sign in to the same member first, then go to “⋯ → Purrdr Plus → Restore Purchases”.</li>
+      <li>An App Store subscription belongs to one Purrdr member. If you see that this Apple account’s subscription belongs to another member, sign in the way you did when you subscribed, or link both sign-in methods to the same member on the Member screen.</li>
+    </ul>
+
+    <h2>Redeeming an offer code</h2>
+    <ul>
+      <li>In the app: sign in, then go to “⋯ → Purrdr Plus → Redeem Code” and enter the code.</li>
+      <li>From a redemption link or the App Store: after redeeming, open Purrdr and sign in — the subscription attaches automatically. If it doesn’t show up, tap “Restore Purchases”.</li>
+      <li>Current offer codes are for Apple accounts that have never subscribed to Purrdr Plus.</li>
+    </ul>
+
+    <h2>Deleting your member account and data</h2>
+    <p>“⋯ → Member → Delete Member…” immediately deletes your member account, push pairings, and synced hosts. See the <a href="../privacy/">Privacy Policy</a>.</p>
+
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:lean.lean@gmail.com">lean.lean@gmail.com</a></p>
+  </section>
+</main>
+<footer class="site">© 2026 Purrdr</footer>
+</body>
+</html>
