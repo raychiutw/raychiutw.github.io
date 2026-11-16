@@ -47,13 +47,13 @@
       <li>驗證方式三選一：
         <ul>
           <li><strong>這支裝置的金鑰</strong>(建議):Purrdr 在裝置的 Secure Enclave 產生金鑰，畫面上會給你一行指令，把公鑰加到電腦的 <code>~/.ssh/authorized_keys</code>(Windows 管理員帳號是 <code>administrators_authorized_keys</code>,畫面上有 PowerShell 指令)。</li>
-          <li>匯入你自己的 OpenSSH 私鑰(可含 passphrase)。</li>
+          <li>匯入你自己的 OpenSSH 私鑰(ed25519 或 ECDSA)。不支援有 passphrase 的私鑰：先在電腦上執行 <code>ssh-keygen -p -N "" -f &lt;私鑰&gt;</code> 移除 passphrase 再匯入。</li>
           <li>密碼。</li>
         </ul>
       </li>
       <li>第一次連線時核對並確認 host key 指紋。</li>
     </ol>
-    <p>私鑰、密碼與 passphrase 只存在這支裝置的 Keychain,不會上傳，也不會被主機同步帶到其他裝置。</p>
+    <p>私鑰與密碼只存在這支裝置的 Keychain,不會上傳，也不會被主機同步帶到其他裝置。</p>
 
     <h2>Windows 主機支援到哪裡?</h2>
     <ul>
@@ -129,13 +129,13 @@
       <li>Pick one way to sign in:
         <ul>
           <li><strong>This device’s key</strong> (recommended): Purrdr creates a key in the device’s Secure Enclave and shows a command that adds the public key to <code>~/.ssh/authorized_keys</code> on the computer (for a Windows administrator, <code>administrators_authorized_keys</code>; the PowerShell command is shown).</li>
-          <li>Import your own OpenSSH private key (with its passphrase, if any).</li>
+          <li>Import your own OpenSSH private key (ed25519 or ECDSA). Keys protected by a passphrase aren’t supported: on the computer, run <code>ssh-keygen -p -N "" -f &lt;key file&gt;</code> to remove the passphrase, then import it.</li>
           <li>A password.</li>
         </ul>
       </li>
       <li>On the first connection, check and confirm the host key fingerprint.</li>
     </ol>
-    <p>Private keys, passwords, and passphrases stay in this device’s Keychain. They’re never uploaded and never carried to other devices by host sync.</p>
+    <p>Private keys and passwords stay in this device’s Keychain. They’re never uploaded and never carried to other devices by host sync.</p>
 
     <h2>How well are Windows hosts supported?</h2>
     <ul>
