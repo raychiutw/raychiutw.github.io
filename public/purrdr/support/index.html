@@ -66,7 +66,7 @@
     <h2>推播通知怎麼運作?要裝什麼?</h2>
     <ul>
       <li>需要 Purrdr Plus,且主機是 macOS 或 Linux(需要 <code>sh</code> 與 <code>curl</code>)。</li>
-      <li>在「⋯ → Settings」為選取中的主機開啟通知。經你同意後，Purrdr 會在主機執行 <code>herdr plugin install</code> 安裝一個小型 herdr 外掛(公開原始碼:<code>raychiutw/purrdr-host-plugin</code>),並在 <code>~/.purrdr/</code> 寫入這支裝置的配對檔。</li>
+      <li>在「⋯ → Settings」為選取中的主機開啟通知。經你同意後，Purrdr 會在主機執行 <code>herdr plugin install</code> 安裝一個小型 herdr 外掛(公開原始碼:<code>raychiutw/purrdr.host</code>),並在 <code>~/.purrdr/</code> 寫入這支裝置的配對檔。</li>
       <li>Agent 需要你時，外掛只送出 workspace 名稱、狀態與 pane id 給 Purrdr 的伺服器，再由 Apple 推播到你的裝置;對話內容不會送出。點通知會直接打開那個聊天。</li>
       <li>關掉通知或刪除主機時，Purrdr 會移除這支裝置的配對;最後一支裝置關掉時，也會移除 Purrdr 安裝的外掛。</li>
       <li>Demo 主機不能推播，請先選你自己的主機。</li>
@@ -148,7 +148,7 @@
     <h2>How do notifications work? What gets installed?</h2>
     <ul>
       <li>You need Purrdr Plus and a macOS or Linux host (with <code>sh</code> and <code>curl</code>).</li>
-      <li>Turn on notifications for the selected host in “⋯ → Settings”. With your consent, Purrdr runs <code>herdr plugin install</code> on the host to add a small herdr plugin (open source: <code>raychiutw/purrdr-host-plugin</code>) and writes this device’s pairing file under <code>~/.purrdr/</code>.</li>
+      <li>Turn on notifications for the selected host in “⋯ → Settings”. With your consent, Purrdr runs <code>herdr plugin install</code> on the host to add a small herdr plugin (open source: <code>raychiutw/purrdr.host</code>) and writes this device’s pairing file under <code>~/.purrdr/</code>.</li>
       <li>When an agent needs you, the plugin sends only the workspace name, the status, and the pane ID to Purrdr’s server, and Apple delivers the notification to your device. Conversation content is never sent. Tapping the notification opens that chat.</li>
       <li>Turning notifications off or removing the host removes this device’s pairing; when the last device turns them off, the plugin Purrdr installed is removed too.</li>
       <li>The Demo host can’t send notifications — choose your own host first.</li>

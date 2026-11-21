@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主機服務 Host Service — Purrdr</title>
+<meta name="description" content="安裝、配對、更新與解除安裝 Purrdr 主機服務(HTTPS 連線方式)。Install, pair, update, and uninstall the Purrdr host service.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site">
+  <a class="brand" href="../">Purrdr</a>
+  <nav>
+    <a href="../support/">支援 Support</a>
+    <a href="../privacy/">隱私權政策 Privacy</a>
+  </nav>
+</header>
+<main>
+  <p class="lang-switch"><a href="#zh">繁體中文</a> · <a href="#en">English</a></p>
+
+  <section lang="zh-Hant" id="zh">
+    <h1>Purrdr 主機服務</h1>
+    <p>主機服務讓 Purrdr 以 <strong>HTTPS</strong> 連到你的電腦，不需要在電腦上開 SSH。它只在電腦本機(127.0.0.1)接受連線，由 Tailscale 的 <code>tailscale serve</code> 提供只在你的 tailnet 內連得到的 HTTPS 位址;憑證與加密都由 Tailscale 處理，不經過 Purrdr 的伺服器。</p>
+
+    <h2>需要準備什麼?</h2>
+    <ul>
+      <li>macOS(Apple 晶片或 Intel)、Linux(x86_64 或 ARM64)或 Windows(x86_64)。</li>
+      <li>電腦上執行著 <a href="https://herdr.dev">herdr</a> 0.9.5 以上。</li>
+      <li>電腦與 iPhone／iPad 都安裝 Tailscale 並登入同一個 tailnet。</li>
+      <li>在 <a href="https://login.tailscale.com/admin/dns">Tailscale 管理主控台的 DNS 頁</a>開啟 <strong>MagicDNS</strong> 與 <strong>HTTPS Certificates</strong>。</li>
+    </ul>
+    <p>開啟 HTTPS Certificates 後，電腦的名稱(例如 <code>studio.tail1234.ts.net</code>)會寫進公開的 Certificate Transparency 紀錄。名稱含有不想公開的資訊時，先在 Tailscale 改名。安裝程式也會提醒並徵求你同意。</p>
+
+    <h2>安裝</h2>
+    <p>在電腦上開終端機，執行一行指令(不需要 sudo 或系統管理員):</p>
+    <h3>macOS、Linux</h3>
+    <pre><code>curl -fsSL https://github.com/raychiutw/purrdr.host/releases/latest/download/install.sh | sh</code></pre>
+    <h3>Windows(PowerShell)</h3>
+    <pre><code>irm https://github.com/raychiutw/purrdr.host/releases/latest/download/install.ps1 | iex</code></pre>
+    <p>指令會下載這台電腦適用的版本，以 SHA-256 檢查碼驗證(不符就停止、不留下檔案),再執行 <code>purrdr-host-service install</code>:檢查 Tailscale 設定、把程式放到 <code>~/.purrdr/host-service/</code>、設定 <code>tailscale serve</code>,並在登入後自動啟動(macOS 是 LaunchAgent,Linux 是 systemd user service,Windows 是登入時執行)。0.6.0 起也會把 <code>purrdr-host-service</code> 加進使用者的 PATH:裝完<strong>重開終端機</strong>就能直接打 <code>purrdr-host-service</code>(不想改 PATH 時安裝加 <code>--no-path</code>)。</p>
+    <p>macOS 版以 Apple Developer ID 簽章。Windows 版沒有程式碼簽章，Windows 可能顯示 SmartScreen 警告。</p>
+    <p>要指定埠或 herdr 的具名 session:macOS／Linux 用 <code>curl -fsSL …/install.sh | sh -s -- --port 47820 --session work</code>;Windows 用 <code>&amp; ([scriptblock]::Create((irm …/install.ps1))) --port 47820 --session work</code>。要安裝特定版本，先設環境變數 <code>PURRDR_HOST_SERVICE_VERSION</code>(例如 <code>0.1.0</code>)。</p>
+    <h3>與其他 tailscale serve 服務並存</h3>
+    <p>主機服務預設使用 HTTPS 443。如果這台電腦的 443 已經被其他工具的 <code>tailscale serve</code> 使用，安裝程式不會更動它：互動安裝時會詢問是否改用第一個可用的埠(依序 8443、10000),加 <code>--yes</code> 時直接改用並印出最後的 HTTPS 位址。也可以自己指定埠：macOS／Linux 用 <code>curl -fsSL …/install.sh | sh -s -- --https-port 8443</code>;Windows 用 <code>&amp; ([scriptblock]::Create((irm …/install.ps1))) --https-port 8443</code>。位址會帶上埠號(例如 <code>https://my-mac.tailnet.ts.net:8443</code>),配對的 QR code 與在 Purrdr 輸入的位址都要包含它。之後再執行安裝指令(更新)會沿用同一個埠，解除安裝只關掉主機服務自己的埠。</p>
+    <p>安裝失敗時，訊息會說明發生什麼與原因，最後一行 <code>Next:</code> 是下一步要執行的完整指令。</p>
+    <p>也可以從 <a href="https://github.com/raychiutw/purrdr.host/releases">GitHub Releases</a> 手動下載壓縮檔(附 <code>SHA256SUMS</code>),解壓後執行 <code>purrdr-host-service install</code>。</p>
+
+    <h2>配對 iPhone／iPad</h2>
+    <p>0.10.0 起可以打短指令 <code>purrdr</code>(<code>purrdr help</code> 列出所有指令)。更舊的版本請把下面的 <code>purrdr</code> 換成 <code>purrdr-host-service</code>;自動更新到 0.10.0 的主機在服務重新啟動後就有 <code>purrdr</code>。</p>
+    <ol>
+      <li>在電腦上執行 <code>purrdr pair</code>。0.6.0 以前的安裝(或加了 <code>--no-path</code>)不在 PATH,要用完整路徑:macOS／Linux 是 <code>~/.purrdr/host-service/bin/purrdr-host-service pair</code>,Windows PowerShell 是 <code>&amp; &quot;$HOME\.purrdr\host-service\bin\purrdr-host-service.exe&quot; pair</code>。畫面會顯示 QR code、HTTPS 位址與一次性配對碼。</li>
+      <li>用 iPhone 的「相機」App 掃 QR code,或在 Purrdr 的「⋯ → Hosts → +」選 HTTPS,輸入位址與配對碼。</li>
+      <li>只想讓這支裝置看、不能操作：改用 <code>purrdr pair --read-only</code>。</li>
+    </ol>
+    <p>列出已配對的裝置：<code>purrdr devices</code>;撤銷一支裝置：<code>purrdr revoke &lt;裝置 ID&gt;</code>。不在 PATH 時同樣用完整路徑，例如 Windows 的 <code>&amp; &quot;$HOME\.purrdr\host-service\bin\purrdr-host-service.exe&quot; devices</code>。在 Purrdr 刪除這台主機時，也會撤銷這支裝置。</p>
+
+    <h2>更新</h2>
+    <p>主機服務預設會自動更新：背景服務啟動後幾分鐘先檢查一次，之後每天檢查最新版本;有新版就下載、以 SHA-256 檢查碼驗證(macOS 另驗 Developer ID 簽章)、替換並重新啟動，新版起不來會自動退回原版本。設定、HTTPS 埠與已配對的裝置都會保留。</p>
+    <ul>
+      <li>查看版本：<code>purrdr version</code>(已安裝與最新版本、自動更新開關、上次檢查的時間與結果)。</li>
+      <li>只檢查有沒有新版：<code>purrdr update --check</code>。</li>
+      <li>立刻更新：<code>purrdr update</code>(加 <code>--yes</code> 不詢問)。</li>
+      <li>關閉自動更新：<code>purrdr auto-update off</code>(<code>on</code> 再打開);安裝時也可以加 <code>--no-auto-update</code>,例如 macOS／Linux 用 <code>curl -fsSL …/install.sh | sh -s -- --no-auto-update</code>,Windows 用 <code>&amp; ([scriptblock]::Create((irm …/install.ps1))) --no-auto-update</code>。</li>
+    </ul>
+    <p>0.6.0 起安裝後重開終端機就能直接打上面的指令。0.6.0 以前的安裝(或加了 <code>--no-path</code>)要用完整路徑：macOS／Linux 例如 <code>~/.purrdr/host-service/bin/purrdr-host-service update</code>,Windows PowerShell 例如 <code>&amp; &quot;$HOME\.purrdr\host-service\bin\purrdr-host-service.exe&quot; update</code>。</p>
+    <p>0.4.x 以前的主機服務沒有更新功能：先重跑一次上面的安裝指令(會保留已配對的裝置),之後才會開始自動更新。Purrdr 發現主機服務比它知道的版本舊時，會在主機清單提示更新並依主機的版本附上指令。</p>
+
+    <h2>查看狀態與解除安裝</h2>
+    <ul>
+      <li>狀態：<code>purrdr status</code>(是否安裝、HTTPS 位址、herdr 是否在執行)。</li>
+      <li>解除安裝：<code>purrdr uninstall</code>。會停止自動啟動、移除 <code>tailscale serve</code> 設定與 <code>~/.purrdr/host-service/</code>,電腦回到安裝前的狀態。</li>
+    </ul>
+
+    <h2>透過 HTTPS 能做什麼?</h2>
+    <p>Agent 列表、聊天、送出 prompt、回答「需要你」與 Pane 終端機都可以用。登入 Shell 與檔案目前只有 SSH 連線方式提供。</p>
+  </section>
+
+  <section lang="en" id="en">
+    <h1>Purrdr Host Service</h1>
+    <p>The host service lets Purrdr connect to your computer over <strong>HTTPS</strong>, with no SSH server needed. It only accepts connections on the computer itself (127.0.0.1); Tailscale’s <code>tailscale serve</code> gives it an HTTPS address that’s reachable only inside your tailnet. Tailscale handles the certificate and encryption, and nothing goes through Purrdr’s servers.</p>
+
+    <h2>What do I need?</h2>
+    <ul>
+      <li>macOS (Apple silicon or Intel), Linux (x86_64 or ARM64), or Windows (x86_64).</li>
+      <li><a href="https://herdr.dev">herdr</a> 0.9.5 or later running on the computer.</li>
+      <li>Tailscale on both the computer and your iPhone or iPad, signed in to the same tailnet.</li>
+      <li><strong>MagicDNS</strong> and <strong>HTTPS Certificates</strong> turned on in the <a href="https://login.tailscale.com/admin/dns">DNS page of the Tailscale admin console</a>.</li>
+    </ul>
+    <p>With HTTPS Certificates on, the computer’s name (like <code>studio.tail1234.ts.net</code>) is written to public Certificate Transparency logs. If the name contains anything you’d rather keep private, rename the machine in Tailscale first. The installer reminds you and asks before continuing.</p>
+
+    <h2>Installing</h2>
+    <p>Open a terminal on the computer and run one command (no sudo or administrator needed):</p>
+    <h3>macOS, Linux</h3>
+    <pre><code>curl -fsSL https://github.com/raychiutw/purrdr.host/releases/latest/download/install.sh | sh</code></pre>
+    <h3>Windows (PowerShell)</h3>
+    <pre><code>irm https://github.com/raychiutw/purrdr.host/releases/latest/download/install.ps1 | iex</code></pre>
+    <p>The command downloads the build for this computer, verifies its SHA-256 checksum (stopping without leaving files behind if it doesn’t match), and runs <code>purrdr-host-service install</code>, which checks your Tailscale settings, puts the program in <code>~/.purrdr/host-service/</code>, sets up <code>tailscale serve</code>, and starts it when you sign in (a LaunchAgent on macOS, a systemd user service on Linux, a sign-in entry on Windows). From 0.6.0 it also adds <code>purrdr-host-service</code> to your user PATH: <strong>open a new terminal</strong> after installing and type <code>purrdr-host-service</code> directly (install with <code>--no-path</code> to leave PATH alone).</p>
+    <p>The macOS build is signed with an Apple Developer ID. The Windows build isn’t code-signed, so Windows may show a SmartScreen warning.</p>
+    <p>To choose a port or a named herdr session: on macOS and Linux, <code>curl -fsSL …/install.sh | sh -s -- --port 47820 --session work</code>; on Windows, <code>&amp; ([scriptblock]::Create((irm …/install.ps1))) --port 47820 --session work</code>. To install a specific version, set <code>PURRDR_HOST_SERVICE_VERSION</code> (for example <code>0.1.0</code>) first.</p>
+    <h3>Sharing tailscale serve with other services</h3>
+    <p>The host service uses HTTPS port 443 by default. If another tool on this computer already uses 443 with <code>tailscale serve</code>, the installer leaves it alone: it asks whether to use the first free port instead (8443, then 10000), and with <code>--yes</code> it switches right away and prints the final HTTPS address. You can also choose the port: on macOS and Linux, <code>curl -fsSL …/install.sh | sh -s -- --https-port 8443</code>; on Windows, <code>&amp; ([scriptblock]::Create((irm …/install.ps1))) --https-port 8443</code>. The address then includes the port (for example <code>https://my-mac.tailnet.ts.net:8443</code>), and so do the pairing QR code and any address you type in Purrdr. Running the install command again (updating) keeps the same port, and uninstalling only turns off the host service’s own port.</p>
+    <p>If the install fails, the message says what happened and why, and its last <code>Next:</code> line is the full command to run next.</p>
+    <p>You can also download an archive from <a href="https://github.com/raychiutw/purrdr.host/releases">GitHub Releases</a> (with <code>SHA256SUMS</code>), extract it, and run <code>purrdr-host-service install</code>.</p>
+
+    <h2>Pairing your iPhone or iPad</h2>
+    <p>From 0.10.0 you can type the short command <code>purrdr</code> (<code>purrdr help</code> lists every command). On older versions, replace <code>purrdr</code> below with <code>purrdr-host-service</code>; hosts that updated themselves to 0.10.0 get <code>purrdr</code> once the service restarts.</p>
+    <ol>
+      <li>On the computer, run <code>purrdr pair</code>. Installs older than 0.6.0 (or with <code>--no-path</code>) aren’t on PATH, so use the full path: <code>~/.purrdr/host-service/bin/purrdr-host-service pair</code> on macOS and Linux, or <code>&amp; &quot;$HOME\.purrdr\host-service\bin\purrdr-host-service.exe&quot; pair</code> in Windows PowerShell. It shows a QR code, the HTTPS address, and a one-time pairing code.</li>
+      <li>Scan the QR code with the iPhone Camera app, or in Purrdr go to “⋯ → Hosts → +”, choose HTTPS, and enter the address and pairing code.</li>
+      <li>For a device that can watch but not act, use <code>purrdr pair --read-only</code> instead.</li>
+    </ol>
+    <p>List paired devices with <code>purrdr devices</code>; revoke one with <code>purrdr revoke &lt;device ID&gt;</code>. If it isn’t on PATH, use the full path here too, for example <code>&amp; &quot;$HOME\.purrdr\host-service\bin\purrdr-host-service.exe&quot; devices</code> on Windows. Deleting the host in Purrdr also revokes that device.</p>
+
+    <h2>Updating</h2>
+    <p>The host service updates itself by default: a few minutes after it starts, and then every day, it checks for the latest version; when there is a newer one it downloads it, verifies its SHA-256 checksum (and the Developer ID signature on macOS), replaces itself, and restarts. If the new version doesn’t start, it goes back to the previous one. Settings, the HTTPS port, and paired devices are kept.</p>
+    <ul>
+      <li>Version: <code>purrdr version</code> (installed and latest version, whether auto update is on, and the last check and its result).</li>
+      <li>Only check for a newer version: <code>purrdr update --check</code>.</li>
+      <li>Update now: <code>purrdr update</code> (<code>--yes</code> skips the question).</li>
+      <li>Turn auto update off: <code>purrdr auto-update off</code> (<code>on</code> turns it back on). You can also install with <code>--no-auto-update</code>: on macOS and Linux, <code>curl -fsSL …/install.sh | sh -s -- --no-auto-update</code>; on Windows, <code>&amp; ([scriptblock]::Create((irm …/install.ps1))) --no-auto-update</code>.</li>
+    </ul>
+    <p>From 0.6.0, open a new terminal after installing and these commands work as written. Installs older than 0.6.0 (or with <code>--no-path</code>) need the full path, for example <code>~/.purrdr/host-service/bin/purrdr-host-service update</code> on macOS and Linux, or <code>&amp; &quot;$HOME\.purrdr\host-service\bin\purrdr-host-service.exe&quot; update</code> in Windows PowerShell.</p>
+    <p>Host service 0.4.x and earlier can’t update itself: run the install command above once more (paired devices are kept), and it starts updating itself from then on. When Purrdr sees a host service older than the version it knows about, it shows an update notice in the host list with the command for that host’s version.</p>
+
+    <h2>Status and uninstalling</h2>
+    <ul>
+      <li>Status: <code>purrdr status</code> (whether it’s installed, its HTTPS address, and whether herdr is running).</li>
+      <li>Uninstall: <code>purrdr uninstall</code>. It stops the sign-in start, removes the <code>tailscale serve</code> setting and <code>~/.purrdr/host-service/</code>, and leaves the computer as it was before installing.</li>
+    </ul>
+
+    <h2>What works over HTTPS?</h2>
+    <p>The Agent list, chats, sending prompts, answering “Needs You”, and Pane terminals all work. Login Shell and Files are currently available only with SSH.</p>
+  </section>
+</main>
+<footer class="site">© 2026 Purrdr</footer>
+</body>
+</html>
