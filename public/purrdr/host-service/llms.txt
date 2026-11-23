@@ -1,0 +1,111 @@
+# Purrdr host service installer
+
+> The Purrdr host service lets the Purrdr iOS app reach herdr (and its coding agents) on a user's computer over HTTPS through Tailscale Serve. This file is for AI agents that install it on the user's behalf.
+
+Human-readable version: https://raychiutw.github.io/purrdr/host-service/#install-options
+
+## Prerequisites
+
+- macOS, Linux (x86_64 or ARM64) or Windows (x86_64). No sudo or administrator needed.
+- herdr 0.9.5 or later running on the computer.
+- Tailscale installed and signed in, with MagicDNS and HTTPS Certificates turned on in the Tailscale admin console (DNS page).
+
+## Install
+
+macOS / Linux:
+
+    curl -fsSL https://github.com/raychiutw/purrdr.host/releases/latest/download/install.sh | sh -s -- --json --yes
+
+Windows (PowerShell; `irm | iex` cannot take options, so use a scriptblock):
+
+    & ([scriptblock]::Create((irm https://github.com/raychiutw/purrdr.host/releases/latest/download/install.ps1))) --json --yes
+
+Without options the same one-liner (`... | sh`) installs interactively when a terminal is available.
+
+## Options and environment variables
+
+Order of precedence: option > PURRDR_* environment variable > previous install > default.
+
+| Option | Environment variable | Default | Meaning |
+|---|---|---|---|
+| `--port <port>` | `PURRDR_PORT` | 47820 | Local port (127.0.0.1). 0 is rejected. |
+| `--https-port <port>` | `PURRDR_HTTPS_PORT` | 443 | HTTPS port exposed to the tailnet by Tailscale Serve. 0 is rejected. |
+| `--session <name>` | `PURRDR_SESSION` | herdr default session | Named herdr session. |
+| `--auto-update`, `--no-auto-update` | `PURRDR_AUTO_UPDATE=1\|0` | on | Automatic updates. |
+| `--path`, `--no-path` | `PURRDR_ADD_TO_PATH=1\|0` | add | Add `bin/` to the user PATH. |
+| `--yes` | `PURRDR_YES=1` | no | Do not ask; answer yes to every question. |
+| `--json` | (none) | no | Print one JSON object and never ask. Still needs `--yes` to agree to the certificate notice. |
+
+Pass options on macOS/Linux with `curl ... | sh -s -- --https-port 9443`, or with environment variables placed before `sh`: `curl ... | PURRDR_HTTPS_PORT=9443 sh -s --`. On Windows: `$env:PURRDR_HTTPS_PORT=9443; irm .../install.ps1 | iex`.
+
+## HTTPS port
+
+If no HTTPS port is given and 443 is used by another `tailscale serve` service, the installer picks the first free port from 443, 8443, 9443, 10000, 10443 and explains who holds the others (setting source `suggested`, plus a warning). It fails with `https_port_taken` only when a port the user explicitly chose is taken (or all candidates are).
+
+## When it asks, and how to avoid it
+
+With a terminal, the installer prints a summary of the settings (with where each came from) and a menu: 1) Install with these settings (or Keep current settings), 2) Customize, 3) Cancel.
+
+It never asks when any of these is true: no terminal on stdin/stdout, the `CI` environment variable is set, `--yes` or `PURRDR_YES=1`, or `--json`. Agents should always pass `--json --yes` (after getting the user's consent, see below). The installer does not detect AI agents specifically.
+
+## Certificate consent
+
+HTTPS Certificates put the computer's Tailscale name (for example `studio.tail1234.ts.net`) in public Certificate Transparency logs. The installer needs consent only the first time or when the machine name changes. When it cannot ask and `--yes` is absent, it stops before changing anything and fails with `consent_required`. Tell the user the name will become public, and only pass `--yes` after they agree.
+
+## --json output
+
+Success:
+
+    {
+      "ok": true,
+      "https_address": "https://my-mac.tailnet.ts.net:8443",
+      "settings": {
+        "port": {"value": 47820, "source": "default"},
+        "https_port": {"value": 8443, "source": "suggested"},
+        "herdr_session": {"value": null, "source": "default"},
+        "auto_update": {"value": true, "source": "default"},
+        "add_to_path": {"value": true, "source": "default"}
+      },
+      "warnings": ["..."],
+      "pair_command": "<full path to purrdr-host-service> pair"
+    }
+
+`source` is one of `argument`, `environment`, `previous`, `default`, `suggested`, `prompt`.
+
+Failure (also carries `settings`: the part resolved so far):
+
+    {"ok": false, "error": {"kind": "...", "message": "..."}, "rerun_command": "...", "settings": {...}}
+
+`error.kind` values:
+
+- `tailscale_missing`: Tailscale is not installed.
+- `tailscale_not_running`: Tailscale is installed but not running or not signed in.
+- `magic_dns_disabled`: turn on MagicDNS in the Tailscale admin console.
+- `https_certificates_disabled`: turn on HTTPS Certificates in the Tailscale admin console.
+- `serve_failed`: `tailscale serve` could not be set up.
+- `declined`: the user chose Cancel or answered no.
+- `consent_required`: certificate consent needed; rerun with `--yes` after the user agrees.
+- `https_port_taken`: an explicitly chosen HTTPS port (or every candidate) is in use; choose another with `--https-port`.
+- `serve_changed`: the `tailscale serve` entry for the HTTPS port is no longer what the installer set; it was left unchanged.
+- `tailscale_error`: Tailscale returned an error.
+- `autostart_failed`: could not set the service to start at login.
+- `not_installed`: the host service is not installed.
+- `io_error`: a file or system error.
+- `invalid_arguments`: a command-line option is wrong.
+- `invalid_environment`: a `PURRDR_*` value is invalid; the message includes a command that clears that variable before rerunning.
+- `host_environment`: the host environment (home directory etc.) could not be read.
+
+## Error handling
+
+Read `error.message` (it states what happened and why) and fix the cause (for example turn on a Tailscale setting), then run `rerun_command` exactly as given, adding any options you still need. Do not retry blindly: `consent_required` needs the user's agreement, `https_port_taken` needs a different port.
+
+## After installing
+
+- Show the user `https_address` (it includes the port when it is not 443).
+- Pair the iPhone/iPad: run `purrdr pair` (or `pair_command`, which uses the full path) on the computer; it shows a QR code, the HTTPS address and a one-time pairing code. `purrdr pair --read-only` makes a watch-only device. Open a new terminal first if `purrdr` is not found yet (PATH change), or run `pair_command`.
+- Other commands: `purrdr status`, `purrdr devices`, `purrdr revoke <device id>`, `purrdr update [--check] [--yes]`, `purrdr version`, `purrdr uninstall`.
+
+## Changing settings later
+
+- Auto update: `purrdr auto-update on` or `purrdr auto-update off`.
+- Anything else: rerun `purrdr install --<option>` (for example `purrdr install --https-port 9443`). Paired devices are kept. Unspecified settings keep their previous values.
